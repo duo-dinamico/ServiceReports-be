@@ -1,0 +1,16 @@
+version: "3"
+services:
+  service-report-api:
+    image: node:16-slim
+    user: "node"
+    working_dir: /home/node/app
+    volumes:
+      - ./:/home/node/app
+    container_name: nodejs
+    #build: .
+#    links:
+#    environment:
+#    depends_on:
+    ports:
+      - "9090:9090"
+    command: bash -c "npm ci && npx nodemon listen.js"
