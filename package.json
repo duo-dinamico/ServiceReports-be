@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "docker compose -f docker-compose.yml build --no-cache",
-    "start": "nodemon listen.js",
+    "start": "docker compose up",
+    "stop": "docker compose down",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
