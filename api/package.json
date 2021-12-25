@@ -1,0 +1,21 @@
+{
+    "name": "servicereports-be",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "DuoDinamico",
+    "license": "ISC",
+    "dependencies": {
+        "@hapi/boom": "^9.1.4",
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "nodemon": "^2.0.15",
+        "swagger-ui-express": "^4.3.0"
+    },
+    "devDependencies": {
+        "prettier": "^2.5.1"
+    }
+}
