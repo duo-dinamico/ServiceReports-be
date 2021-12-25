@@ -5,7 +5,7 @@ services:
     user: "node"
     working_dir: /home/node/app
     volumes:
-      - ./:/home/node/app
+      - ./api:/home/node/app
     container_name: nodejs
     #build: .
 #    links:
@@ -13,4 +13,4 @@ services:
 #    depends_on:
     ports:
       - "9090:9090"
-    command: bash -c "npm ci && npx nodemon listen.js"
+    command: bash -c "npx nodemon listen.js"
