@@ -4,7 +4,8 @@
     "description": "",
     "main": "app.js",
     "scripts": {
-        "test": "jest --reporters=default -i --watchAll --runInBand --verbose"
+        "test": "jest --reporters=default -i --watchAll --runInBand --verbose",
+        "test-git": "jest"
     },
     "author": "DuoDinamico",
     "license": "ISC",
