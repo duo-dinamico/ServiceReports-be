@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const Boom = require("@hapi/boom");
+const {errorHandler} = require("./errors")
 
 const apiRouter = require("./routes/api.router");
 const docsRouter = require("./routes/docs.router");
@@ -12,6 +13,7 @@ app.use(cors());
 app.use("/api", apiRouter);
 app.use("/api-docs", docsRouter);
 
-app.all("/*", (_req, _res, next) => next(Boom.notFound("Route Not Found")));
+app.all("/*", (_req, _res, next) => next(Boom.notFound("Route Not Found.")));
+app.use(errorHandler)
 
 module.exports = app;
