@@ -11,10 +11,9 @@ describe("/*", () => {
                 .expect(404)
                 .then(({body: {message}}) => expect(message).toBe("Route Not Found.")));
         it("Return 404 Root Route", () =>
-                request
-                    .get("/")
-                    .expect(404)
-                    .then(({body: {message}}) => expect(message).toBe("Route Not Found.")));
+            request
+                .get("/")
+                .expect(404)
+                .then(({body: {message}}) => expect(message).toBe("Route Not Found.")));
     });
-    
 });
