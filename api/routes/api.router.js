@@ -1,6 +1,6 @@
-const apiRouter = require("express").Router();
-const {methodNotAllowed} = require("../errors");
+const apiRouter = require('express').Router();
+const { methodNotAllowed } = require('../errors');
 
-apiRouter.route("/").all(methodNotAllowed);
+apiRouter.route('/').all(methodNotAllowed);
 
 module.exports = apiRouter;

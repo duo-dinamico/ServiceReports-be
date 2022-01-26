@@ -1,3 +1,3 @@
-const tags = [{name: "CRUD Operations"}];
+const tags = [{ name: 'CRUD Operations' }];
 
 module.exports = tags;
