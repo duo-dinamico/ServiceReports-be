@@ -5,7 +5,8 @@ exports.methodNotAllowed = (_req, res) => {
   res.status(error.output.statusCode).json(error.output.payload);
 };
 
-exports.errorHandler = (err, _req, res) => {
+// eslint-disable-next-line no-unused-vars
+exports.errorHandler = (err, _req, res, next) => {
   if (Boom.isBoom(err)) {
     res.status(err.output.statusCode).json({ ...err.output.payload, data: err.data });
   } else {
