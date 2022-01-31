@@ -1,0 +1,16 @@
+[
+    {
+        "id": "341ae597-6e26-4c2a-9966-26447522a21e",
+        "manufacturer": "Shuffle Master",
+        "Model": "One 2 Six",
+        "Serial": "01010101A",
+        "department_id": "74562a23-4ae4-4fc0-8d98-32bad3472c9a"
+    },
+    {
+        "id": "f8cae396-5376-47ae-8dfc-690572e76a09",
+        "manufacturer": "TCS",
+        "Model": "Chipper Champ 2",
+        "Serial": "087610101A",
+        "department_id": "446470f4-aeff-4fb7-9b53-38b434ca2488"
+    }
+]
