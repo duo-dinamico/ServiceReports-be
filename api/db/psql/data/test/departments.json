@@ -1,6 +1,22 @@
 [
-    {"id": "341ae597-6e26-4c2a-9966-26447522a21e", "name": "Sala de Máquinas Estoril", "Casino_ID": "4dca6671-7c73-4414-bf4c-0646d8c70ede"},
-    {"id": "a7895b03-70a2-4bab-8e0f-dbc561e6d098", "name": "Bancados Espinho", "Casino_ID": "446470f4-aeff-4fb7-9b53-38b434ca2488"},
-    {"id": "1ed90dca-dd68-476a-bd48-63b2a5d66c2f", "name": "Caixas Lisboa", "Casino_ID": "74562a23-4ae4-4fc0-8d98-32bad3472c9a"},
-    {"id": "04ef48c0-38b3-4cdc-b483-2d72dfa81527", "name": "Sala de Máquinas Lisboa", "Casino_ID": "74562a23-4ae4-4fc0-8d98-32bad3472c9a"}
+    {
+        "id": "341ae597-6e26-4c2a-9966-26447522a21e",
+        "name": "Sala de Máquinas Estoril",
+        "casinos_id": "4dca6671-7c73-4414-bf4c-0646d8c70ede"
+    },
+    {
+        "id": "a7895b03-70a2-4bab-8e0f-dbc561e6d098",
+        "name": "Bancados Espinho",
+        "casinos_id": "446470f4-aeff-4fb7-9b53-38b434ca2488"
+    },
+    {
+        "id": "1ed90dca-dd68-476a-bd48-63b2a5d66c2f",
+        "name": "Caixas Lisboa",
+        "casinos_id": "74562a23-4ae4-4fc0-8d98-32bad3472c9a"
+    },
+    {
+        "id": "04ef48c0-38b3-4cdc-b483-2d72dfa81527",
+        "name": "Sala de Máquinas Lisboa",
+        "casinos_id": "74562a23-4ae4-4fc0-8d98-32bad3472c9a"
+    }
 ]
