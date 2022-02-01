@@ -6,7 +6,12 @@
     "scripts": {
         "test": "jest --reporters=default -i --watchAll --runInBand --verbose",
         "test-git": "jest",
-        "lint": "eslint . --fix"
+        "lint": "eslint . --fix",
+        "mgr-make": "knex migrate:make",
+        "mgr-rol": "knex migrate:rollback",
+        "mgr-lat": "knex migrate:latest",
+        "seed-test": "cross-env NODE_ENV=test npm run seed-psql",
+        "seed-psql": "knex migrate:rollback --all && knex migrate:latest && knex seed:run"
     },
     "author": "DuoDinamico",
     "license": "ISC",
@@ -20,6 +25,7 @@
         "swagger-ui-express": "^4.3.0"
     },
     "devDependencies": {
+        "cross-env": "^7.0.3",
         "eslint": "^8.7.0",
         "eslint-config-airbnb-base": "^15.0.0",
         "eslint-config-prettier": "^8.3.0",
