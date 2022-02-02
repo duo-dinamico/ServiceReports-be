@@ -105,6 +105,3 @@ dist
 
 # Postgres
 db_data
-
-# Knexjs
-knexfile.js
