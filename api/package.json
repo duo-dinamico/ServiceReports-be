@@ -39,7 +39,12 @@
         "supertest": "^6.2.1"
     },
     "lint-staged": {
-        "*.js": "eslint --cache --fix",
-        "*.{js,css,md}": "prettier --write"
+        "*.{js,ts}": [
+            "eslint --fix",
+            "prettier --write"
+        ],
+        "*.{json,yml,md}": [
+            "prettier --write"
+        ]
     }
 }
