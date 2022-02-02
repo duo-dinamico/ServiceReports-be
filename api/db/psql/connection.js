@@ -1,5 +1,5 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/extensions */
-const dbConfig = process.env.LOCAL ? require("../../knexfile") : null;
+const dbConfig = require("../../knexfile");
 
 module.exports = require("knex")(dbConfig);
