@@ -11,7 +11,8 @@
         "mgr-rol": "knex migrate:rollback",
         "mgr-lat": "knex migrate:latest",
         "seed-test": "cross-env NODE_ENV=test npm run seed-psql",
-        "seed-psql": "knex migrate:rollback --all && knex migrate:latest && knex seed:run"
+        "seed-psql": "knex migrate:rollback --all && knex migrate:latest && knex seed:run",
+        "prepare": "cd .. && husky install api/.husky"
     },
     "author": "DuoDinamico",
     "license": "ISC",
@@ -31,8 +32,19 @@
         "eslint-config-prettier": "^8.3.0",
         "eslint-plugin-import": "^2.25.4",
         "eslint-plugin-jest": "^26.0.0",
+        "husky": "^7.0.4",
         "jest": "^27.4.7",
+        "lint-staged": "^12.3.3",
         "prettier": "^2.5.1",
         "supertest": "^6.2.1"
+    },
+    "lint-staged": {
+        "*.{js,ts}": [
+            "eslint --fix",
+            "prettier --write"
+        ],
+        "*.{json,yml,md}": [
+            "prettier --write"
+        ]
     }
 }
