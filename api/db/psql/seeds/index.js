@@ -1,6 +1,8 @@
 const {casinosData, departmentsData, machinesData, servicesData, usersData} = require("../data");
 
 exports.seed = async knex => {
+    await knex.migrate.rollback();
+    await knex.migrate.latest();
     await knex.insert(usersData).into("users");
     await knex.insert(casinosData).into("casinos");
     await knex.insert(departmentsData).into("departments");
