@@ -1,5 +1,5 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/extensions */
-const dbConfig = require("../../knexfile");
-
-module.exports = require("knex")(dbConfig);
+const environment = process.env.ENVIRONMENT || "development";
+const config = require("../../knexfile.js")[environment];
+module.exports = require("knex")(config);
