@@ -7,10 +7,7 @@
         "jest/globals": true
     },
     "plugins": ["jest"],
-    "extends": [
-        "airbnb-base",
-        "prettier"
-    ],
+    "extends": ["airbnb-base", "prettier"],
     "parserOptions": {
         "ecmaVersion": "latest"
     },
@@ -27,6 +24,7 @@
         "jest/no-focused-tests": "error",
         "jest/no-identical-title": "error",
         "jest/prefer-to-have-length": "warn",
-        "jest/valid-expect": "error"
+        "jest/valid-expect": "error",
+        "camelcase": "off"
     }
 }

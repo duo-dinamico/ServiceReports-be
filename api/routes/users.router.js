@@ -1,8 +1,9 @@
 const usersRouter = require("express").Router();
 const {celebrate} = require("celebrate");
-const {usersSchema} = require("../schemas/users");
 
+const {usersSchema} = require("../schemas/users");
 const {getAllUsers} = require("../controllers/users.controllers");
+const {methodNotAllowed} = require("../errors");
 
 /**
  * @swagger
@@ -13,6 +14,6 @@ const {getAllUsers} = require("../controllers/users.controllers");
  *      '200':
  *        description: A successful response
  */
-usersRouter.route("/").get(celebrate(usersSchema), getAllUsers);
+usersRouter.route("/").get(celebrate(usersSchema), getAllUsers).all(methodNotAllowed);
 
 module.exports = usersRouter;
