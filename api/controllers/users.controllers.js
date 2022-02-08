@@ -4,7 +4,7 @@ const {usersResponseSchema} = require("../schemas/users");
 
 exports.getAllUsers = async (req, res, next) => {
     try {
-        const resolvedData = await fetchAllUsers();
+        const resolvedData = await fetchAllUsers(req.query);
         const validatedData = await Joi.object(usersResponseSchema).validateAsync({users: resolvedData});
         res.status(200).json(validatedData);
     } catch (err) {
