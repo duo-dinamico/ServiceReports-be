@@ -1,20 +1,43 @@
-const ENV = process.env.NODE_ENV || "test";
-
-const dbConfig = {
+/**
+ * @type { Object.<string, import("knex").Knex.Config> }
+ */
+module.exports = {
     test: {
         client: "pg",
-        migrations: {
-            directory: "./db/psql/migrations",
-        },
         connection: {
             database: "service_reports",
             user: "sruser",
             password: "sruser",
         },
+        pool: {
+            min: 2,
+            max: 10,
+        },
+        migrations: {
+            directory: `${__dirname}/db/psql/migrations`,
+        },
         seeds: {
-            directory: "./db/psql/seeds",
+            directory: `${__dirname}/db/psql/seeds`,
+        },
+    },
+    development: {
+        client: "pg",
+        connection: {
+            host: "postgres",
+            port: 5432,
+            database: "service_reports",
+            user: "sruser",
+            password: "sruser",
+        },
+        pool: {
+            min: 2,
+            max: 10,
+        },
+        migrations: {
+            directory: `${__dirname}/db/psql/migrations`,
+        },
+        seeds: {
+            directory: `${__dirname}/db/psql/seeds`,
         },
     },
 };
-
-module.exports = dbConfig[ENV];

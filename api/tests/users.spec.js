@@ -1,4 +1,4 @@
-process.env.NODE_ENV = "test";
+process.env.ENVIRONMENT = "test";
 const supertest = require("supertest");
 const connection = require("../db/psql/connection");
 const app = require("../app");

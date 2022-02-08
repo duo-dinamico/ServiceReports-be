@@ -1,10 +1,13 @@
-const docsRouter = require('express').Router();
-const swaggerUi = require('swagger-ui-express');
-const { methodNotAllowed } = require('../errors');
+const docsRouter = require("express").Router();
+const swaggerUi = require("swagger-ui-express");
+const swaggerJsdoc = require("swagger-jsdoc");
+const {methodNotAllowed} = require("../errors");
 
-const swaggerDocument = require('../docs');
+const swaggerOptions = require("../docs");
 
-docsRouter.use('/', swaggerUi.serve);
-docsRouter.get('/', swaggerUi.setup(swaggerDocument)).all(methodNotAllowed);
+const swaggerDocs = swaggerJsdoc(swaggerOptions);
+
+docsRouter.use("/", swaggerUi.serve);
+docsRouter.get("/", swaggerUi.setup(swaggerDocs)).all(methodNotAllowed);
 
 module.exports = docsRouter;
