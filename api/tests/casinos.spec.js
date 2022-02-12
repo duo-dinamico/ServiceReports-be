@@ -4,16 +4,16 @@ const connection = require("../db/psql/connection");
 const app = require("../app");
 
 const request = supertest(app);
-const expectedKeys = ["id", "username", "name", "created_at", "updated_at", "deleted_at"];
-const urlPath = "/api/users";
+const expectedKeys = ["id", "name", "location", "created_at", "updated_at", "deleted_at"];
+const urlPath = "/api/casinos";
 const invalidMethods = ["post", "put", "patch", "delete"];
 
-const userId = "9a5c5991-a14d-4d85-b75f-d75081500c8d";
+const casinoId = "446470f4-aeff-4fb7-9b53-38b434ca2488";
 
 describe("/api", () => {
     beforeEach(() => connection.seed.run());
     afterAll(() => connection.destroy());
-    describe("/users", () => {
+    describe("/casinos", () => {
         describe("DEFAULT BEHAVIOUR", () => {
             describe("Sortable", () => {
                 it("status: 200, sortable by name", () =>
@@ -21,54 +21,54 @@ describe("/api", () => {
                         .get(urlPath)
                         .query({sort_by: "name"})
                         .expect(200)
-                        .then(({body: {users}}) => {
-                            expect(users).toBeSorted({key: "name"});
+                        .then(({body: {casinos}}) => {
+                            expect(casinos).toBeSorted({key: "name"});
                         }));
                 it("status: 200, sortable by name desc", () =>
                     request
                         .get(urlPath)
                         .query({sort_by: "name", order: "desc"})
                         .expect(200)
-                        .then(({body: {users}}) => {
-                            expect(users).toBeSorted({key: "name", descending: true});
+                        .then(({body: {casinos}}) => {
+                            expect(casinos).toBeSorted({key: "name", descending: true});
                         }));
             });
             describe("Queries", () => {
-                it("status: 200, filter by user id", () =>
+                it("status: 200, filter by casino id", () =>
                     request
                         .get(urlPath)
-                        .query({user_id: userId})
+                        .query({casino_id: casinoId})
                         .expect(200)
-                        .then(({body: {users}}) => {
-                            expect(users).toHaveLength(1);
-                            const [user] = users;
-                            expect(user).toHaveProperty("id", userId);
+                        .then(({body: {casinos}}) => {
+                            expect(casinos).toHaveLength(1);
+                            const [casino] = casinos;
+                            expect(casino).toHaveProperty("id", casinoId);
                         }));
             });
             it("status: 200", () =>
                 request
                     .get(urlPath)
                     .expect(200)
-                    .then(({body: {users}}) => {
-                        expect(users).not.toBe(null);
-                        expect(Array.isArray(users)).toBe(true);
+                    .then(({body: {casinos}}) => {
+                        expect(casinos).not.toBe(null);
+                        expect(Array.isArray(casinos)).toBe(true);
                     }));
             it("status: 200, with expected keys", () =>
                 request
                     .get(urlPath)
                     .expect(200)
-                    .then(({body: {users}}) => {
-                        users.forEach(user => {
-                            expect(Object.keys(user)).toEqual(expectedKeys);
+                    .then(({body: {casinos}}) => {
+                        casinos.forEach(casino => {
+                            expect(Object.keys(casino)).toEqual(expectedKeys);
                         });
                     }));
-            it("status: 200, no deleted users", () =>
+            it("status: 200, no deleted casinos", () =>
                 request
                     .get(urlPath)
                     .expect(200)
-                    .then(({body: {users}}) => {
-                        users.forEach(user => {
-                            expect(user.deleted_at).toBe(null);
+                    .then(({body: {casinos}}) => {
+                        casinos.forEach(casino => {
+                            expect(casino.deleted_at).toBe(null);
                         });
                     }));
         });
@@ -92,14 +92,14 @@ describe("/api", () => {
                         }));
             });
             describe("Queries", () => {
-                it("status: 400, user id must contain a valid GUID", () =>
+                it("status: 400, casino id must contain a valid GUID", () =>
                     request
                         .get(urlPath)
-                        .query({user_id: "invalid"})
+                        .query({casino_id: "invalid"})
                         .expect(400)
                         .then(({body: {error, message}}) => {
                             expect(error).toBe("Bad Request");
-                            expect(message).toBe('"user_id" must be a valid GUID');
+                            expect(message).toBe('"casino_id" must be a valid GUID');
                         }));
             });
             it.each(invalidMethods)("status:405, invalid method - %s", async method =>

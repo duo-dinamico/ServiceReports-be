@@ -1,12 +1,12 @@
 const {Joi} = require("celebrate");
 
-const usersSchema = {
+const departmentsSchema = {
     params: Joi.object({}),
     query: Joi.object({
         sort_by: Joi.string().valid("name").default("name"),
         order: Joi.string().valid("asc", "desc").default("asc"),
-        user_id: Joi.string().uuid(),
+        department_id: Joi.string().uuid(),
     }),
 };
 
-module.exports = {usersSchema};
+module.exports = {departmentsSchema};

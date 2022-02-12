@@ -2,21 +2,32 @@
     {
         "id": "341ae597-6e26-4c2a-9966-26447522a21e",
         "name": "Sala de Máquinas Estoril",
-        "casinos_id": "4dca6671-7c73-4414-bf4c-0646d8c70ede"
+        "casino_id": "4dca6671-7c73-4414-bf4c-0646d8c70ede"
     },
     {
         "id": "a7895b03-70a2-4bab-8e0f-dbc561e6d098",
         "name": "Bancados Espinho",
-        "casinos_id": "446470f4-aeff-4fb7-9b53-38b434ca2488"
+        "casino_id": "446470f4-aeff-4fb7-9b53-38b434ca2488"
     },
     {
         "id": "1ed90dca-dd68-476a-bd48-63b2a5d66c2f",
         "name": "Caixas Lisboa",
-        "casinos_id": "74562a23-4ae4-4fc0-8d98-32bad3472c9a"
+        "casino_id": "74562a23-4ae4-4fc0-8d98-32bad3472c9a"
     },
     {
         "id": "04ef48c0-38b3-4cdc-b483-2d72dfa81527",
         "name": "Sala de Máquinas Lisboa",
-        "casinos_id": "74562a23-4ae4-4fc0-8d98-32bad3472c9a"
+        "casino_id": "74562a23-4ae4-4fc0-8d98-32bad3472c9a"
+    },
+    {
+        "id": "329adfd4-9880-49ee-b650-af3f24dc4929",
+        "name": "Sala de Máquinas Deleted",
+        "casino_id": "74562a23-4ae4-4fc0-8d98-32bad3472c9a",
+        "deleted_at": "2022-03-08T20:44:24.907Z"
+    },
+    {
+        "id": "582dff92-45ef-40e2-a9c2-b7e6d65f129b",
+        "name": "Sala de Máquinas Casino Deleted",
+        "casino_id": "30d877ce-387c-4b9d-8a58-566a035892d0"
     }
 ]
