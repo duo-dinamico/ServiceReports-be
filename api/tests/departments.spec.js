@@ -4,16 +4,16 @@ const connection = require("../db/psql/connection");
 const app = require("../app");
 
 const request = supertest(app);
-const expectedKeys = ["id", "username", "name", "created_at", "updated_at", "deleted_at"];
-const urlPath = "/api/users";
+const expectedKeys = ["id", "name", "created_at", "updated_at", "deleted_at", "casino"];
+const urlPath = "/api/departments";
 const invalidMethods = ["post", "put", "patch", "delete"];
 
-const userId = "9a5c5991-a14d-4d85-b75f-d75081500c8d";
+const departmentId = "a7895b03-70a2-4bab-8e0f-dbc561e6d098";
 
 describe("/api", () => {
     beforeEach(() => connection.seed.run());
     afterAll(() => connection.destroy());
-    describe("/users", () => {
+    describe("/departments", () => {
         describe("DEFAULT BEHAVIOUR", () => {
             describe("Sortable", () => {
                 it("status: 200, sortable by name", () =>
@@ -21,54 +21,63 @@ describe("/api", () => {
                         .get(urlPath)
                         .query({sort_by: "name"})
                         .expect(200)
-                        .then(({body: {users}}) => {
-                            expect(users).toBeSorted({key: "name"});
+                        .then(({body: {departments}}) => {
+                            expect(departments).toBeSorted({key: "name"});
                         }));
                 it("status: 200, sortable by name desc", () =>
                     request
                         .get(urlPath)
                         .query({sort_by: "name", order: "desc"})
                         .expect(200)
-                        .then(({body: {users}}) => {
-                            expect(users).toBeSorted({key: "name", descending: true});
+                        .then(({body: {departments}}) => {
+                            expect(departments).toBeSorted({key: "name", descending: true});
                         }));
             });
             describe("Queries", () => {
-                it("status: 200, filter by user id", () =>
+                it("status: 200, filter by department id", () =>
                     request
                         .get(urlPath)
-                        .query({user_id: userId})
+                        .query({department_id: departmentId})
                         .expect(200)
-                        .then(({body: {users}}) => {
-                            expect(users).toHaveLength(1);
-                            const [user] = users;
-                            expect(user).toHaveProperty("id", userId);
+                        .then(({body: {departments}}) => {
+                            expect(departments).toHaveLength(1);
+                            const [department] = departments;
+                            expect(department).toHaveProperty("id", departmentId);
                         }));
             });
             it("status: 200", () =>
                 request
                     .get(urlPath)
                     .expect(200)
-                    .then(({body: {users}}) => {
-                        expect(users).not.toBe(null);
-                        expect(Array.isArray(users)).toBe(true);
+                    .then(({body: {departments}}) => {
+                        expect(departments).not.toBe(null);
+                        expect(Array.isArray(departments)).toBe(true);
                     }));
             it("status: 200, with expected keys", () =>
                 request
                     .get(urlPath)
                     .expect(200)
-                    .then(({body: {users}}) => {
-                        users.forEach(user => {
-                            expect(Object.keys(user)).toEqual(expectedKeys);
+                    .then(({body: {departments}}) => {
+                        departments.forEach(department => {
+                            expect(Object.keys(department)).toEqual(expectedKeys);
                         });
                     }));
-            it("status: 200, no deleted users", () =>
+            it("status: 200, no deleted departments", () =>
                 request
                     .get(urlPath)
                     .expect(200)
-                    .then(({body: {users}}) => {
-                        users.forEach(user => {
-                            expect(user.deleted_at).toBe(null);
+                    .then(({body: {departments}}) => {
+                        departments.forEach(department => {
+                            expect(department.deleted_at).toBe(null);
+                        });
+                    }));
+            it("status: 200, no deleted casinos", () =>
+                request
+                    .get(urlPath)
+                    .expect(200)
+                    .then(({body: {departments}}) => {
+                        departments.forEach(department => {
+                            expect(department.casino.id).not.toEqual("30d877ce-387c-4b9d-8a58-566a035892d0");
                         });
                     }));
         });
@@ -92,14 +101,14 @@ describe("/api", () => {
                         }));
             });
             describe("Queries", () => {
-                it("status: 400, user id must contain a valid GUID", () =>
+                it("status: 400, department id must contain a valid GUID", () =>
                     request
                         .get(urlPath)
-                        .query({user_id: "invalid"})
+                        .query({department_id: "invalid"})
                         .expect(400)
                         .then(({body: {error, message}}) => {
                             expect(error).toBe("Bad Request");
-                            expect(message).toBe('"user_id" must be a valid GUID');
+                            expect(message).toBe('"department_id" must be a valid GUID');
                         }));
             });
             it.each(invalidMethods)("status:405, invalid method - %s", async method =>

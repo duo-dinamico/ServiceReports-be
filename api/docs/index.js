@@ -20,7 +20,7 @@ const swaggerOptions = {
             },
         },
     },
-    apis: ["./routes/*.js"],
+    apis: ["./routes/*.js", "./docs/*.yaml"],
 };
 
 module.exports = swaggerOptions;

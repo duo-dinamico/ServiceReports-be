@@ -1,0 +1,49 @@
+parameters:
+    sort_by:
+        description: "To sort by name"
+        in: query
+        name: sort_by
+        schema:
+            type: string
+    order:
+        description: "Sorting direction"
+        in: query
+        name: order
+        schema:
+            type: string
+    user_id:
+        description: "To filter users by id"
+        in: query
+        name: user_id
+        schema:
+            type: string
+            format: uuid
+        examples:
+            allUsers:
+                value:
+            user_id:
+                value: 9a5c5991-a14d-4d85-b75f-d75081500c8d
+    casino_id:
+        description: "To filter casinos by id"
+        in: query
+        name: casino_id
+        schema:
+            type: string
+            format: uuid
+        examples:
+            allCasinos:
+                value:
+            casino_id:
+                value: 74562a23-4ae4-4fc0-8d98-32bad3472c9a
+    department_id:
+        description: "To filter departments by id"
+        in: query
+        name: department_id
+        schema:
+            type: string
+            format: uuid
+        examples:
+            allDepartments:
+                value:
+            casino_id:
+                value: a7895b03-70a2-4bab-8e0f-dbc561e6d098
