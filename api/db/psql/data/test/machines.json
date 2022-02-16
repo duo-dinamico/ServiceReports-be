@@ -4,13 +4,20 @@
         "manufacturer": "Shuffle Master",
         "model": "One 2 Six",
         "serial_number": "01010101A",
-        "departments_id": "1ed90dca-dd68-476a-bd48-63b2a5d66c2f"
+        "department_id": "1ed90dca-dd68-476a-bd48-63b2a5d66c2f"
     },
     {
         "id": "f8cae396-5376-47ae-8dfc-690572e76a09",
         "manufacturer": "TCS",
         "model": "Chipper Champ 2",
         "serial_number": "087610101A",
-        "departments_id": "a7895b03-70a2-4bab-8e0f-dbc561e6d098"
+        "department_id": "a7895b03-70a2-4bab-8e0f-dbc561e6d098"
+    },
+    {
+        "id": "0f53de42-3506-4bad-9a2d-c827bd6c5b6d",
+        "manufacturer": "CountR",
+        "model": "Caion",
+        "serial_number": "08-761-0101A",
+        "department_id": "329adfd4-9880-49ee-b650-af3f24dc4929"
     }
 ]

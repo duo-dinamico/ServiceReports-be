@@ -1,6 +1,6 @@
 parameters:
     sort_by:
-        description: "To sort by name"
+        description: "To sort by valid parameters"
         in: query
         name: sort_by
         schema:
@@ -45,5 +45,39 @@ parameters:
         examples:
             allDepartments:
                 value:
-            casino_id:
+            department_id:
                 value: a7895b03-70a2-4bab-8e0f-dbc561e6d098
+    machine_id:
+        description: "To filter machines by id"
+        in: query
+        name: machine_id
+        schema:
+            type: string
+            format: uuid
+        examples:
+            allMachines:
+                value:
+            machine_id:
+                value: f8cae396-5376-47ae-8dfc-690572e76a09
+    manufacturer:
+        description: "To filter machines by manufacturer"
+        in: query
+        name: manufacturer
+        schema:
+            type: string
+        examples:
+            allMachines:
+                value:
+            manufacturer:
+                value: TCS
+    model:
+        description: "To filter machines by model"
+        in: query
+        name: model
+        schema:
+            type: string
+        examples:
+            allMachines:
+                value:
+            model:
+                value: Chipper Champ 2
