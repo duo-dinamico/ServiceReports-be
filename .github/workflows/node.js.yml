@@ -10,7 +10,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: node:16-slim
+    container: node:16
 
     services:
       postgres:
