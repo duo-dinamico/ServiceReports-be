@@ -6,8 +6,8 @@ exports.up = knex =>
             table.text("manufacturer").notNullable();
             table.text("model").notNullable();
             table.text("serial_number").notNullable();
-            table.uuid("departments_id");
-            table.foreign("departments_id").references("departments.id");
+            table.uuid("department_id");
+            table.foreign("department_id").references("departments.id");
             table.timestamp("created_at").defaultTo(knex.fn.now());
             table.timestamp("updated_at").defaultTo(knex.fn.now());
             table.timestamp("deleted_at").defaultTo(null);
