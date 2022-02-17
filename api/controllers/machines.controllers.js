@@ -7,6 +7,7 @@ exports.getAllMachines = async (req, res, next) => {
         const resolvedData = await fetchAllMachines(req.query);
         const validatedData = await Joi.object(machinesResponseSchema).validateAsync({machines: resolvedData});
         res.status(200).json(validatedData);
+        return;
     } catch (err) {
         next(err);
     }
