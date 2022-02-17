@@ -5,6 +5,8 @@ module.exports = {
     test: {
         client: "pg",
         connection: {
+            host: "localhost",
+            port: 5432,
             database: "service_reports",
             user: "sruser",
             password: "sruser",

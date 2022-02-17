@@ -10,7 +10,7 @@
         "mgr-make": "knex migrate:make",
         "mgr-rol": "knex migrate:rollback",
         "mgr-lat": "knex migrate:latest",
-        "seed-test": "cross-env NODE_ENV=test npm run seed-psql",
+        "seed-test": "npm run seed-psql",
         "seed-psql": "knex migrate:rollback --all && knex migrate:latest && knex seed:run",
         "prepare": "cd .. && husky install api/.husky"
     },
