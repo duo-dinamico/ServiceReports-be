@@ -36,7 +36,7 @@ jobs:
       - run: npm run lint
         working-directory: api
       - name: Connect to PostgreSQL
-        run: npm test
+        run: npm test-git
         working-directory: api
         env:
           POSTGRES_HOST: postgres
