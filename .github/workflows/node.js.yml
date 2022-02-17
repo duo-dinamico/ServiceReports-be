@@ -18,6 +18,7 @@ jobs:
         env:
           POSTGRES_USER: sruser
           POSTGRES_PASSWORD: sruser
+          POSTGRES_DB: service_reports
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
