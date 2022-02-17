@@ -40,4 +40,20 @@ module.exports = {
             directory: `${__dirname}/db/psql/seeds`,
         },
     },
+    github_actions: {
+        client: "pg",
+        connection: {
+            host: process.env.POSTGRES_HOST,
+            port: process.env.POSTGRES_PORT,
+            database: "postgres",
+            user: "postgres",
+            password: "postgres",
+        },
+        migrations: {
+            directory: `${__dirname}/db/psql/migrations`,
+        },
+        seeds: {
+            directory: `${__dirname}/db/psql/seeds`,
+        },
+    },
 };
