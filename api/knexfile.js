@@ -47,9 +47,9 @@ module.exports = {
         connection: {
             host: process.env.POSTGRES_HOST,
             port: process.env.POSTGRES_PORT,
-            database: "postgres",
-            user: "postgres",
-            password: "postgres",
+            database: "service_reports",
+            user: "sruser",
+            password: "sruser",
         },
         migrations: {
             directory: `${__dirname}/db/psql/migrations`,
