@@ -16,7 +16,8 @@ jobs:
       postgres:
         image: postgres
         env:
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: sruser
+          POSTGRES_PASSWORD: sruser
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
