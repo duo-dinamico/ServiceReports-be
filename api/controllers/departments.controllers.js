@@ -7,6 +7,7 @@ exports.getAllDepartments = async (req, res, next) => {
         const resolvedData = await fetchAllDepartments(req.query);
         const validatedData = await Joi.object(departmentsResponseSchema).validateAsync({departments: resolvedData});
         res.status(200).json(validatedData);
+        return;
     } catch (err) {
         next(err);
     }
