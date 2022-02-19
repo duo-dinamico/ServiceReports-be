@@ -5,7 +5,7 @@
     "main": "app.js",
     "scripts": {
         "test": "cross-env NODE_ENV=test jest --reporters=default -i --watchAll --runInBand --verbose",
-        "test-git": "jest",
+        "test-git": "cross-env NODE_ENV=github_actions jest",
         "lint": "eslint . --fix",
         "mgr-make": "knex migrate:make",
         "mgr-rol": "knex migrate:rollback",
