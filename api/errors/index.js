@@ -24,6 +24,7 @@ exports.errorHandler = (err, _req, res, next) => {
         const errorBody = mapToJson(err.details);
         const newErr = Boom.badRequest(errorBody.query.details[0].message);
         res.status(newErr.output.statusCode).json({...newErr.output.payload, data: newErr.data});
+        return;
     }
     if (Boom.isBoom(err)) {
         res.status(err.output.statusCode).json({...err.output.payload, data: err.data});
