@@ -4,13 +4,13 @@
     "description": "",
     "main": "app.js",
     "scripts": {
-        "test": "jest --reporters=default -i --watchAll --runInBand --verbose",
-        "test-git": "jest",
+        "test": "cross-env NODE_ENV=test jest --reporters=default -i --watchAll --runInBand --verbose",
+        "test-git": "cross-env NODE_ENV=github_actions jest",
         "lint": "eslint . --fix",
         "mgr-make": "knex migrate:make",
         "mgr-rol": "knex migrate:rollback",
         "mgr-lat": "knex migrate:latest",
-        "seed-test": "cross-env NODE_ENV=test npm run seed-psql",
+        "seed-test": "cross-env NODE_ENV=test cross-env NODE_ENV=test npm run seed-psql",
         "seed-psql": "knex migrate:rollback --all && knex migrate:latest && knex seed:run",
         "prepare": "cd .. && husky install api/.husky"
     },
