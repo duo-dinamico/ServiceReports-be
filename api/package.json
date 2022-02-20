@@ -4,8 +4,8 @@
     "description": "",
     "main": "app.js",
     "scripts": {
-        "test": "cross-env NODE_ENV=test jest --reporters=default -i --watchAll --runInBand --verbose",
-        "test-git": "cross-env NODE_ENV=github_actions jest",
+        "test": "cross-env NODE_ENV=test jest --watchAll --runInBand --detectOpenHandles",
+        "test-git": "cross-env NODE_ENV=github_actions jest --runInBand --detectOpenHandles",
         "lint": "eslint . --fix",
         "mgr-make": "knex migrate:make",
         "mgr-rol": "knex migrate:rollback",
@@ -52,6 +52,19 @@
         ]
     },
     "jest": {
+        "collectCoverage": true,
+        "coverageProvider": "v8",
+        "collectCoverageFrom": [
+            "**/*.js",
+            "!**/node_modules/**",
+            "!**/db/**",
+            "!**/docs/**",
+            "!**/errors/**",
+            "!**/schemas/**",
+            "!**/coverage/**",
+            "!*.js"
+        ],
+        "verbose": true,
         "setupFilesAfterEnv": [
             "jest-sorted"
         ]
