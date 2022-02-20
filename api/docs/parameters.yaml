@@ -22,7 +22,7 @@ parameters:
             allUsers:
                 value:
             user_id:
-                value: 9a5c5991-a14d-4d85-b75f-d75081500c8d
+                value: 435ccd69-f989-4219-a3c7-9f09ff32c6cb
     casino_id:
         description: "To filter casinos by id"
         in: query
@@ -81,3 +81,27 @@ parameters:
                 value:
             model:
                 value: Chipper Champ 2
+    created_by:
+        description: "To filter services by the user that created them"
+        in: query
+        name: created_by
+        schema:
+            type: string
+            format: uuid
+        examples:
+            allUsers:
+                value:
+            created_by:
+                value: 435ccd69-f989-4219-a3c7-9f09ff32c6cb
+    closed_by:
+        description: "To filter services by the user that closed them"
+        in: query
+        name: closed_by
+        schema:
+            type: string
+            format: uuid
+        examples:
+            allUsers:
+                value:
+            closed_by:
+                value: 435ccd69-f989-4219-a3c7-9f09ff32c6cb

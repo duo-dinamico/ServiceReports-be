@@ -18,7 +18,6 @@ exports.methodNotAllowed = (_req, res) => {
     res.status(error.output.statusCode).json(error.output.payload);
 };
 
-// eslint-disable-next-line no-unused-vars
 exports.errorHandler = (err, _req, res, next) => {
     if (isCelebrateError(err)) {
         const errorBody = mapToJson(err.details);
