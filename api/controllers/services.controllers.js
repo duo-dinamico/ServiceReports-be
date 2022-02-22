@@ -8,7 +8,6 @@ exports.getAllServices = async (req, res, next) => {
         const validatedData = await Joi.object(servicesResponseSchema).validateAsync({services: resolvedData});
         res.status(200).json(validatedData);
     } catch (err) {
-        console.log("next");
         next(err);
     }
 };
