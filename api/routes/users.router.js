@@ -42,6 +42,8 @@ module.exports = usersRouter;
  *  get:
  *    summary: Use to request one user
  *    tags: [Users]
+ *    parameters:
+ *      - $ref: '#parameters/id'
  *    responses:
  *      '200':
  *        description: A successful response
