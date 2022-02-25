@@ -1,7 +1,7 @@
 const Boom = require("@hapi/boom");
 const {validateUser} = require("./utils/validation");
 
-exports.validateDeleteUser = async (req, res, next) => {
+exports.validateUserExists = async (req, res, next) => {
     const {id} = req.params;
     const toValidate = [validateUser(id)];
     try {

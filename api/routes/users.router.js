@@ -1,16 +1,17 @@
 const usersRouter = require("express").Router();
 const {celebrate} = require("celebrate");
 
-const {usersSchema, userSchema} = require("../schemas/users");
-const {getAllUsers, deleteUser, getUser} = require("../controllers/users.controllers");
-const {validateDeleteUser} = require("../validation/users.validation");
+const {usersSchema, userSchema, patchUserSchema} = require("../schemas/users");
+const {getAllUsers, deleteUser, getUser, patchUser} = require("../controllers/users.controllers");
+const {validateUserExists} = require("../validation/users.validation");
 const {methodNotAllowed} = require("../errors");
 
 usersRouter.route("/").get(celebrate(usersSchema), getAllUsers).all(methodNotAllowed);
 usersRouter
     .route("/:id")
     .get(celebrate(userSchema), getUser)
-    .delete(celebrate(userSchema), validateDeleteUser, deleteUser)
+    .patch(celebrate(patchUserSchema), validateUserExists, patchUser)
+    .delete(celebrate(userSchema), validateUserExists, deleteUser)
     .all(methodNotAllowed);
 
 module.exports = usersRouter;
@@ -49,6 +50,30 @@ module.exports = usersRouter;
  *        description: A successful response
  *      '400':
  *        description: Bad request.
+ *  patch:
+ *    summary: Use to patch one user
+ *    tags: [Users]
+ *    parameters:
+ *      - $ref: '#parameters/id'
+ *    responses:
+ *      '200':
+ *        description: A successful response
+ *      '400':
+ *        description: Bad request.
+ *    userPatchBody:
+ *      description: Body to update a user
+ *      required: true
+ *      content:
+ *        application/json:
+ *           schema:
+ *              type: object
+ *              properties:
+ *                username:
+ *                  type: string
+ *                  example: testusername
+ *                name:
+ *                  type: string
+ *                  example: testname
  *  delete:
  *    summary: Use to delete one users
  *    tags: [Users]

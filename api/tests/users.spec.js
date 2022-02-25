@@ -6,7 +6,7 @@ const request = supertest(app);
 const expectedKeys = ["id", "username", "name", "created_at", "updated_at", "deleted_at"];
 const urlPath = "/api/users";
 const invalidMethods = ["post", "put", "patch", "delete"];
-const invalidMethodsId = ["post", "put", "patch"];
+const invalidMethodsId = ["post", "put"];
 const deleteUserId = "1ebd707a-894e-41b1-881e-d222379ac1f4";
 const userId = "9a5c5991-a14d-4d85-b75f-d75081500c8d";
 
@@ -117,6 +117,36 @@ describe("/api", () => {
                 describe("GET", () => {
                     it("status: 200, gets a user by id", () => request.get(`${urlPath}/${userId}`).expect(200));
                 });
+                describe("PATCH", () => {
+                    it("status: 200, should be able to patch an user", () =>
+                        request
+                            .patch(`${urlPath}/${userId}`)
+                            .send({username: "testusername", name: "testname"})
+                            .expect(200)
+                            .then(({body: {user}}) => {
+                                expect(user.id).toBe(userId);
+                                expect(user.username).toBe("testusername");
+                                expect(user.name).toBe("testname");
+                            }));
+                    it("status: 200, should be able to patch only username", () =>
+                        request
+                            .patch(`${urlPath}/${userId}`)
+                            .send({username: "testusername"})
+                            .expect(200)
+                            .then(({body: {user}}) => {
+                                expect(user.id).toBe(userId);
+                                expect(user.username).toBe("testusername");
+                            }));
+                    it("status: 200, should be able to patch only name", () =>
+                        request
+                            .patch(`${urlPath}/${userId}`)
+                            .send({name: "testname"})
+                            .expect(200)
+                            .then(({body: {user}}) => {
+                                expect(user.id).toBe(userId);
+                                expect(user.name).toBe("testname");
+                            }));
+                });
                 describe("DELETE", () => {
                     it("status: 204, user deleted", () => request.delete(`${urlPath}/${deleteUserId}`).expect(204));
                     it("status: 204, should return an empty object", () =>
@@ -152,6 +182,44 @@ describe("/api", () => {
                             .expect(400)
                             .then(({body: {message}}) => {
                                 expect(message).toBe('"id" must be a valid GUID');
+                            }));
+                });
+                describe("PATCH", () => {
+                    it("status: 400, empty body not allowed", () =>
+                        request
+                            .patch(`${urlPath}/${userId}`)
+                            .send({})
+                            .expect(400)
+                            .then(({body: {error, message}}) => {
+                                expect(error).toBe("Bad Request");
+                                expect(message).toBe('"value" must have at least 1 key');
+                            }));
+                    it("status: 400, keys must be username or name", () =>
+                        request
+                            .patch(`${urlPath}/${userId}`)
+                            .send({blackknight: "tis but a silly wound"})
+                            .expect(400)
+                            .then(({body: {error, message}}) => {
+                                expect(error).toBe("Bad Request");
+                                expect(message).toBe('"blackknight" is not allowed');
+                            }));
+                    it("status: 400, username must be string", () =>
+                        request
+                            .patch(`${urlPath}/${userId}`)
+                            .send({username: 123})
+                            .expect(400)
+                            .then(({body: {error, message}}) => {
+                                expect(error).toBe("Bad Request");
+                                expect(message).toBe('"username" must be a string');
+                            }));
+                    it("status: 400, name must be string", () =>
+                        request
+                            .patch(`${urlPath}/${userId}`)
+                            .send({name: 123})
+                            .expect(400)
+                            .then(({body: {error, message}}) => {
+                                expect(error).toBe("Bad Request");
+                                expect(message).toBe('"name" must be a string');
                             }));
                 });
                 describe("DELETE", () => {
