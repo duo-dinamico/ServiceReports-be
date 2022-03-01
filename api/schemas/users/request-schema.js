@@ -10,4 +10,9 @@ const usersSchema = {
     }),
 };
 
-module.exports = {usersSchema, userSchema};
+const patchUserSchema = {
+    params: Joi.object({id: Joi.string().uuid()}),
+    body: Joi.object({username: Joi.string(), name: Joi.string()}).min(1).required(),
+};
+
+module.exports = {usersSchema, userSchema, patchUserSchema};
