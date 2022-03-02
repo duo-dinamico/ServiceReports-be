@@ -1,12 +1,16 @@
 const usersRouter = require("express").Router();
 const {celebrate} = require("celebrate");
 
-const {usersSchema, userSchema, patchUserSchema} = require("../schemas/users");
-const {getAllUsers, deleteUser, getUser, patchUser} = require("../controllers/users.controllers");
+const {usersSchema, userSchema, patchUserSchema, postUserSchema} = require("../schemas/users");
+const {getAllUsers, deleteUser, getUser, patchUser, postUser} = require("../controllers/users.controllers");
 const {validateUserExists} = require("../validation/users.validation");
 const {methodNotAllowed} = require("../errors");
 
-usersRouter.route("/").get(celebrate(usersSchema), getAllUsers).all(methodNotAllowed);
+usersRouter
+    .route("/")
+    .get(celebrate(usersSchema), getAllUsers)
+    .post(celebrate(postUserSchema), validateUserExists, postUser)
+    .all(methodNotAllowed);
 usersRouter
     .route("/:id")
     .get(celebrate(userSchema), getUser)
@@ -38,6 +42,29 @@ module.exports = usersRouter;
  *        description: A successful response
  *      '400':
  *        description: Bad request.
+ *  post:
+ *    summary: Use to add a user
+ *    tags: [Users]
+ *    requestBody:
+ *      description: Body to add a user
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            properties:
+ *              username:
+ *                type: string
+ *                example: testusername
+ *              name:
+ *                type: string
+ *                example: testname
+ *    responses:
+ *      '201':
+ *        description: A successful response
+ *      '400':
+ *        description: Bad request.
+ *
  *
  * /users/{id}:
  *  get:
@@ -60,7 +87,7 @@ module.exports = usersRouter;
  *        description: A successful response
  *      '400':
  *        description: Bad request.
- *    userPatchBody:
+ *    requestBody:
  *      description: Body to update a user
  *      required: true
  *      content:
@@ -80,7 +107,7 @@ module.exports = usersRouter;
  *    parameters:
  *      - $ref: '#parameters/id'
  *    responses:
- *      '200':
+ *      '204':
  *        description: A successful response
  *      '400':
  *        description: Bad request.

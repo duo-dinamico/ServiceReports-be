@@ -24,9 +24,16 @@ exports.removeUser = async id => {
     return user;
 };
 
-exports.fetchUser = async ({id}) => {
-    const [user] = await connection.select(columnSelection).from("users").where({deleted_at: null, id});
-    if (!user) return Promise.reject(Boom.notFound(`"${id}" could not be found`));
+exports.fetchUser = async ({id: user_id}, username) => {
+    const [user] = await connection
+        .select(columnSelection)
+        .from("users")
+        .where({deleted_at: null})
+        .modify(builder => {
+            if (user_id) builder.where({id: user_id});
+            if (username) builder.where({username});
+        });
+    if (!user && user_id) return Promise.reject(Boom.notFound(`"${user_id}" could not be found`));
     return user;
 };
 
@@ -35,6 +42,14 @@ exports.updateUser = async (id, body) => {
         .from("users")
         .where({deleted_at: null, id})
         .update({...body, updated_at: new Date().toISOString()})
+        .returning(columnSelection);
+    return user;
+};
+
+exports.addUser = async body => {
+    const [user] = await connection
+        .from("users")
+        .insert({...body, created_at: new Date().toISOString()})
         .returning(columnSelection);
     return user;
 };

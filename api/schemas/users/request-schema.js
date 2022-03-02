@@ -15,4 +15,15 @@ const patchUserSchema = {
     body: Joi.object({username: Joi.string(), name: Joi.string()}).min(1).required(),
 };
 
-module.exports = {usersSchema, userSchema, patchUserSchema};
+const postUserSchema = {
+    body: Joi.object({
+        username: Joi.string()
+            .pattern(/^[a-z]+$/)
+            .required(),
+        name: Joi.string().required(),
+    })
+        .min(1)
+        .required(),
+};
+
+module.exports = {usersSchema, userSchema, patchUserSchema, postUserSchema};

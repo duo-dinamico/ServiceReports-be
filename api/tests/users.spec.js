@@ -5,7 +5,7 @@ const app = require("../app");
 const request = supertest(app);
 const expectedKeys = ["id", "username", "name", "created_at", "updated_at", "deleted_at"];
 const urlPath = "/api/users";
-const invalidMethods = ["post", "put", "patch", "delete"];
+const invalidMethods = ["put", "patch", "delete"];
 const invalidMethodsId = ["post", "put"];
 const deleteUserId = "1ebd707a-894e-41b1-881e-d222379ac1f4";
 const userId = "9a5c5991-a14d-4d85-b75f-d75081500c8d";
@@ -73,6 +73,27 @@ describe("/api", () => {
                             });
                         }));
             });
+            describe("POST", () => {
+                it("status: 201", () =>
+                    request
+                        .post(urlPath)
+                        .send({username: "testpostuser", name: "test post user"})
+                        .expect(201)
+                        .then(({body: {user}}) => {
+                            expect(user).not.toBe(null);
+                            expect(typeof user === "object" && user.constructor === Object).toBeTruthy();
+                        }));
+                it("status: 201, responds with expected keys", () =>
+                    request
+                        .post(urlPath)
+                        .send({username: "testpostuser", name: "test post user"})
+                        .expect(201)
+                        .then(({body: {user}}) => {
+                            expect(Object.keys(user)).toEqual(expectedKeys);
+                            expect(user.username).toEqual("testpostuser");
+                            expect(user.name).toEqual("test post user");
+                        }));
+            });
         });
         describe("ERROR HANDLING", () => {
             describe("GET", () => {
@@ -105,6 +126,51 @@ describe("/api", () => {
                                 expect(message).toBe('"user_id" must be a valid GUID');
                             }));
                 });
+            });
+            describe("POST", () => {
+                it("status: 400, should error with wrong keys", () =>
+                    request
+                        .post(urlPath)
+                        .send({username: "mytest", name: "second", batatas: "Joao"})
+                        .expect(400)
+                        .then(({body: {message}}) => {
+                            expect(message).toBe('"batatas" is not allowed');
+                        }));
+                it("status: 400, should error if value not string", () =>
+                    request
+                        .post(urlPath)
+                        .send({username: 1234})
+                        .expect(400)
+                        .then(({body: {message}}) => {
+                            expect(message).toBe('"username" must be a string');
+                        }));
+                it("status: 400, should error if user already exists [username must be unique]", () =>
+                    request
+                        .post(urlPath)
+                        .send({username: "jsilva", name: "second"})
+                        .expect(400)
+                        .then(({body: {error, data}}) => {
+                            expect(data.message).toBe('"jsilva" already exists');
+                            expect(error).toBe("Bad Request");
+                        }));
+                it("status: 400, should error if username not well formatted [username must follow this regex: ^[a-z]+$ ]", () =>
+                    request
+                        .post(urlPath)
+                        .send({username: "hello john 123"})
+                        .expect(400)
+                        .then(({body: {message}}) => {
+                            expect(message).toBe(
+                                '"username" with value "hello john 123" fails to match the required pattern: /^[a-z]+$/'
+                            );
+                        }));
+                it("status: 400, should error if no username ", () =>
+                    request
+                        .post(urlPath)
+                        .send({name: "mytest"})
+                        .expect(400)
+                        .then(({body: {message}}) => {
+                            expect(message).toBe('"username" is required');
+                        }));
             });
             it.each(invalidMethods)("status:405, invalid method - %s", async method =>
                 request[method](urlPath)
