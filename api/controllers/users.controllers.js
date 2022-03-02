@@ -1,5 +1,5 @@
 const {Joi} = require("celebrate");
-const {fetchAllUsers, removeUser, fetchUser, updateUser} = require("../models/users.models");
+const {fetchAllUsers, removeUser, fetchUser, updateUser, addUser} = require("../models/users.models");
 const {usersResponseSchema, userResponseSchema} = require("../schemas/users");
 
 exports.getAllUsers = async (req, res, next) => {
@@ -36,6 +36,16 @@ exports.patchUser = async (req, res, next) => {
         const resolvedData = await updateUser(req.params.id, req.body);
         const validatedData = await Joi.object(userResponseSchema).validateAsync({user: resolvedData});
         res.status(200).json(validatedData);
+    } catch (err) {
+        next(err);
+    }
+};
+
+exports.postUser = async (req, res, next) => {
+    try {
+        const resolvedData = await addUser(req.body);
+        const validatedData = await Joi.object(userResponseSchema).validateAsync({user: resolvedData});
+        res.status(201).json(validatedData);
     } catch (err) {
         next(err);
     }
