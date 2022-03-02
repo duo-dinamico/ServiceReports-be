@@ -38,8 +38,19 @@ module.exports = usersRouter;
  *      - $ref: '#parameters/order'
  *      - $ref: '#parameters/user_id'
  *    responses:
- *      '200':
- *        description: A successful response
+ *      200:
+ *         description: A list of users.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 username:
+ *                   type: string
+ *                   example: testusername
+ *                 name:
+ *                   type: string
+ *                   example: testname
  *      '400':
  *        description: Bad request.
  *  post:

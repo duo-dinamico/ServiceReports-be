@@ -44,8 +44,8 @@ exports.patchUser = async (req, res, next) => {
 exports.postUser = async (req, res, next) => {
     try {
         const resolvedData = await addUser(req.body);
-
-        res.status(201).json({user: resolvedData});
+        const validatedData = await Joi.object(userResponseSchema).validateAsync({user: resolvedData});
+        res.status(201).json(validatedData);
     } catch (err) {
         next(err);
     }

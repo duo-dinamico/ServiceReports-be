@@ -163,7 +163,7 @@ describe("/api", () => {
                                 '"username" with value "hello john 123" fails to match the required pattern: /^[a-z]+$/'
                             );
                         }));
-                it("status: 400, should error if no username ", () =>
+                it("status: 400, should error if no username", () =>
                     request
                         .post(urlPath)
                         .send({name: "mytest"})
