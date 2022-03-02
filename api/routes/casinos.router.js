@@ -1,11 +1,13 @@
 const casinosRouter = require("express").Router();
 const {celebrate} = require("celebrate");
 
-const {casinosSchema} = require("../schemas/casinos");
-const {getAllCasinos} = require("../controllers/casinos.controllers");
+const {casinosSchema, casinoSchema} = require("../schemas/casinos");
+const {getAllCasinos, getCasino} = require("../controllers/casinos.controllers");
 const {methodNotAllowed} = require("../errors");
+const {validateCasinoExists} = require("../validation/casinos.validation");
 
 casinosRouter.route("/").get(celebrate(casinosSchema), getAllCasinos).all(methodNotAllowed);
+casinosRouter.route("/:id").get(celebrate(casinoSchema), validateCasinoExists, getCasino);
 
 module.exports = casinosRouter;
 

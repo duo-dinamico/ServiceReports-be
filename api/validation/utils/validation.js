@@ -1,5 +1,6 @@
 const Boom = require("@hapi/boom");
 const {fetchUser} = require("../../models/users.models");
+const {fetchCasino} = require("../../models/casinos.models");
 
 async function validateUserById(id) {
     try {
@@ -20,4 +21,13 @@ async function validateUserByUsername(username) {
     }
 }
 
-module.exports = {validateUserById, validateUserByUsername};
+async function validateCasinoById(id) {
+    try {
+        await fetchCasino({id});
+        return true;
+    } catch (err) {
+        return Promise.reject(err.output.payload);
+    }
+}
+
+module.exports = {validateUserById, validateUserByUsername, validateCasinoById};

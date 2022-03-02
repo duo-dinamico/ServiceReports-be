@@ -234,7 +234,7 @@ describe("/api", () => {
             });
             describe("ERROR HANDLING", () => {
                 describe("GET", () => {
-                    it("status: 404, gets a user by id", () =>
+                    it("status: 404, should error if id doesn't exist", () =>
                         request
                             .get(`${urlPath}/9a5c5991-a14d-4d85-b75f-d75081500c8a`)
                             .expect(404)

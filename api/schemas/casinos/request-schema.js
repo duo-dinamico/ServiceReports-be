@@ -9,4 +9,6 @@ const casinosSchema = {
     }),
 };
 
-module.exports = {casinosSchema};
+const casinoSchema = {params: Joi.object({id: Joi.string().uuid()})};
+
+module.exports = {casinosSchema, casinoSchema};

@@ -107,5 +107,42 @@ describe("/api", () => {
                     .then(({body: {error}}) => expect(error).toBe("Method Not Allowed"))
             );
         });
+        describe("/:id", () => {
+            describe("DEFAULT BEHAVIOUR", () => {
+                it("status: 200", () => request.get(`${urlPath}/${casinoId}`).expect(200));
+                it("status: 200, should return an object", () =>
+                    request
+                        .get(`${urlPath}/${casinoId}`)
+                        .expect(200)
+                        .then(({body: {casino}}) => {
+                            expect(casino).not.toBe(null);
+                            expect(typeof casino === "object" && casino.constructor === Object).toBeTruthy();
+                        }));
+                it("status: 200, should return expected keys", () =>
+                    request
+                        .get(`${urlPath}/${casinoId}`)
+                        .expect(200)
+                        .then(({body: {casino}}) => {
+                            expect(Object.keys(casino)).toEqual(expectedKeys);
+                        }));
+            });
+            describe("ERROR HANDLING", () => {
+                it("status: 400, should error if id not uuid", () =>
+                    request
+                        .get(`${urlPath}/invalid`)
+                        .expect(400)
+                        .then(({body: {message}}) => {
+                            expect(message).toBe('"id" must be a valid GUID');
+                        }));
+                it("status: 404, should error if id doesn't exist", () =>
+                    request
+                        .get(`${urlPath}/9a5c5991-a14d-4d85-b75f-d75081500c8a`)
+                        .expect(404)
+                        .then(({body: {error, data}}) => {
+                            expect(error).toBe("Not Found");
+                            expect(data.message).toBe(`"9a5c5991-a14d-4d85-b75f-d75081500c8a" could not be found`);
+                        }));
+            });
+        });
     });
 });
