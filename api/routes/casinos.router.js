@@ -33,4 +33,16 @@ module.exports = casinosRouter;
  *        description: A successful response
  *      '400':
  *        description: Bad request.
+ *
+ * /casinos/{id}:
+ *  get:
+ *    summary: Use to request a casino
+ *    tags: [Casinos]
+ *    parameters:
+ *      - $ref: '#parameters/id'
+ *    responses:
+ *      '200':
+ *        description: A successful response
+ *      '400':
+ *        description: Bad request.
  */
