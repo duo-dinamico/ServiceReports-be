@@ -19,6 +19,8 @@ jobs:
           POSTGRES_PORT: ${{ secrets.POSTGRES_PORT }}
           POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+          POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -39,8 +41,5 @@ jobs:
       - run: npm run lint
         working-directory: api
       - name: Connect to PostgreSQL and tests
-        env:
-          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-          POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
         run: npm run test-git
         working-directory: api

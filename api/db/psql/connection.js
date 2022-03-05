@@ -8,8 +8,8 @@ const githubConfig = {
             host: process.env.POSTGRES_HOST,
             port: process.env.POSTGRES_PORT,
             database: process.env.DATABASE_NAME,
-            user: "sruser",
-            password: "sruser",
+            user: process.env.POSTGRES_USER,
+            password: process.env.POSTGRES_PASSWORD,
         },
         migrations: {
             directory: `${__dirname}/db/psql/migrations`,
