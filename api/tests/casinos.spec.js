@@ -6,8 +6,10 @@ const request = supertest(app);
 const expectedKeys = ["id", "name", "location", "created_at", "updated_at", "deleted_at"];
 const urlPath = "/api/casinos";
 const invalidMethods = ["post", "put", "patch", "delete"];
+const invalidMethodsId = ["post", "put", "patch"];
 
 const casinoId = "446470f4-aeff-4fb7-9b53-38b434ca2488";
+const casinoIdDelete = "583eed9c-65d0-4d3e-b561-faba91ca0ee5";
 
 describe("/api", () => {
     beforeEach(() => connection.seed.run());
@@ -131,6 +133,31 @@ describe("/api", () => {
                                 expect(Object.keys(casino)).toEqual(expectedKeys);
                             }));
                 });
+                describe("DELETE", () => {
+                    it("status: 204, should be able to soft delete", () =>
+                        request.delete(`${urlPath}/${casinoIdDelete}`).expect(204));
+                    it("status: 204, should return empty object", () =>
+                        request
+                            .delete(`${urlPath}/${casinoIdDelete}`)
+                            .expect(204)
+                            .then(({body}) => {
+                                expect(body).toStrictEqual({});
+                            }));
+                    it("status: 204, confirm that casino has been soft deleted", () =>
+                        request
+                            .delete(`${urlPath}/${casinoIdDelete}`)
+                            .expect(204)
+                            .then(() =>
+                                request
+                                    .get(urlPath)
+                                    .expect(200)
+                                    .then(({body: {casinos}}) => {
+                                        casinos.forEach(casino => {
+                                            expect(casino.id).not.toEqual(casinoIdDelete);
+                                        });
+                                    })
+                            ));
+                });
             });
             describe("ERROR HANDLING", () => {
                 describe("GET", () => {
@@ -158,6 +185,36 @@ describe("/api", () => {
                                 expect(data.message).toBe(`"30d877ce-387c-4b9d-8a58-566a035892d0" could not be found`);
                             }));
                 });
+                describe("DELETE", () => {
+                    it("status: 404, should error if casino not found", () =>
+                        request
+                            .delete(`${urlPath}/583eed9c-65d0-4d3e-b561-faba91ca0ee6`)
+                            .expect(404)
+                            .then(({body: {error, data}}) => {
+                                expect(error).toBe("Not Found");
+                                expect(data.message).toBe(`"583eed9c-65d0-4d3e-b561-faba91ca0ee6" could not be found`);
+                            }));
+                    it("status: 404, should error if already deleted", () =>
+                        request
+                            .delete(`${urlPath}/30d877ce-387c-4b9d-8a58-566a035892d0`)
+                            .expect(404)
+                            .then(({body: {error, data}}) => {
+                                expect(error).toBe("Not Found");
+                                expect(data.message).toBe(`"30d877ce-387c-4b9d-8a58-566a035892d0" could not be found`);
+                            }));
+                    it("status: 400, should error if not UUID", () =>
+                        request
+                            .delete(`${urlPath}/invalid`)
+                            .expect(400)
+                            .then(({body: {message}}) => {
+                                expect(message).toBe('"id" must be a valid GUID');
+                            }));
+                });
+                it.each(invalidMethodsId)("status:405, invalid method - %s", async method =>
+                    request[method](`${urlPath}/${casinoId}`)
+                        .expect(405)
+                        .then(({body: {error}}) => expect(error).toBe("Method Not Allowed"))
+                );
             });
         });
     });

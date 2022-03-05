@@ -16,12 +16,7 @@ exports.fetchAllUsers = async ({sort_by, order, user_id}) => {
 };
 
 exports.removeUser = async id => {
-    const user = await connection
-        .from("users")
-        .where({deleted_at: null, id})
-        .update("deleted_at", new Date().toISOString());
-    if (user === 0) return Promise.reject(Boom.notFound(`"${id}" could not be found`));
-    return user;
+    await connection.from("users").where({id}).update("deleted_at", new Date().toISOString());
 };
 
 exports.fetchUser = async ({id: user_id}, username) => {
