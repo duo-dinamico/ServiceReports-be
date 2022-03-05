@@ -21,3 +21,7 @@ exports.fetchCasino = async ({id}) => {
     if (!casino && id) return Promise.reject(Boom.notFound(`"${id}" could not be found`));
     return casino;
 };
+
+exports.removeCasino = async ({id}) => {
+    await connection.from("casinos").where({id}).update({deleted_at: new Date().toISOString()});
+};
