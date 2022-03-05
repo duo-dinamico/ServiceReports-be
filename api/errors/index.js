@@ -29,6 +29,7 @@ exports.errorHandler = (err, _req, res, next) => {
     } else if (Boom.isBoom(err)) {
         res.status(err.output.statusCode).json({...err.output.payload, data: err.data});
     } else {
+        console.log(err);
         const serverErr = Boom.badImplementation("terrible implementation");
         res.status(serverErr.output.statusCode).json(serverErr.output.payload);
     }

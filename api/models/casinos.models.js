@@ -1,8 +1,12 @@
+const Boom = require("@hapi/boom");
+
 const connection = require("../db/psql/connection");
+
+const columnSelection = ["id", "name", "location", "created_at", "updated_at", "deleted_at"];
 
 exports.fetchAllCasinos = async ({sort_by, order, casino_id}) => {
     const casinos = await connection
-        .select("id", "name", "location", "created_at", "updated_at", "deleted_at")
+        .select(columnSelection)
         .from("casinos")
         .where({deleted_at: null})
         .modify(builder => {
@@ -10,4 +14,10 @@ exports.fetchAllCasinos = async ({sort_by, order, casino_id}) => {
             if (casino_id) builder.where({id: casino_id});
         });
     return casinos;
+};
+
+exports.fetchCasino = async ({id}) => {
+    const [casino] = await connection.select(columnSelection).from("casinos").where({deleted_at: null, id});
+    if (!casino && id) return Promise.reject(Boom.notFound(`"${id}" could not be found`));
+    return casino;
 };

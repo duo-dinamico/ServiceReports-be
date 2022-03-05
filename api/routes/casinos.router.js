@@ -1,11 +1,13 @@
 const casinosRouter = require("express").Router();
 const {celebrate} = require("celebrate");
 
-const {casinosSchema} = require("../schemas/casinos");
-const {getAllCasinos} = require("../controllers/casinos.controllers");
+const {casinosSchema, casinoSchema} = require("../schemas/casinos");
+const {getAllCasinos, getCasino} = require("../controllers/casinos.controllers");
 const {methodNotAllowed} = require("../errors");
+const {validateCasinoExists} = require("../validation/casinos.validation");
 
 casinosRouter.route("/").get(celebrate(casinosSchema), getAllCasinos).all(methodNotAllowed);
+casinosRouter.route("/:id").get(celebrate(casinoSchema), validateCasinoExists, getCasino);
 
 module.exports = casinosRouter;
 
@@ -26,6 +28,18 @@ module.exports = casinosRouter;
  *      - $ref: '#parameters/sort_by'
  *      - $ref: '#parameters/order'
  *      - $ref: '#parameters/casino_id'
+ *    responses:
+ *      '200':
+ *        description: A successful response
+ *      '400':
+ *        description: Bad request.
+ *
+ * /casinos/{id}:
+ *  get:
+ *    summary: Use to request a casino
+ *    tags: [Casinos]
+ *    parameters:
+ *      - $ref: '#parameters/id'
  *    responses:
  *      '200':
  *        description: A successful response

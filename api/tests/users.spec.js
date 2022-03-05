@@ -182,6 +182,21 @@ describe("/api", () => {
             describe("DEFAULT BEHAVIOUR", () => {
                 describe("GET", () => {
                     it("status: 200, gets a user by id", () => request.get(`${urlPath}/${userId}`).expect(200));
+                    it("status: 200, should return an object", () =>
+                        request
+                            .get(`${urlPath}/${userId}`)
+                            .expect(200)
+                            .then(({body: {user}}) => {
+                                expect(user).not.toBe(null);
+                                expect(typeof user === "object" && user.constructor === Object).toBeTruthy();
+                            }));
+                    it("status: 200, should return expected keys", () =>
+                        request
+                            .get(`${urlPath}/${userId}`)
+                            .expect(200)
+                            .then(({body: {user}}) => {
+                                expect(Object.keys(user)).toEqual(expectedKeys);
+                            }));
                 });
                 describe("PATCH", () => {
                     it("status: 200, should be able to patch an user", () =>
@@ -234,7 +249,7 @@ describe("/api", () => {
             });
             describe("ERROR HANDLING", () => {
                 describe("GET", () => {
-                    it("status: 404, gets a user by id", () =>
+                    it("status: 404, should error if id doesn't exist", () =>
                         request
                             .get(`${urlPath}/9a5c5991-a14d-4d85-b75f-d75081500c8a`)
                             .expect(404)
@@ -248,6 +263,14 @@ describe("/api", () => {
                             .expect(400)
                             .then(({body: {message}}) => {
                                 expect(message).toBe('"id" must be a valid GUID');
+                            }));
+                    it("status: 404, should not return a user that has been deleted", () =>
+                        request
+                            .get(`${urlPath}/d3b77da1-f9a3-4b1b-b747-7a7cb27efe75`)
+                            .expect(404)
+                            .then(({body: {error, message}}) => {
+                                expect(error).toBe("Not Found");
+                                expect(message).toBe(`"d3b77da1-f9a3-4b1b-b747-7a7cb27efe75" could not be found`);
                             }));
                 });
                 describe("PATCH", () => {

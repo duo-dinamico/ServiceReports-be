@@ -79,7 +79,7 @@ module.exports = usersRouter;
  *
  * /users/{id}:
  *  get:
- *    summary: Use to request one user
+ *    summary: Use to request a user
  *    tags: [Users]
  *    parameters:
  *      - $ref: '#parameters/id'
