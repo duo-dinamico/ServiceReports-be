@@ -12,10 +12,10 @@ const githubConfig = {
             password: process.env.POSTGRES_PASSWORD,
         },
         migrations: {
-            directory: `./migrations`,
+            directory: `${__dirname}/migrations`,
         },
         seeds: {
-            directory: `./seeds`,
+            directory: `${__dirname}/seeds`,
         },
     },
 };
