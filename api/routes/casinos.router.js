@@ -34,7 +34,11 @@ module.exports = casinosRouter;
  *      - $ref: '#parameters/casino_id'
  *    responses:
  *      '200':
- *        description: A successful response
+ *        description: Returns an object with an array of casino objects
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/casinos_schema'
  *      '400':
  *        description: Bad request.
  *
@@ -46,7 +50,57 @@ module.exports = casinosRouter;
  *      - $ref: '#parameters/id'
  *    responses:
  *      '200':
- *        description: A successful response
+ *        description: Returns an object with a key "casino", with a casino object
+ *        content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/casino_schema'
  *      '400':
  *        description: Bad request.
+ *
+ *  delete:
+ *    summary: Use to delete one casino
+ *    tags: [Casinos]
+ *    parameters:
+ *      - $ref: '#parameters/id'
+ *    responses:
+ *      '204':
+ *        description: A successful response, returns nothing
+ *      '400':
+ *        description: Bad request.
+ *      '404':
+ *        description: Not Found
+ *
+ * components:
+ *  schemas:
+ *    casino_schema:
+ *      type: object
+ *      properties:
+ *        id:
+ *          type: string
+ *          description: The casino ID.
+ *        name:
+ *          type: string
+ *          description: The casino name.
+ *        location:
+ *          type: string
+ *          description: The casino name.
+ *        created_at:
+ *          type: string
+ *          description: The casino name.
+ *        updated_at:
+ *          type: string
+ *          description: The casino name.
+ *        deleted_at:
+ *          type: string
+ *          description: The casino name.
+ *    casinos_schema:
+ *      type: object
+ *      properties:
+ *        casinos:
+ *          type: array
+ *          items:
+ *            type: object
+ *            allOf:
+ *              - $ref: '#/components/schemas/casino_schema'
  */
