@@ -149,8 +149,8 @@ describe("/api", () => {
                         .post(urlPath)
                         .send({username: "jsilva", name: "second"})
                         .expect(400)
-                        .then(({body: {error, data}}) => {
-                            expect(data.message).toBe('"jsilva" already exists');
+                        .then(({body: {error, message}}) => {
+                            expect(message).toBe('"jsilva" already exists');
                             expect(error).toBe("Bad Request");
                         }));
                 it("status: 400, should error if username not well formatted [username must follow this regex: ^[a-z]+$ ]", () =>
@@ -320,18 +320,18 @@ describe("/api", () => {
                                 request
                                     .delete(`${urlPath}/${deleteUserId}`)
                                     .expect(404)
-                                    .then(({body: {error, data}}) => {
+                                    .then(({body: {error, message}}) => {
                                         expect(error).toBe("Not Found");
-                                        expect(data.message).toBe(`"${deleteUserId}" could not be found`);
+                                        expect(message).toBe(`"${deleteUserId}" could not be found`);
                                     })
                             ));
                     it("status: 404, should error if user doesn't exist", () =>
                         request
                             .delete(`${urlPath}/1ebd707a-894e-41b1-881e-d222379ac1f5`)
                             .expect(404)
-                            .then(({body: {error, data}}) => {
+                            .then(({body: {error, message}}) => {
                                 expect(error).toBe("Not Found");
-                                expect(data.message).toBe(`"1ebd707a-894e-41b1-881e-d222379ac1f5" could not be found`);
+                                expect(message).toBe(`"1ebd707a-894e-41b1-881e-d222379ac1f5" could not be found`);
                             }));
                 });
                 it.each(invalidMethodsId)("status:405, invalid method - %s", async method =>

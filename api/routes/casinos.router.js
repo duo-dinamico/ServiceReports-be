@@ -68,7 +68,11 @@ module.exports = casinosRouter;
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/casino_schema'
+ *              type: object
+ *              properties:
+ *                casino:
+ *                  oneOf:
+ *                  $ref: '#/components/schemas/casino_schema'
  *      '400':
  *        description: Bad request.
  *

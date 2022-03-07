@@ -25,9 +25,9 @@ exports.errorHandler = (err, _req, res, next) => {
         if (errorBody.query) newErr = Boom.badRequest(errorBody.query.details[0].message);
         if (errorBody.params) newErr = Boom.badRequest(errorBody.params.details[0].message);
         if (errorBody.body) newErr = Boom.badRequest(errorBody.body.details[0].message);
-        res.status(newErr.output.statusCode).json({...newErr.output.payload, data: newErr.data});
+        res.status(newErr.output.statusCode).json({...newErr.output.payload});
     } else if (Boom.isBoom(err)) {
-        res.status(err.output.statusCode).json({...err.output.payload, data: err.data});
+        res.status(err.output.statusCode).json({...err.output.payload});
     } else {
         const serverErr = Boom.badImplementation("terrible implementation");
         res.status(serverErr.output.statusCode).json(serverErr.output.payload);
