@@ -5,11 +5,11 @@ const app = require("../app");
 const request = supertest(app);
 const expectedKeys = ["id", "name", "location", "created_at", "updated_at", "deleted_at"];
 const urlPath = "/api/casinos";
-const invalidMethods = ["post", "put", "patch", "delete"];
+const invalidMethods = ["put", "patch", "delete"];
 const invalidMethodsId = ["post", "put", "patch"];
-
 const casinoId = "446470f4-aeff-4fb7-9b53-38b434ca2488";
 const casinoIdDelete = "583eed9c-65d0-4d3e-b561-faba91ca0ee5";
+const postBody = {name: "Casino de Test", location: "Cidade de Teste"};
 
 describe("/api", () => {
     beforeEach(() => connection.seed.run());
@@ -72,6 +72,19 @@ describe("/api", () => {
                             casinos.forEach(casino => {
                                 expect(casino.deleted_at).toBe(null);
                             });
+                        }));
+            });
+            describe("POST", () => {
+                it("status: 201, must get succesful status", () => request.post(urlPath).send(postBody).expect(201));
+                it("status: 201, returns expected keys for casino", () =>
+                    request
+                        .post(urlPath)
+                        .send(postBody)
+                        .expect(201)
+                        .then(({body: {casino}}) => {
+                            expect(casino).not.toBe(null);
+                            expect(typeof casino === "object" && casino.constructor === Object).toBeTruthy();
+                            expect(Object.keys(casino)).toEqual(expectedKeys);
                         }));
             });
         });

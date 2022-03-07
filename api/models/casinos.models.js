@@ -25,3 +25,11 @@ exports.fetchCasino = async ({id}) => {
 exports.removeCasino = async ({id}) => {
     await connection.from("casinos").where({id}).update({deleted_at: new Date().toISOString()});
 };
+
+exports.addCasino = async body => {
+    const [casino] = await connection
+        .from("casinos")
+        .insert({...body, created_at: new Date().toISOString()})
+        .returning(columnSelection);
+    return casino;
+};

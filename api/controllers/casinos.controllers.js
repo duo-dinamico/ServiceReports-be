@@ -1,5 +1,5 @@
 const {Joi} = require("celebrate");
-const {fetchAllCasinos, fetchCasino, removeCasino} = require("../models/casinos.models");
+const {fetchAllCasinos, fetchCasino, removeCasino, addCasino} = require("../models/casinos.models");
 const {casinosResponseSchema, casinoResponseSchema} = require("../schemas/casinos");
 
 exports.getAllCasinos = async (req, res, next) => {
@@ -26,6 +26,15 @@ exports.deleteCasino = async (req, res, next) => {
     try {
         await removeCasino(req.params);
         res.status(204).json({});
+    } catch (err) {
+        next(err);
+    }
+};
+
+exports.postCasino = async (req, res, next) => {
+    try {
+        const resolvedData = await addCasino(req.body);
+        res.status(201).json({casino: resolvedData});
     } catch (err) {
         next(err);
     }
