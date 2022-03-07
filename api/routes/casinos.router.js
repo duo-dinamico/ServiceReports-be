@@ -40,7 +40,7 @@ module.exports = casinosRouter;
  *            schema:
  *              $ref: '#/components/schemas/casinos_schema'
  *      '400':
- *        description: Bad request.
+ *        description: Bad request
  *
  * /casinos/{id}:
  *  get:
@@ -56,7 +56,7 @@ module.exports = casinosRouter;
  *             schema:
  *               $ref: '#/components/schemas/casino_schema'
  *      '400':
- *        description: Bad request.
+ *        description: Bad request
  *
  *  delete:
  *    summary: Use to delete one casino
@@ -65,9 +65,9 @@ module.exports = casinosRouter;
  *      - $ref: '#parameters/id'
  *    responses:
  *      '204':
- *        description: A successful response, returns nothing
+ *        description: A successful response, returns an empty object
  *      '400':
- *        description: Bad request.
+ *        description: Bad request
  *      '404':
  *        description: Not Found
  *
@@ -78,22 +78,16 @@ module.exports = casinosRouter;
  *      properties:
  *        id:
  *          type: string
- *          description: The casino ID.
  *        name:
  *          type: string
- *          description: The casino name.
  *        location:
  *          type: string
- *          description: The casino name.
  *        created_at:
  *          type: string
- *          description: The casino name.
  *        updated_at:
  *          type: string
- *          description: The casino name.
  *        deleted_at:
  *          type: string
- *          description: The casino name.
  *    casinos_schema:
  *      type: object
  *      properties:
