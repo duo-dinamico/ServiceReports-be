@@ -144,9 +144,9 @@ describe("/api", () => {
                         .post(urlPath)
                         .send({name: "Casino Estoril", location: "Estoril"})
                         .expect(400)
-                        .then(({body: {error, data}}) => {
+                        .then(({body: {error, message}}) => {
                             expect(error).toBe("Bad Request");
-                            expect(data.message).toBe('"Casino Estoril" already exists');
+                            expect(message).toBe('"Casino Estoril" already exists');
                         }));
                 it("status: 400, should only have allowed keys", () =>
                     request
@@ -223,17 +223,17 @@ describe("/api", () => {
                         request
                             .get(`${urlPath}/9a5c5991-a14d-4d85-b75f-d75081500c8a`)
                             .expect(404)
-                            .then(({body: {error, data}}) => {
+                            .then(({body: {error, message}}) => {
                                 expect(error).toBe("Not Found");
-                                expect(data.message).toBe(`"9a5c5991-a14d-4d85-b75f-d75081500c8a" could not be found`);
+                                expect(message).toBe(`"9a5c5991-a14d-4d85-b75f-d75081500c8a" could not be found`);
                             }));
                     it("status: 404, should not return a casino that has been deleted", () =>
                         request
                             .get(`${urlPath}/30d877ce-387c-4b9d-8a58-566a035892d0`)
                             .expect(404)
-                            .then(({body: {error, data}}) => {
+                            .then(({body: {error, message}}) => {
                                 expect(error).toBe("Not Found");
-                                expect(data.message).toBe(`"30d877ce-387c-4b9d-8a58-566a035892d0" could not be found`);
+                                expect(message).toBe(`"30d877ce-387c-4b9d-8a58-566a035892d0" could not be found`);
                             }));
                 });
                 describe("DELETE", () => {
@@ -241,17 +241,17 @@ describe("/api", () => {
                         request
                             .delete(`${urlPath}/583eed9c-65d0-4d3e-b561-faba91ca0ee6`)
                             .expect(404)
-                            .then(({body: {error, data}}) => {
+                            .then(({body: {error, message}}) => {
                                 expect(error).toBe("Not Found");
-                                expect(data.message).toBe(`"583eed9c-65d0-4d3e-b561-faba91ca0ee6" could not be found`);
+                                expect(message).toBe(`"583eed9c-65d0-4d3e-b561-faba91ca0ee6" could not be found`);
                             }));
                     it("status: 404, should error if already deleted", () =>
                         request
                             .delete(`${urlPath}/30d877ce-387c-4b9d-8a58-566a035892d0`)
                             .expect(404)
-                            .then(({body: {error, data}}) => {
+                            .then(({body: {error, message}}) => {
                                 expect(error).toBe("Not Found");
-                                expect(data.message).toBe(`"30d877ce-387c-4b9d-8a58-566a035892d0" could not be found`);
+                                expect(message).toBe(`"30d877ce-387c-4b9d-8a58-566a035892d0" could not be found`);
                             }));
                     it("status: 400, should error if not UUID", () =>
                         request

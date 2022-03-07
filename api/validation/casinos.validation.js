@@ -11,8 +11,6 @@ exports.validateCasinoExists = async (req, res, next) => {
         await Promise.all(toValidate);
         next();
     } catch (err) {
-        if (err.statusCode === 400) next(Boom.badRequest("The request wasn't valid, please try again", err));
-        else if (err.statusCode === 404) next(Boom.notFound("The request wasn't valid, please try again", err));
-        else next(err);
+        next(new Boom.Boom(err.message, {statusCode: err.statusCode}));
     }
 };
