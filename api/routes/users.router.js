@@ -74,8 +74,7 @@ module.exports = usersRouter;
  *      '201':
  *        description: A successful response
  *      '400':
- *        description: Bad request.
- *
+ *        description: Bad request
  *
  * /users/{id}:
  *  get:

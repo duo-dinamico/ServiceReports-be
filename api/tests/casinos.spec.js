@@ -120,6 +120,44 @@ describe("/api", () => {
                             }));
                 });
             });
+            describe("POST", () => {
+                it("status: 400, should have required keys", () =>
+                    request
+                        .post(urlPath)
+                        .send({name: "Casino de test"})
+                        .expect(400)
+                        .then(({body: {error, message}}) => {
+                            expect(error).toBe("Bad Request");
+                            expect(message).toBe('"location" is required');
+                        }));
+                it("status: 400, values should be strings", () =>
+                    request
+                        .post(urlPath)
+                        .send({name: 12345})
+                        .expect(400)
+                        .then(({body: {error, message}}) => {
+                            expect(error).toBe("Bad Request");
+                            expect(message).toBe('"name" must be a string');
+                        }));
+                it("status: 400, casino should be unique [name must be unique]", () =>
+                    request
+                        .post(urlPath)
+                        .send({name: "Casino Estoril", location: "Estoril"})
+                        .expect(400)
+                        .then(({body: {error, data}}) => {
+                            expect(error).toBe("Bad Request");
+                            expect(data.message).toBe('"Casino Estoril" already exists');
+                        }));
+                it("status: 400, should only have allowed keys", () =>
+                    request
+                        .post(urlPath)
+                        .send({...postBody, batatas: "fritas"})
+                        .expect(400)
+                        .then(({body: {error, message}}) => {
+                            expect(error).toBe("Bad Request");
+                            expect(message).toBe('"batatas" is not allowed');
+                        }));
+            });
             it.each(invalidMethods)("status:405, invalid method - %s", async method =>
                 request[method](urlPath)
                     .expect(405)

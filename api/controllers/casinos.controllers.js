@@ -34,7 +34,8 @@ exports.deleteCasino = async (req, res, next) => {
 exports.postCasino = async (req, res, next) => {
     try {
         const resolvedData = await addCasino(req.body);
-        res.status(201).json({casino: resolvedData});
+        const validatedData = await Joi.object(casinoResponseSchema).validateAsync({casino: resolvedData});
+        res.status(201).json(validatedData);
     } catch (err) {
         next(err);
     }

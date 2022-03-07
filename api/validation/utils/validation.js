@@ -30,4 +30,14 @@ async function validateCasinoById(id) {
     }
 }
 
-module.exports = {validateUserById, validateUserByUsername, validateCasinoById};
+async function validateCasinoByName(name) {
+    try {
+        const casino = await fetchCasino({}, name);
+        if (casino) return Promise.reject(Boom.badRequest(`"${name}" already exists`).output.payload);
+        return true;
+    } catch (err) {
+        return Promise.reject(err.output.payload);
+    }
+}
+
+module.exports = {validateUserById, validateUserByUsername, validateCasinoById, validateCasinoByName};
