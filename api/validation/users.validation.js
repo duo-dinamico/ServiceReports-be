@@ -12,7 +12,7 @@ exports.validateUserExists = async (req, res, next) => {
         next();
     } catch (err) {
         if (err.statusCode === 400) next(Boom.badRequest("The request wasn't valid, please try again", err));
-        if (err.statusCode === 404) next(Boom.notFound("The request wasn't valid, please try again", err));
-        next(err);
+        else if (err.statusCode === 404) next(Boom.notFound("The request wasn't valid, please try again", err));
+        else next(err);
     }
 };

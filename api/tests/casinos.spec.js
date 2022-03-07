@@ -5,11 +5,11 @@ const app = require("../app");
 const request = supertest(app);
 const expectedKeys = ["id", "name", "location", "created_at", "updated_at", "deleted_at"];
 const urlPath = "/api/casinos";
-const invalidMethods = ["post", "put", "patch", "delete"];
+const invalidMethods = ["put", "patch", "delete"];
 const invalidMethodsId = ["post", "put", "patch"];
-
 const casinoId = "446470f4-aeff-4fb7-9b53-38b434ca2488";
 const casinoIdDelete = "583eed9c-65d0-4d3e-b561-faba91ca0ee5";
+const postBody = {name: "Casino de Test", location: "Cidade de Teste"};
 
 describe("/api", () => {
     beforeEach(() => connection.seed.run());
@@ -74,6 +74,19 @@ describe("/api", () => {
                             });
                         }));
             });
+            describe("POST", () => {
+                it("status: 201, must get succesful status", () => request.post(urlPath).send(postBody).expect(201));
+                it("status: 201, returns expected keys for casino", () =>
+                    request
+                        .post(urlPath)
+                        .send(postBody)
+                        .expect(201)
+                        .then(({body: {casino}}) => {
+                            expect(casino).not.toBe(null);
+                            expect(typeof casino === "object" && casino.constructor === Object).toBeTruthy();
+                            expect(Object.keys(casino)).toEqual(expectedKeys);
+                        }));
+            });
         });
         describe("ERROR HANDLING", () => {
             describe("GET", () => {
@@ -106,6 +119,44 @@ describe("/api", () => {
                                 expect(message).toBe('"casino_id" must be a valid GUID');
                             }));
                 });
+            });
+            describe("POST", () => {
+                it("status: 400, should have required keys", () =>
+                    request
+                        .post(urlPath)
+                        .send({name: "Casino de test"})
+                        .expect(400)
+                        .then(({body: {error, message}}) => {
+                            expect(error).toBe("Bad Request");
+                            expect(message).toBe('"location" is required');
+                        }));
+                it("status: 400, values should be strings", () =>
+                    request
+                        .post(urlPath)
+                        .send({name: 12345})
+                        .expect(400)
+                        .then(({body: {error, message}}) => {
+                            expect(error).toBe("Bad Request");
+                            expect(message).toBe('"name" must be a string');
+                        }));
+                it("status: 400, casino should be unique [name must be unique]", () =>
+                    request
+                        .post(urlPath)
+                        .send({name: "Casino Estoril", location: "Estoril"})
+                        .expect(400)
+                        .then(({body: {error, data}}) => {
+                            expect(error).toBe("Bad Request");
+                            expect(data.message).toBe('"Casino Estoril" already exists');
+                        }));
+                it("status: 400, should only have allowed keys", () =>
+                    request
+                        .post(urlPath)
+                        .send({...postBody, batatas: "fritas"})
+                        .expect(400)
+                        .then(({body: {error, message}}) => {
+                            expect(error).toBe("Bad Request");
+                            expect(message).toBe('"batatas" is not allowed');
+                        }));
             });
             it.each(invalidMethods)("status:405, invalid method - %s", async method =>
                 request[method](urlPath)
