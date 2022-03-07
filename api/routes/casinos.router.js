@@ -16,14 +16,14 @@ casinosRouter
 module.exports = casinosRouter;
 
 /**
- * @swagger
+ * @openapi
  * tags:
  *   name: Casinos
  *   description: Casino management and retrieval
  */
 
 /**
- * @swagger
+ * @openapi
  * /casinos:
  *  get:
  *    summary: Use to request all casinos
