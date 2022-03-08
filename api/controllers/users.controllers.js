@@ -2,51 +2,34 @@ const {Joi} = require("celebrate");
 const {fetchAllUsers, removeUser, fetchUser, updateUser, addUser} = require("../models/users.models");
 const {usersResponseSchema, userResponseSchema} = require("../schemas/users");
 
-exports.getAllUsers = async (req, res, next) => {
-    try {
-        const resolvedData = await fetchAllUsers(req.query);
-        const validatedData = await Joi.object(usersResponseSchema).validateAsync({users: resolvedData});
-        res.status(200).json(validatedData);
-    } catch (err) {
-        next(err);
-    }
+exports.getAllUsers = (req, res, next) => {
+    fetchAllUsers(req.query)
+        .then(resolvedData => Joi.object(usersResponseSchema).validateAsync({users: resolvedData}))
+        .then(validatedData => res.status(200).json(validatedData))
+        .catch(next);
 };
 
-exports.getUser = async (req, res, next) => {
-    try {
-        const resolvedData = await fetchUser(req.params);
-        const validatedData = await Joi.object(userResponseSchema).validateAsync({user: resolvedData});
-        res.status(200).json(validatedData);
-    } catch (err) {
-        next(err);
-    }
+exports.getUser = (req, res, next) => {
+    fetchUser(req.params)
+        .then(resolvedData => Joi.object(userResponseSchema).validateAsync({user: resolvedData}))
+        .then(validatedData => res.status(200).json(validatedData))
+        .catch(next);
 };
 
-exports.deleteUser = async (req, res, next) => {
-    try {
-        await removeUser(req.params.id);
-        res.status(204).json({});
-    } catch (err) {
-        next(err);
-    }
+exports.deleteUser = (req, res, next) => {
+    removeUser(req.params.id).then(res.status(204).json({})).catch(next);
 };
 
-exports.patchUser = async (req, res, next) => {
-    try {
-        const resolvedData = await updateUser(req.params.id, req.body);
-        const validatedData = await Joi.object(userResponseSchema).validateAsync({user: resolvedData});
-        res.status(200).json(validatedData);
-    } catch (err) {
-        next(err);
-    }
+exports.patchUser = (req, res, next) => {
+    updateUser(req.params.id, req.body)
+        .then(resolvedData => Joi.object(userResponseSchema).validateAsync({user: resolvedData}))
+        .then(validatedData => res.status(200).json(validatedData))
+        .catch(next);
 };
 
-exports.postUser = async (req, res, next) => {
-    try {
-        const resolvedData = await addUser(req.body);
-        const validatedData = await Joi.object(userResponseSchema).validateAsync({user: resolvedData});
-        res.status(201).json(validatedData);
-    } catch (err) {
-        next(err);
-    }
+exports.postUser = (req, res, next) => {
+    addUser(req.body)
+        .then(resolvedData => Joi.object(userResponseSchema).validateAsync({user: resolvedData}))
+        .then(validatedData => res.status(201).json(validatedData))
+        .catch(next);
 };

@@ -2,41 +2,27 @@ const {Joi} = require("celebrate");
 const {fetchAllCasinos, fetchCasino, removeCasino, addCasino} = require("../models/casinos.models");
 const {casinosResponseSchema, casinoResponseSchema} = require("../schemas/casinos");
 
-exports.getAllCasinos = async (req, res, next) => {
-    try {
-        const resolvedData = await fetchAllCasinos(req.query);
-        const validatedData = await Joi.object(casinosResponseSchema).validateAsync({casinos: resolvedData});
-        res.status(200).json(validatedData);
-    } catch (err) {
-        next(err);
-    }
+exports.getAllCasinos = (req, res, next) => {
+    fetchAllCasinos(req.query)
+        .then(resolvedData => Joi.object(casinosResponseSchema).validateAsync({casinos: resolvedData}))
+        .then(validatedData => res.status(200).json(validatedData))
+        .catch(next);
 };
 
-exports.getCasino = async (req, res, next) => {
-    try {
-        const resolvedData = await fetchCasino(req.params);
-        const validatedData = await Joi.object(casinoResponseSchema).validateAsync({casino: resolvedData});
-        res.status(200).json(validatedData);
-    } catch (err) {
-        next(err);
-    }
+exports.getCasino = (req, res, next) => {
+    fetchCasino(req.params)
+        .then(resolvedData => Joi.object(casinoResponseSchema).validateAsync({casino: resolvedData}))
+        .then(validatedData => res.status(200).json(validatedData))
+        .catch(next);
 };
 
-exports.deleteCasino = async (req, res, next) => {
-    try {
-        await removeCasino(req.params);
-        res.status(204).json({});
-    } catch (err) {
-        next(err);
-    }
+exports.deleteCasino = (req, res, next) => {
+    removeCasino(req.params).then(res.status(204).json({})).catch(next);
 };
 
-exports.postCasino = async (req, res, next) => {
-    try {
-        const resolvedData = await addCasino(req.body);
-        const validatedData = await Joi.object(casinoResponseSchema).validateAsync({casino: resolvedData});
-        res.status(201).json(validatedData);
-    } catch (err) {
-        next(err);
-    }
+exports.postCasino = (req, res, next) => {
+    addCasino(req.body)
+        .then(resolvedData => Joi.object(casinoResponseSchema).validateAsync({casino: resolvedData}))
+        .then(validatedData => res.status(201).json(validatedData))
+        .catch(next);
 };
