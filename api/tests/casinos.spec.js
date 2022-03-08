@@ -6,7 +6,7 @@ const request = supertest(app);
 const expectedKeys = ["id", "name", "location", "created_at", "updated_at", "deleted_at"];
 const urlPath = "/api/casinos";
 const invalidMethods = ["put", "patch", "delete"];
-const invalidMethodsId = ["post", "put", "patch"];
+const invalidMethodsId = ["post", "put"];
 const casinoId = "446470f4-aeff-4fb7-9b53-38b434ca2488";
 const casinoIdDelete = "583eed9c-65d0-4d3e-b561-faba91ca0ee5";
 const postBody = {name: "Casino de Test", location: "Cidade de Teste"};
@@ -184,6 +184,44 @@ describe("/api", () => {
                                 expect(Object.keys(casino)).toEqual(expectedKeys);
                             }));
                 });
+                describe("PATCH", () => {
+                    it("status: 200, should be able to patch a casino", () =>
+                        request
+                            .patch(`${urlPath}/${casinoId}`)
+                            .send({name: "Casino de Teste", location: "Beiras"})
+                            .expect(200)
+                            .then(({body: {casino}}) => {
+                                expect(casino.id).toBe(casinoId);
+                                expect(casino.name).toBe("Casino de Teste");
+                                expect(casino.location).toBe("Beiras");
+                            }));
+                    it("status: 200, should be able to patch only casino name", () =>
+                        request
+                            .patch(`${urlPath}/${casinoId}`)
+                            .send({name: "Casino de Teste"})
+                            .expect(200)
+                            .then(({body: {casino}}) => {
+                                expect(casino.id).toBe(casinoId);
+                                expect(casino.name).toBe("Casino de Teste");
+                            }));
+                    it("status: 200, should be able to patch only casino location", () =>
+                        request
+                            .patch(`${urlPath}/${casinoId}`)
+                            .send({location: "Beiras"})
+                            .expect(200)
+                            .then(({body: {casino}}) => {
+                                expect(casino.id).toBe(casinoId);
+                                expect(casino.location).toBe("Beiras");
+                            }));
+                    it("status: 200, should return expected keys", () =>
+                        request
+                            .patch(`${urlPath}/${casinoId}`)
+                            .send({location: "Beiras"})
+                            .expect(200)
+                            .then(({body: {casino}}) => {
+                                expect(Object.keys(casino)).toEqual(expectedKeys);
+                            }));
+                });
                 describe("DELETE", () => {
                     it("status: 204, should be able to soft delete", () =>
                         request.delete(`${urlPath}/${casinoIdDelete}`).expect(204));
@@ -234,6 +272,53 @@ describe("/api", () => {
                             .then(({body: {error, message}}) => {
                                 expect(error).toBe("Not Found");
                                 expect(message).toBe(`"30d877ce-387c-4b9d-8a58-566a035892d0" could not be found`);
+                            }));
+                });
+                describe("PATCH", () => {
+                    it("status: 400, empty body not allowed", () =>
+                        request
+                            .patch(`${urlPath}/${casinoId}`)
+                            .send({})
+                            .expect(400)
+                            .then(({body: {error, message}}) => {
+                                expect(error).toBe("Bad Request");
+                                expect(message).toBe('"value" must have at least 1 key');
+                            }));
+                    it("status: 400, keys must be name or location", () =>
+                        request
+                            .patch(`${urlPath}/${casinoId}`)
+                            .send({best_slot: "the one in the corner"})
+                            .expect(400)
+                            .then(({body: {error, message}}) => {
+                                expect(error).toBe("Bad Request");
+                                expect(message).toBe('"best_slot" is not allowed');
+                            }));
+                    it("status: 400, name must be string", () =>
+                        request
+                            .patch(`${urlPath}/${casinoId}`)
+                            .send({name: 123})
+                            .expect(400)
+                            .then(({body: {error, message}}) => {
+                                expect(error).toBe("Bad Request");
+                                expect(message).toBe('"name" must be a string');
+                            }));
+                    it("status: 400, location must be string", () =>
+                        request
+                            .patch(`${urlPath}/${casinoId}`)
+                            .send({location: 123})
+                            .expect(400)
+                            .then(({body: {error, message}}) => {
+                                expect(error).toBe("Bad Request");
+                                expect(message).toBe('"location" must be a string');
+                            }));
+                    it("status: 400, name should be unique", () =>
+                        request
+                            .patch(`${urlPath}/${casinoId}`)
+                            .send({name: "Casino Estoril"})
+                            .expect(400)
+                            .then(({body: {error, message}}) => {
+                                expect(error).toBe("Bad Request");
+                                expect(message).toBe('"Casino Estoril" already exists');
                             }));
                 });
                 describe("DELETE", () => {

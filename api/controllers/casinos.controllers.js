@@ -1,5 +1,5 @@
 const {Joi} = require("celebrate");
-const {fetchAllCasinos, fetchCasino, removeCasino, addCasino} = require("../models/casinos.models");
+const {fetchAllCasinos, fetchCasino, removeCasino, addCasino, updateCasino} = require("../models/casinos.models");
 const {casinosResponseSchema, casinoResponseSchema} = require("../schemas/casinos");
 
 exports.getAllCasinos = (req, res, next) => {
@@ -24,5 +24,12 @@ exports.postCasino = (req, res, next) => {
     addCasino(req.body)
         .then(resolvedData => Joi.object(casinoResponseSchema).validateAsync({casino: resolvedData}))
         .then(validatedData => res.status(201).json(validatedData))
+        .catch(next);
+};
+
+exports.patchCasino = (req, res, next) => {
+    updateCasino(req.params, req.body)
+        .then(resolvedData => Joi.object(casinoResponseSchema).validateAsync({casino: resolvedData}))
+        .then(validatedData => res.status(200).json({validatedData}))
         .catch(next);
 };

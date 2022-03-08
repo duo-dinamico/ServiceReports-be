@@ -40,3 +40,12 @@ exports.addCasino = async body => {
         .returning(columnSelection);
     return casino;
 };
+
+exports.updateCasino = async ({id}, body) => {
+    const [casino] = await connection
+        .from("casinos")
+        .where({id})
+        .update({...body, updated_at: new Date().toISOString()})
+        .returning(columnSelection);
+    return casino;
+};

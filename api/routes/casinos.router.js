@@ -1,10 +1,11 @@
 const casinosRouter = require("express").Router();
 const {celebrate} = require("celebrate");
 
-const {casinosSchema, casinoSchema, postCasinoSchema} = require("../schemas/casinos");
-const {getAllCasinos, getCasino, deleteCasino, postCasino} = require("../controllers/casinos.controllers");
+const {casinosSchema, casinoSchema, postCasinoSchema, patchCasinoSchema} = require("../schemas/casinos");
+const {getAllCasinos, getCasino, deleteCasino, postCasino, patchCasino} = require("../controllers/casinos.controllers");
 const {methodNotAllowed} = require("../errors");
 const {validateCasinoExists} = require("../validation/casinos.validation");
+const {validateCasinoByName} = require("../validation/utils/validation");
 
 casinosRouter
     .route("/")
@@ -14,6 +15,7 @@ casinosRouter
 casinosRouter
     .route("/:id")
     .get(celebrate(casinoSchema), validateCasinoExists, getCasino)
+    .patch(celebrate(patchCasinoSchema), validateCasinoExists, validateCasinoByName, patchCasino)
     .delete(celebrate(casinoSchema), validateCasinoExists, deleteCasino)
     .all(methodNotAllowed);
 
@@ -45,6 +47,7 @@ module.exports = casinosRouter;
  *              $ref: '#/components/schemas/casinos_schema'
  *      '400':
  *        description: Bad request
+ *
  *  post:
  *    summary: Use to add a casino
  *    tags: [Casinos]
@@ -91,6 +94,39 @@ module.exports = casinosRouter;
  *               $ref: '#/components/schemas/casino_schema'
  *      '400':
  *        description: Bad request
+ *
+ *  patch:
+ *    summary: Use to edit a casino
+ *    tags: [Casinos]
+ *    parameters:
+ *      - $ref: '#parameters/id'
+ *    requestBody:
+ *      description: Body to edit a casino
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            properties:
+ *              name:
+ *                type: string
+ *                example: Casino de Teste
+ *              location:
+ *                type: string
+ *                example: Location name
+ *    responses:
+ *      '200':
+ *        description: Returns an object with a casino object
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                casino:
+ *                  oneOf:
+ *                  $ref: '#/components/schemas/casino_schema'
+ *      '400':
+ *        description: Bad request.
  *
  *  delete:
  *    summary: Use to delete one casino
