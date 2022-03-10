@@ -30,6 +30,6 @@ exports.postCasino = (req, res, next) => {
 exports.patchCasino = (req, res, next) => {
     updateCasino(req.params, req.body)
         .then(resolvedData => Joi.object(casinoResponseSchema).validateAsync({casino: resolvedData}))
-        .then(validatedData => res.status(200).json({validatedData}))
+        .then(validatedData => res.status(200).json(validatedData))
         .catch(next);
 };

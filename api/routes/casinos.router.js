@@ -5,7 +5,6 @@ const {casinosSchema, casinoSchema, postCasinoSchema, patchCasinoSchema} = requi
 const {getAllCasinos, getCasino, deleteCasino, postCasino, patchCasino} = require("../controllers/casinos.controllers");
 const {methodNotAllowed} = require("../errors");
 const {validateCasinoExists} = require("../validation/casinos.validation");
-const {validateCasinoByName} = require("../validation/utils/validation");
 
 casinosRouter
     .route("/")
@@ -15,7 +14,7 @@ casinosRouter
 casinosRouter
     .route("/:id")
     .get(celebrate(casinoSchema), validateCasinoExists, getCasino)
-    .patch(celebrate(patchCasinoSchema), validateCasinoExists, validateCasinoByName, patchCasino)
+    .patch(celebrate(patchCasinoSchema), validateCasinoExists, patchCasino)
     .delete(celebrate(casinoSchema), validateCasinoExists, deleteCasino)
     .all(methodNotAllowed);
 
