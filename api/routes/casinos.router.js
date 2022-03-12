@@ -77,7 +77,10 @@ module.exports = casinosRouter;
  *                  $ref: '#/components/schemas/casino_schema'
  *      '400':
  *        description: Bad request.
- *
+ */
+
+/**
+ * @openapi
  * /casinos/{id}:
  *  get:
  *    summary: Use to request a casino
