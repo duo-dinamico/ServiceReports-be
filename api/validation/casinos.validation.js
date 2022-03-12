@@ -6,7 +6,7 @@ exports.validateCasinoExists = async (req, res, next) => {
     const {name} = req.body;
     const toValidate = [];
     if (id) toValidate.push(validateCasinoById(id));
-    if (name && req.method === "POST") toValidate.push(validateCasinoByName(name));
+    if (name && (req.method === "POST" || req.method === "PATCH")) toValidate.push(validateCasinoByName(name));
     try {
         await Promise.all(toValidate);
         next();

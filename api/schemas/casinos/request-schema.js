@@ -20,4 +20,13 @@ const postCasinoSchema = {
         .required(),
 };
 
-module.exports = {casinosSchema, casinoSchema, postCasinoSchema};
+const patchCasinoSchema = {
+    body: Joi.object({
+        name: Joi.string(),
+        location: Joi.string(),
+    })
+        .min(1)
+        .required(),
+};
+
+module.exports = {casinosSchema, casinoSchema, postCasinoSchema, patchCasinoSchema};
