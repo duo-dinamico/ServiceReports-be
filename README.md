@@ -47,3 +47,5 @@ $ npm test
 ```
 
 ## Thanks
+
+To life!
