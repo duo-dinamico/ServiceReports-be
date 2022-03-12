@@ -45,3 +45,5 @@ To run tests:
 $ cd api
 $ npm test
 ```
+
+## Thanks
