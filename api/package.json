@@ -28,6 +28,9 @@
         "swagger-jsdoc": "^6.1.0",
         "swagger-ui-express": "^4.3.0"
     },
+    "engines": {
+        "node": ">=8.0.0"
+    },
     "devDependencies": {
         "cross-env": "^7.0.3",
         "eslint": "^8.7.0",
