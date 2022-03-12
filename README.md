@@ -17,10 +17,14 @@ It will be composed of an API with PostgreSQL, a REACT frontend for report usage
 
 ## Technologies
 
-Project is created with:
+API is created with:
 
 - NodeJS
 - Postgresql
+
+Frontend for report is created with:
+
+- React
 
 And uses Docker for deployment.
 
