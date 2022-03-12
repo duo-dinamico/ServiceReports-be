@@ -1,7 +1,7 @@
 # ServiceReports
 
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/duo-dinamico/ServiceReports/develop)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/duo-dinamico/ServiceReports/Node.js%20CI)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/duo-dinamico/ServiceReports/Node.js%20CI)](https://github.com/duo-dinamico/ServiceReports/actions)
 
 ## Table of contents
 
