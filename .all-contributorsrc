@@ -1,0 +1,26 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "joaojesus81",
+      "name": "Joao Jesus",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67010899?v=4",
+      "profile": "https://github.com/joaojesus81",
+      "contributions": [
+        "test",
+        "code",
+        "review"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "ServiceReports",
+  "projectOwner": "duo-dinamico",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
