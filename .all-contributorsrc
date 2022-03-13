@@ -1,0 +1,26 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "jcvsilva",
+      "name": "João Carlos Silva",
+      "avatar_url": "https://avatars.githubusercontent.com/u/16050048?v=4",
+      "profile": "https://github.com/jcvsilva",
+      "contributions": [
+        "code",
+        "test",
+        "review"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "ServiceReports",
+  "projectOwner": "duo-dinamico",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
