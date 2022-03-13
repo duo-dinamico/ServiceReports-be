@@ -6,6 +6,17 @@
   "commit": false,
   "contributors": [
     {
+      "login": "joaojesus81",
+      "name": "Joao Jesus",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67010899?v=4",
+      "profile": "https://github.com/joaojesus81",
+      "contributions": [
+        "test",
+        "code",
+        "review"
+      ]
+    },
+    {
       "login": "jcvsilva",
       "name": "João Carlos Silva",
       "avatar_url": "https://avatars.githubusercontent.com/u/16050048?v=4",
