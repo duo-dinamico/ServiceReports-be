@@ -1,10 +1,16 @@
-# ServiceReports
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
-
-![GitHub last commit (branch)](https://img.shields.io/github/last-commit/duo-dinamico/ServiceReports/develop)
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/duo-dinamico/ServiceReports/Node.js%20CI)](https://github.com/duo-dinamico/ServiceReports/actions)
+<div align="center">
+  <h1>
+    Service Reports
+  </h1>
+  <p>
+    
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg)](#contributors-)
+![GitHub license](https://img.shields.io/github/license/duo-dinamico/ServiceReports)
+[![GitHub last commit (branch)](https://img.shields.io/github/last-commit/duo-dinamico/ServiceReports)](https://img.shields.io/github/last-commit/duo-dinamico/ServiceReports/develop)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/duo-dinamico/ServiceReports/Node.js%20CI?label=Node.js%20CI)](https://github.com/duo-dinamico/ServiceReports/actions)
+    
+  </p>
+</div>
 
 ## Table of contents
 
