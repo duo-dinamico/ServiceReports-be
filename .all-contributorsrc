@@ -15,6 +15,17 @@
         "code",
         "review"
       ]
+    },
+    {
+      "login": "jcvsilva",
+      "name": "João Carlos Silva",
+      "avatar_url": "https://avatars.githubusercontent.com/u/16050048?v=4",
+      "profile": "https://github.com/jcvsilva",
+      "contributions": [
+        "code",
+        "test",
+        "review"
+      ]
     }
   ],
   "contributorsPerLine": 7,

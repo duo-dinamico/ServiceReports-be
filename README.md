@@ -62,6 +62,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="https://github.com/joaojesus81"><img src="https://avatars.githubusercontent.com/u/67010899?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Joao Jesus</b></sub></a><br /><a href="https://github.com/duo-dinamico/ServiceReports/commits?author=joaojesus81" title="Tests">⚠️</a> <a href="https://github.com/duo-dinamico/ServiceReports/commits?author=joaojesus81" title="Code">💻</a> <a href="https://github.com/duo-dinamico/ServiceReports/pulls?q=is%3Apr+reviewed-by%3Ajoaojesus81" title="Reviewed Pull Requests">👀</a></td>
+    <td align="center"><a href="https://github.com/jcvsilva"><img src="https://avatars.githubusercontent.com/u/16050048?v=4?s=100" width="100px;" alt=""/><br /><sub><b>João Carlos Silva</b></sub></a><br /><a href="https://github.com/duo-dinamico/ServiceReports/commits?author=jcvsilva" title="Code">💻</a> <a href="https://github.com/duo-dinamico/ServiceReports/commits?author=jcvsilva" title="Tests">⚠️</a> <a href="https://github.com/duo-dinamico/ServiceReports/pulls?q=is%3Apr+reviewed-by%3Ajcvsilva" title="Reviewed Pull Requests">👀</a></td>
   </tr>
 </table>
 
