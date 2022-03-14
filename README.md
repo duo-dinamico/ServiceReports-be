@@ -5,9 +5,10 @@
   <p>
     
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg)](#contributors-)
-![GitHub license](https://img.shields.io/github/license/duo-dinamico/ServiceReports)
-[![GitHub last commit (branch)](https://img.shields.io/github/last-commit/duo-dinamico/ServiceReports)](https://img.shields.io/github/last-commit/duo-dinamico/ServiceReports/develop)
+[![GitHub license](https://img.shields.io/github/license/duo-dinamico/ServiceReports)](https://github.com/duo-dinamico/ServiceReports/blob/develop/LICENSE)
+[![GitHub last commit (branch)](https://img.shields.io/github/last-commit/duo-dinamico/ServiceReports)](https://github.com/duo-dinamico/ServiceReports/commits/develop)
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/duo-dinamico/ServiceReports/Node.js%20CI?label=Node.js%20CI)](https://github.com/duo-dinamico/ServiceReports/actions)
+[![GitHub issues](https://img.shields.io/github/issues/duo-dinamico/Servicereports)](https://github.com/duo-dinamico/ServiceReports/issues)
     
   </p>
 </div>
