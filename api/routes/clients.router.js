@@ -1,21 +1,21 @@
 const clientsRouter = require("express").Router();
 const {celebrate} = require("celebrate");
 
-const {clientsSchema, clientSchema, postclientSchema, patchclientSchema} = require("../schemas/clients");
-const {getAllclients, getclient, deleteclient, postclient, patchclient} = require("../controllers/clients.controllers");
+const {clientsSchema, clientSchema, postClientSchema, patchClientSchema} = require("../schemas/clients");
+const {getAllClients, getClient, deleteClient, postClient, patchClient} = require("../controllers/clients.controllers");
 const {methodNotAllowed} = require("../errors");
-const {validateclientExists} = require("../validation/clients.validation");
+const {validateClientExists} = require("../validation/clients.validation");
 
 clientsRouter
     .route("/")
-    .get(celebrate(clientsSchema), getAllclients)
-    .post(celebrate(postclientSchema), validateclientExists, postclient)
+    .get(celebrate(clientsSchema), getAllClients)
+    .post(celebrate(postClientSchema), validateClientExists, postClient)
     .all(methodNotAllowed);
 clientsRouter
     .route("/:id")
-    .get(celebrate(clientSchema), validateclientExists, getclient)
-    .patch(celebrate(patchclientSchema), validateclientExists, patchclient)
-    .delete(celebrate(clientSchema), validateclientExists, deleteclient)
+    .get(celebrate(clientSchema), validateClientExists, getClient)
+    .patch(celebrate(patchClientSchema), validateClientExists, patchClient)
+    .delete(celebrate(clientSchema), validateClientExists, deleteClient)
     .all(methodNotAllowed);
 
 module.exports = clientsRouter;

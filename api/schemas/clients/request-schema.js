@@ -11,7 +11,7 @@ const clientsSchema = {
 
 const clientSchema = {params: Joi.object({id: Joi.string().uuid()})};
 
-const postclientSchema = {
+const postClientSchema = {
     body: Joi.object({
         name: Joi.string().example("client Estoril").required(),
         location: Joi.string().example("Estoril").required(),
@@ -20,7 +20,7 @@ const postclientSchema = {
         .required(),
 };
 
-const patchclientSchema = {
+const patchClientSchema = {
     body: Joi.object({
         name: Joi.string(),
         location: Joi.string(),
@@ -29,4 +29,4 @@ const patchclientSchema = {
         .required(),
 };
 
-module.exports = {clientsSchema, clientSchema, postclientSchema, patchclientSchema};
+module.exports = {clientsSchema, clientSchema, postClientSchema, patchClientSchema};

@@ -4,7 +4,7 @@ const connection = require("../db/psql/connection");
 
 const columnSelection = ["id", "name", "location", "created_at", "updated_at", "deleted_at"];
 
-exports.fetchAllclients = async ({sort_by, order, client_id}) => {
+exports.fetchAllClients = async ({sort_by, order, client_id}) => {
     const clients = await connection
         .select(columnSelection)
         .from("clients")
@@ -16,7 +16,7 @@ exports.fetchAllclients = async ({sort_by, order, client_id}) => {
     return clients;
 };
 
-exports.fetchclient = async ({id}, name) => {
+exports.fetchClient = async ({id}, name) => {
     const [client] = await connection
         .select(columnSelection)
         .from("clients")
@@ -29,11 +29,11 @@ exports.fetchclient = async ({id}, name) => {
     return client;
 };
 
-exports.removeclient = async ({id}) => {
+exports.removeClient = async ({id}) => {
     await connection.from("clients").where({id}).update({deleted_at: new Date().toISOString()});
 };
 
-exports.addclient = async body => {
+exports.addClient = async body => {
     const [client] = await connection
         .from("clients")
         .insert({...body, created_at: new Date().toISOString()})
@@ -41,7 +41,7 @@ exports.addclient = async body => {
     return client;
 };
 
-exports.updateclient = async ({id}, body) => {
+exports.updateClient = async ({id}, body) => {
     const [client] = await connection
         .from("clients")
         .where({id})

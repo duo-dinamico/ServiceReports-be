@@ -1,12 +1,12 @@
 const Boom = require("@hapi/boom");
-const {validateclientById, validateclientByName} = require("./utils/validation");
+const {validateClientById, validateClientByName} = require("./utils/validation");
 
-exports.validateclientExists = async (req, res, next) => {
+exports.validateClientExists = async (req, res, next) => {
     const {id} = req.params;
     const {name} = req.body;
     const toValidate = [];
-    if (id) toValidate.push(validateclientById(id));
-    if (name && (req.method === "POST" || req.method === "PATCH")) toValidate.push(validateclientByName(name));
+    if (id) toValidate.push(validateClientById(id));
+    if (name && (req.method === "POST" || req.method === "PATCH")) toValidate.push(validateClientByName(name));
     try {
         await Promise.all(toValidate);
         next();

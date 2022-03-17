@@ -31,7 +31,7 @@ parameters:
             type: string
             format: uuid
         examples:
-            allclients:
+            allClients:
                 value:
             client_id:
                 value: 74562a23-4ae4-4fc0-8d98-32bad3472c9a
