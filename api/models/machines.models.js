@@ -11,11 +11,11 @@ exports.fetchAllMachines = async ({sort_by, order, machine_id, manufacturer, mod
             "machines.updated_at",
             "machines.deleted_at",
             connection.raw(
-                "json_build_object('id',departments.id,'name',departments.name, 'casino', casinos.name) as department"
+                "json_build_object('id',departments.id,'name',departments.name, 'client', clients.name) as department"
             )
         )
         .leftJoin("departments", "machines.department_id", "=", "departments.id")
-        .leftJoin("casinos", "departments.casino_id", "=", "casinos.id")
+        .leftJoin("clients", "departments.client_id", "=", "clients.id")
         .from("machines")
         .where({"machines.deleted_at": null, "departments.deleted_at": null})
         .modify(builder => {

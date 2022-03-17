@@ -6,7 +6,7 @@ exports.fetchAllServices = async ({sort_by, order, department_id, user_id, creat
             "services.id",
             connection.raw("json_build_object('id',users.id,'username',users.username,'name',users.name) as user"),
             connection.raw(
-                "json_build_object('id',departments.id,'name',departments.name, 'casino', casinos.name) as department"
+                "json_build_object('id',departments.id,'name',departments.name, 'client', clients.name) as department"
             ),
             "services.created_at",
             "services.updated_at",
@@ -19,7 +19,7 @@ exports.fetchAllServices = async ({sort_by, order, department_id, user_id, creat
         )
         .leftJoin("users", "services.user_id", "=", "users.id")
         .leftJoin("departments", "services.department_id", "=", "departments.id")
-        .leftJoin("casinos", "departments.casino_id", "=", "casinos.id")
+        .leftJoin("clients", "departments.client_id", "=", "clients.id")
         .from("services")
         .where({"services.deleted_at": null, "departments.deleted_at": null})
         .modify(builder => {

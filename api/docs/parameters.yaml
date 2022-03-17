@@ -23,17 +23,17 @@ parameters:
                 value:
             user_id:
                 value: 435ccd69-f989-4219-a3c7-9f09ff32c6cb
-    casino_id:
-        description: "To filter casinos by id"
+    client_id:
+        description: "To filter clients by id"
         in: query
-        name: casino_id
+        name: client_id
         schema:
             type: string
             format: uuid
         examples:
-            allCasinos:
+            allclients:
                 value:
-            casino_id:
+            client_id:
                 value: 74562a23-4ae4-4fc0-8d98-32bad3472c9a
     department_id:
         description: "To filter departments by id"

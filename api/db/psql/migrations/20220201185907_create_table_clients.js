@@ -1,7 +1,7 @@
 exports.up = knex =>
     Promise.all([
         knex.raw('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";'),
-        knex.schema.createTable("casinos", table => {
+        knex.schema.createTable("clients", table => {
             table.uuid("id").primary().defaultTo(knex.raw("uuid_generate_v4()"));
             table.text("name").unique().defaultTo(null);
             table.text("location").defaultTo(null);
@@ -11,4 +11,4 @@ exports.up = knex =>
         }),
     ]);
 
-exports.down = knex => knex.schema.dropTable("casinos");
+exports.down = knex => knex.schema.dropTable("clients");
