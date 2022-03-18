@@ -112,3 +112,4 @@ parameters:
         schema:
             type: string
             format: uuid
+        required: true

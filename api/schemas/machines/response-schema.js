@@ -9,7 +9,7 @@ const machineResponseSchema = {
         department: Joi.object({
             id: Joi.string().uuid().example("a7895b03-70a2-4bab-8e0f-dbc561e6d098").description("unique id in uuid v4"),
             name: Joi.string().example("Bancados Espinho"),
-            casino: Joi.string().example("Casino Espinho"),
+            client: Joi.string().example("Client Espinho"),
         }),
         created_at: Joi.date().timestamp().example("2019-05-10T13:45:08.000Z").description("Timestamp"),
         updated_at: Joi.date().timestamp().example("2019-05-10T13:45:08.000Z").description("Timestamp"),
