@@ -85,7 +85,7 @@ module.exports = departmentsRouter;
  *              name:
  *                type: string
  *                example: New Department
- *              casino_id:
+ *              client_id:
  *                type: string
  *                format: uuid
  *                example: 4dca6671-7c73-4414-bf4c-0646d8c70ede
@@ -177,7 +177,7 @@ module.exports = departmentsRouter;
  *              name:
  *                type: string
  *                example: Test Department
- *              casino_id:
+ *              client_id:
  *                type: string
  *                format: uuid
  *                example: 4dca6671-7c73-4414-bf4c-0646d8c70ede
@@ -278,7 +278,7 @@ module.exports = departmentsRouter;
  *          format: uuid
  *        name:
  *          type: string
- *        casino:
+ *        client:
  *          type: object
  *          properties:
  *            id:

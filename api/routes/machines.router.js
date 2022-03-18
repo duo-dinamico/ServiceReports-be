@@ -94,7 +94,7 @@ module.exports = machinesRouter;
  *              format: uuid
  *            name:
  *              type: string
- *            casino:
+ *            client:
  *              type: object
  *              properties:
  *                id:
