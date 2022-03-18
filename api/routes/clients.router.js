@@ -60,7 +60,7 @@ module.exports = clientsRouter;
  *            properties:
  *              name:
  *                type: string
- *                example: client de Test
+ *                example: Client de Test
  *              location:
  *                type: string
  *                example: testname
@@ -112,7 +112,7 @@ module.exports = clientsRouter;
  *            properties:
  *              name:
  *                type: string
- *                example: client de Teste
+ *                example: Client de Teste
  *              location:
  *                type: string
  *                example: Location name
