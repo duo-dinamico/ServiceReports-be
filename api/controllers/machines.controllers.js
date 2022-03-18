@@ -16,7 +16,7 @@ exports.getMachine = (req, res, next) => {
         .catch(next);
 };
 
-exports.patchDepartment = (req, res, next) => {
+exports.patchMachine = (req, res, next) => {
     updateMachine(req.params, req.body)
         .then(resolvedData => Joi.object(machineResponseSchema).validateAsync({machine: resolvedData}))
         .then(validatedData => res.status(200).json(validatedData))

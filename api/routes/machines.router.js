@@ -5,7 +5,7 @@ const {machinesSchema, machineSchema, patchMachineSchema, postMachineSchema} = r
 const {
     getAllMachines,
     getMachine,
-    patchDepartment,
+    patchMachine,
     deleteMachine,
     postMachine,
 } = require("../controllers/machines.controllers");
@@ -20,7 +20,7 @@ machinesRouter
 machinesRouter
     .route("/:id")
     .get(celebrate(machineSchema), getMachine)
-    .patch(celebrate(patchMachineSchema), validateMachineExists, patchDepartment)
+    .patch(celebrate(patchMachineSchema), validateMachineExists, patchMachine)
     .delete(celebrate(machineSchema), validateMachineExists, deleteMachine)
     .all(methodNotAllowed);
 
@@ -69,7 +69,7 @@ module.exports = machinesRouter;
  *                  type: string
  *                  example: '"id" must be a valid GUID'
  *  post:
- *    summary: Use to add a machin
+ *    summary: Use to add a machine
  *    tags: [Machines]
  *    requestBody:
  *      description: Body to add a machine
