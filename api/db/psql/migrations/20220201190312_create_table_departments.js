@@ -4,8 +4,8 @@ exports.up = knex =>
         knex.schema.createTable("departments", table => {
             table.uuid("id").primary().defaultTo(knex.raw("uuid_generate_v4()"));
             table.text("name").defaultTo(null);
-            table.uuid("casino_id");
-            table.foreign("casino_id").references("casinos.id");
+            table.uuid("client_id");
+            table.foreign("client_id").references("clients.id");
             table.timestamp("created_at").defaultTo(knex.fn.now());
             table.timestamp("updated_at").defaultTo(knex.fn.now());
             table.timestamp("deleted_at").defaultTo(null);

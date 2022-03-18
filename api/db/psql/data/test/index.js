@@ -1,11 +1,11 @@
-const casinosData = require("./casinos.json");
+const clientsData = require("./clients.json");
 const departmentsData = require("./departments.json");
 const machinesData = require("./machines.json");
 const servicesData = require("./services.json");
 const usersData = require("./users.json");
 
 const testData = {
-    casinosData,
+    clientsData,
     departmentsData,
     machinesData,
     servicesData,

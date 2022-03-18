@@ -1,6 +1,6 @@
 const Boom = require("@hapi/boom");
 const {fetchUser} = require("../../models/users.models");
-const {fetchCasino} = require("../../models/casinos.models");
+const {fetchClient} = require("../../models/clients.models");
 const {fetchDepartment} = require("../../models/departments.models");
 
 async function validateUserById(id) {
@@ -18,18 +18,18 @@ async function validateUserByUsername(username) {
     return true;
 }
 
-async function validateCasinoById(id) {
+async function validateClientById(id) {
     try {
-        await fetchCasino({id});
+        await fetchClient({id});
         return true;
     } catch (err) {
         return Promise.reject(err.output.payload);
     }
 }
 
-async function validateCasinoByName(name) {
-    const casino = await fetchCasino({}, name);
-    if (casino) return Promise.reject(Boom.badRequest(`"${name}" already exists`).output.payload);
+async function validateClientByName(name) {
+    const client = await fetchClient({}, name);
+    if (client) return Promise.reject(Boom.badRequest(`"${name}" already exists`).output.payload);
     return true;
 }
 
@@ -51,8 +51,8 @@ async function validateDepartmentByName(name) {
 module.exports = {
     validateUserById,
     validateUserByUsername,
-    validateCasinoById,
-    validateCasinoByName,
+    validateClientById,
+    validateClientByName,
     validateDepartmentByName,
     validateDepartmentById,
 };

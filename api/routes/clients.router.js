@@ -1,57 +1,57 @@
-const casinosRouter = require("express").Router();
+const clientsRouter = require("express").Router();
 const {celebrate} = require("celebrate");
 
-const {casinosSchema, casinoSchema, postCasinoSchema, patchCasinoSchema} = require("../schemas/casinos");
-const {getAllCasinos, getCasino, deleteCasino, postCasino, patchCasino} = require("../controllers/casinos.controllers");
+const {clientsSchema, clientSchema, postClientSchema, patchClientSchema} = require("../schemas/clients");
+const {getAllClients, getClient, deleteClient, postClient, patchClient} = require("../controllers/clients.controllers");
 const {methodNotAllowed} = require("../errors");
-const {validateCasinoExists} = require("../validation/casinos.validation");
+const {validateClientExists} = require("../validation/clients.validation");
 
-casinosRouter
+clientsRouter
     .route("/")
-    .get(celebrate(casinosSchema), getAllCasinos)
-    .post(celebrate(postCasinoSchema), validateCasinoExists, postCasino)
+    .get(celebrate(clientsSchema), getAllClients)
+    .post(celebrate(postClientSchema), validateClientExists, postClient)
     .all(methodNotAllowed);
-casinosRouter
+clientsRouter
     .route("/:id")
-    .get(celebrate(casinoSchema), validateCasinoExists, getCasino)
-    .patch(celebrate(patchCasinoSchema), validateCasinoExists, patchCasino)
-    .delete(celebrate(casinoSchema), validateCasinoExists, deleteCasino)
+    .get(celebrate(clientSchema), validateClientExists, getClient)
+    .patch(celebrate(patchClientSchema), validateClientExists, patchClient)
+    .delete(celebrate(clientSchema), validateClientExists, deleteClient)
     .all(methodNotAllowed);
 
-module.exports = casinosRouter;
+module.exports = clientsRouter;
 
 /**
  * @openapi
  * tags:
- *   name: Casinos
- *   description: Casino management and retrieval
+ *   name: Clients
+ *   description: Client management and retrieval
  */
 
 /**
  * @openapi
- * /casinos:
+ * /clients:
  *  get:
- *    summary: Use to request all casinos
- *    tags: [Casinos]
+ *    summary: Use to request all clients
+ *    tags: [Clients]
  *    parameters:
  *      - $ref: '#parameters/sort_by'
  *      - $ref: '#parameters/order'
- *      - $ref: '#parameters/casino_id'
+ *      - $ref: '#parameters/client_id'
  *    responses:
  *      '200':
- *        description: Returns an object with an array of casino objects
+ *        description: Returns an object with an array of client objects
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/casinos_schema'
+ *              $ref: '#/components/schemas/clients_schema'
  *      '400':
  *        description: Bad request
  *
  *  post:
- *    summary: Use to add a casino
- *    tags: [Casinos]
+ *    summary: Use to add a client
+ *    tags: [Clients]
  *    requestBody:
- *      description: Body to add a casino
+ *      description: Body to add a client
  *      required: true
  *      content:
  *        application/json:
@@ -60,50 +60,50 @@ module.exports = casinosRouter;
  *            properties:
  *              name:
  *                type: string
- *                example: Casino de Test
+ *                example: Client de Test
  *              location:
  *                type: string
  *                example: testname
  *    responses:
  *      '201':
- *        description: Returns an object with a casino object
+ *        description: Returns an object with a client object
  *        content:
  *          application/json:
  *            schema:
  *              type: object
  *              properties:
- *                casino:
+ *                client:
  *                  oneOf:
- *                  $ref: '#/components/schemas/casino_schema'
+ *                  $ref: '#/components/schemas/client_schema'
  *      '400':
  *        description: Bad request.
  */
 
 /**
  * @openapi
- * /casinos/{id}:
+ * /clients/{id}:
  *  get:
- *    summary: Use to request a casino
- *    tags: [Casinos]
+ *    summary: Use to request a client
+ *    tags: [Clients]
  *    parameters:
  *      - $ref: '#parameters/id'
  *    responses:
  *      '200':
- *        description: Returns an object with a key "casino", with a casino object
+ *        description: Returns an object with a key "client", with a client object
  *        content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/casino_schema'
+ *               $ref: '#/components/schemas/client_schema'
  *      '400':
  *        description: Bad request
  *
  *  patch:
- *    summary: Use to edit a casino
- *    tags: [Casinos]
+ *    summary: Use to edit a client
+ *    tags: [Clients]
  *    parameters:
  *      - $ref: '#parameters/id'
  *    requestBody:
- *      description: Body to edit a casino
+ *      description: Body to edit a client
  *      required: true
  *      content:
  *        application/json:
@@ -112,27 +112,27 @@ module.exports = casinosRouter;
  *            properties:
  *              name:
  *                type: string
- *                example: Casino de Teste
+ *                example: Client de Teste
  *              location:
  *                type: string
  *                example: Location name
  *    responses:
  *      '200':
- *        description: Returns an object with a casino object
+ *        description: Returns an object with a client object
  *        content:
  *          application/json:
  *            schema:
  *              type: object
  *              properties:
- *                casino:
+ *                client:
  *                  oneOf:
- *                  $ref: '#/components/schemas/casino_schema'
+ *                  $ref: '#/components/schemas/client_schema'
  *      '400':
  *        description: Bad request.
  *
  *  delete:
- *    summary: Use to delete one casino
- *    tags: [Casinos]
+ *    summary: Use to delete one client
+ *    tags: [Clients]
  *    parameters:
  *      - $ref: '#parameters/id'
  *    responses:
@@ -145,7 +145,7 @@ module.exports = casinosRouter;
  *
  * components:
  *  schemas:
- *    casino_schema:
+ *    client_schema:
  *      type: object
  *      properties:
  *        id:
@@ -164,13 +164,13 @@ module.exports = casinosRouter;
  *        deleted_at:
  *          type: string
  *          format: date-time
- *    casinos_schema:
+ *    clients_schema:
  *      type: object
  *      properties:
- *        casinos:
+ *        clients:
  *          type: array
  *          items:
  *            type: object
  *            allOf:
- *              - $ref: '#/components/schemas/casino_schema'
+ *              - $ref: '#/components/schemas/client_schema'
  */

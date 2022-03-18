@@ -13,7 +13,7 @@ const departmentSchema = {params: Joi.object({id: Joi.string().uuid()})};
 const patchDepartmentSchema = {
     body: Joi.object({
         name: Joi.string(),
-        casino_id: Joi.string().uuid(),
+        client_id: Joi.string().uuid(),
     })
         .min(1)
         .required(),
@@ -21,8 +21,8 @@ const patchDepartmentSchema = {
 
 const postDepartmentSchema = {
     body: Joi.object({
-        name: Joi.string().example("Bancadas do Casino").required(),
-        casino_id: Joi.string().uuid().example("446470f4-aeff-4fb7-9b53-38b434ca2488").required(),
+        name: Joi.string().example("Bancadas do client").required(),
+        client_id: Joi.string().uuid().example("446470f4-aeff-4fb7-9b53-38b434ca2488").required(),
     })
         .min(1)
         .required(),

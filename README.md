@@ -18,7 +18,7 @@
 
 ## General info
 
-This project will manage technical services reports, for casino works.
+This project will manage technical services reports, for client works.
 
 It will be composed of an API with PostgreSQL, a REACT frontend for report usage, and a REACT backend for administration.
 

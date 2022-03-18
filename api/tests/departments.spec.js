@@ -3,14 +3,14 @@ const connection = require("../db/psql/connection");
 const app = require("../app");
 
 const request = supertest(app);
-const expectedKeys = ["id", "name", "created_at", "updated_at", "deleted_at", "casino"];
+const expectedKeys = ["id", "name", "created_at", "updated_at", "deleted_at", "client"];
 const urlPath = "/api/departments";
 const invalidMethods = ["put", "patch", "delete"];
 const invalidMethodsId = ["post", "put"];
 
 const departmentId = "a7895b03-70a2-4bab-8e0f-dbc561e6d098";
-const patchBody = {name: "Test Department", casino_id: "4dca6671-7c73-4414-bf4c-0646d8c70ede"};
-const postBody = {name: "New Department", casino_id: "583eed9c-65d0-4d3e-b561-faba91ca0ee5"};
+const patchBody = {name: "Test Department", client_id: "4dca6671-7c73-4414-bf4c-0646d8c70ede"};
+const postBody = {name: "New Department", client_id: "583eed9c-65d0-4d3e-b561-faba91ca0ee5"};
 
 describe("/api", () => {
     beforeEach(() => connection.seed.run());
@@ -74,13 +74,13 @@ describe("/api", () => {
                                 expect(department.deleted_at).toBe(null);
                             });
                         }));
-                it("status: 200, no deleted casinos", () =>
+                it("status: 200, no deleted clients", () =>
                     request
                         .get(urlPath)
                         .expect(200)
                         .then(({body: {departments}}) => {
                             departments.forEach(department => {
-                                expect(department.casino.id).not.toEqual("30d877ce-387c-4b9d-8a58-566a035892d0");
+                                expect(department.client.id).not.toEqual("30d877ce-387c-4b9d-8a58-566a035892d0");
                             });
                         }));
             });
@@ -138,7 +138,7 @@ describe("/api", () => {
                         .expect(400)
                         .then(({body: {error, message}}) => {
                             expect(error).toBe("Bad Request");
-                            expect(message).toBe('"casino_id" is required');
+                            expect(message).toBe('"client_id" is required');
                         }));
                 it("status: 400, values should be strings", () =>
                     request
@@ -152,7 +152,7 @@ describe("/api", () => {
                 it("status: 400, department should be unique [name must be unique]", () =>
                     request
                         .post(urlPath)
-                        .send({name: "Caixas Lisboa", casino_id: postBody.casino_id})
+                        .send({name: "Caixas Lisboa", client_id: postBody.client_id})
                         .expect(400)
                         .then(({body: {error, message}}) => {
                             expect(error).toBe("Bad Request");
@@ -167,10 +167,10 @@ describe("/api", () => {
                             expect(error).toBe("Bad Request");
                             expect(message).toBe('"batatas" is not allowed');
                         }));
-                it("status: 404, casino must exist", () =>
+                it("status: 404, client must exist", () =>
                     request
                         .post(urlPath)
-                        .send({name: "New Department", casino_id: "4dca6671-7c73-4414-bf4c-0646d8c70edf"})
+                        .send({name: "New Department", client_id: "4dca6671-7c73-4414-bf4c-0646d8c70edf"})
                         .expect(404)
                         .then(({body: {error, message}}) => {
                             expect(error).toBe("Not Found");
@@ -214,7 +214,7 @@ describe("/api", () => {
                             .then(({body: {department}}) => {
                                 expect(department.id).toBe(departmentId);
                                 expect(department.name).toBe(patchBody.name);
-                                expect(department.casino.id).toBe(patchBody.casino_id);
+                                expect(department.client.id).toBe(patchBody.client_id);
                             }));
                     it("status: 200, should be able to patch only department name", () =>
                         request
@@ -225,14 +225,14 @@ describe("/api", () => {
                                 expect(department.id).toBe(departmentId);
                                 expect(department.name).toBe(patchBody.name);
                             }));
-                    it("status: 200, should be able to patch only department casino", () =>
+                    it("status: 200, should be able to patch only department client", () =>
                         request
                             .patch(`${urlPath}/${departmentId}`)
-                            .send({casino_id: patchBody.casino_id})
+                            .send({client_id: patchBody.client_id})
                             .expect(200)
                             .then(({body: {department}}) => {
                                 expect(department.id).toBe(departmentId);
-                                expect(department.casino.id).toBe(patchBody.casino_id);
+                                expect(department.client.id).toBe(patchBody.client_id);
                             }));
                     it("status: 200, should return expected keys", () =>
                         request
@@ -305,7 +305,7 @@ describe("/api", () => {
                                 expect(error).toBe("Bad Request");
                                 expect(message).toBe('"value" must have at least 1 key');
                             }));
-                    it("status: 400, keys must be name or casino_id", () =>
+                    it("status: 400, keys must be name or client_id", () =>
                         request
                             .patch(`${urlPath}/${departmentId}`)
                             .send({fake_key: "the only key for you"})
@@ -323,14 +323,14 @@ describe("/api", () => {
                                 expect(error).toBe("Bad Request");
                                 expect(message).toBe('"name" must be a string');
                             }));
-                    it("status: 400, casino_id must be string and of type UUID", () =>
+                    it("status: 400, client_id must be string and of type UUID", () =>
                         request
                             .patch(`${urlPath}/${departmentId}`)
-                            .send({casino_id: "not a good string"})
+                            .send({client_id: "not a good string"})
                             .expect(400)
                             .then(({body: {error, message}}) => {
                                 expect(error).toBe("Bad Request");
-                                expect(message).toBe('"casino_id" must be a valid GUID');
+                                expect(message).toBe('"client_id" must be a valid GUID');
                             }));
                     it("status: 400, name should be unique", () =>
                         request
@@ -341,19 +341,19 @@ describe("/api", () => {
                                 expect(error).toBe("Bad Request");
                                 expect(message).toBe('"Sala de Máquinas Estoril" already exists');
                             }));
-                    it("status: 404, casino must exist", () =>
+                    it("status: 404, client must exist", () =>
                         request
                             .patch(`${urlPath}/${departmentId}`)
-                            .send({casino_id: "4dca6671-7c73-4414-bf4c-0646d8c70edd"})
+                            .send({client_id: "4dca6671-7c73-4414-bf4c-0646d8c70edd"})
                             .expect(404)
                             .then(({body: {error, message}}) => {
                                 expect(error).toBe("Not Found");
                                 expect(message).toBe('"4dca6671-7c73-4414-bf4c-0646d8c70edd" could not be found');
                             }));
-                    it("status: 404, casino must not be deleted", () =>
+                    it("status: 404, client must not be deleted", () =>
                         request
                             .patch(`${urlPath}/${departmentId}`)
-                            .send({casino_id: "30d877ce-387c-4b9d-8a58-566a035892d0"})
+                            .send({client_id: "30d877ce-387c-4b9d-8a58-566a035892d0"})
                             .expect(404)
                             .then(({body: {error, message}}) => {
                                 expect(error).toBe("Not Found");
