@@ -2,6 +2,7 @@ const Boom = require("@hapi/boom");
 const {fetchUser} = require("../../models/users.models");
 const {fetchClient} = require("../../models/clients.models");
 const {fetchDepartment} = require("../../models/departments.models");
+const {fetchMachine} = require("../../models/machines.models");
 
 async function validateUserById(id) {
     try {
@@ -48,6 +49,25 @@ async function validateDepartmentByName(name) {
     return true;
 }
 
+async function validateMachineById(id) {
+    try {
+        await fetchMachine({id});
+        return true;
+    } catch (err) {
+        return Promise.reject(err.output.payload);
+    }
+}
+
+async function validateMachineByManufacturer(body) {
+    const {model, serial_number} = body;
+    const machine = await fetchMachine({}, model, serial_number);
+    if (machine)
+        return Promise.reject(
+            Boom.badRequest(`Machine ${model} with serial number ${serial_number} already exists`).output.payload
+        );
+    return true;
+}
+
 module.exports = {
     validateUserById,
     validateUserByUsername,
@@ -55,4 +75,6 @@ module.exports = {
     validateClientByName,
     validateDepartmentByName,
     validateDepartmentById,
+    validateMachineByManufacturer,
+    validateMachineById,
 };
