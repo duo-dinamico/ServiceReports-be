@@ -1,12 +1,28 @@
 const machinesRouter = require("express").Router();
 const {celebrate} = require("celebrate");
 
-const {machinesSchema} = require("../schemas/machines");
-const {getAllMachines} = require("../controllers/machines.controllers");
+const {machinesSchema, machineSchema, patchMachineSchema, postMachineSchema} = require("../schemas/machines");
+const {
+    getAllMachines,
+    getMachine,
+    patchDepartment,
+    deleteMachine,
+    postMachine,
+} = require("../controllers/machines.controllers");
 const {methodNotAllowed} = require("../errors");
+const {validateMachineExists} = require("../validation/machines.validation");
 
-machinesRouter.route("/").get(celebrate(machinesSchema), getAllMachines).all(methodNotAllowed);
-machinesRouter.route("/:id").all(methodNotAllowed);
+machinesRouter
+    .route("/")
+    .get(celebrate(machinesSchema), getAllMachines)
+    .post(celebrate(postMachineSchema), validateMachineExists, postMachine)
+    .all(methodNotAllowed);
+machinesRouter
+    .route("/:id")
+    .get(celebrate(machineSchema), getMachine)
+    .patch(celebrate(patchMachineSchema), validateMachineExists, patchDepartment)
+    .delete(celebrate(machineSchema), validateMachineExists, deleteMachine)
+    .all(methodNotAllowed);
 
 module.exports = machinesRouter;
 

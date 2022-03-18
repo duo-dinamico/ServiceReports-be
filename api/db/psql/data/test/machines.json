@@ -19,5 +19,13 @@
         "model": "Caion",
         "serial_number": "08-761-0101A",
         "department_id": "329adfd4-9880-49ee-b650-af3f24dc4929"
+    },
+    {
+        "id": "14772f69-0c53-409c-a373-f7db7f0543cf",
+        "manufacturer": "CountR",
+        "model": "Model2",
+        "serial_number": "08-761-0101B",
+        "department_id": "329adfd4-9880-49ee-b650-af3f24dc4929",
+        "deleted_at": "2022-03-08T20:44:24.907Z"
     }
 ]
