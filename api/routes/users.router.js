@@ -21,14 +21,14 @@ usersRouter
 module.exports = usersRouter;
 
 /**
- * @swagger
+ * @openapi
  * tags:
  *   name: Users
  *   description: User management and retrieval
  */
 
 /**
- * @swagger
+ * @openapi
  * /users:
  *  get:
  *    summary: Use to request all users
@@ -39,20 +39,17 @@ module.exports = usersRouter;
  *      - $ref: '#parameters/user_id'
  *    responses:
  *      200:
- *         description: A list of users.
+ *         description: Returns an object with an array of users objects
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 username:
- *                   type: string
- *                   example: testusername
- *                 name:
- *                   type: string
- *                   example: testname
+ *               $ref: '#/components/schemas/users_schema'
  *      '400':
- *        description: Bad request.
+ *        description: Bad Request
+ *        content:
+ *          application/json:
+ *            schema:
+ *               $ref: '#/components/schemas/bad_request_schema'
  *  post:
  *    summary: Use to add a user
  *    tags: [Users]
@@ -66,16 +63,33 @@ module.exports = usersRouter;
  *            properties:
  *              username:
  *                type: string
- *                example: testusername
+ *                example: jdoe
  *              name:
  *                type: string
- *                example: testname
+ *                example: John Doe
  *    responses:
  *      '201':
- *        description: A successful response
+ *        description: Returns an object with a user object
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/machine_schema'
  *      '400':
- *        description: Bad request
- *
+ *        description: Bad Request
+ *        content:
+ *          application/json:
+ *            schema:
+ *               $ref: '#/components/schemas/bad_request_schema'
+ *      '404':
+ *        description: Not Found
+ *        content:
+ *          application/json:
+ *            schema:
+ *               $ref: '#/components/schemas/not_found_schema'
+ */
+
+/**
+ * @openapi
  * /users/{id}:
  *  get:
  *    summary: Use to request a user
@@ -84,41 +98,141 @@ module.exports = usersRouter;
  *      - $ref: '#parameters/id'
  *    responses:
  *      '200':
- *        description: A successful response
+ *        description: Returns an object with a key "user", with a user object
+ *        content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/user_schema'
  *      '400':
- *        description: Bad request.
+ *        description: Bad Request
+ *        content:
+ *          application/json:
+ *            schema:
+ *               $ref: '#/components/schemas/bad_request_schema'
+ *      '404':
+ *        description: Not Found
+ *        content:
+ *          application/json:
+ *            schema:
+ *               $ref: '#/components/schemas/not_found_schema'
  *  patch:
- *    summary: Use to patch one user
+ *    summary: Use to update a user
  *    tags: [Users]
  *    parameters:
  *      - $ref: '#parameters/id'
- *    responses:
- *      '200':
- *        description: A successful response
- *      '400':
- *        description: Bad request.
  *    requestBody:
- *      description: Body to update a user
+ *      description: Body to add a user
  *      required: true
  *      content:
  *        application/json:
- *           schema:
- *              type: object
- *              properties:
- *                username:
- *                  type: string
- *                  example: testusername
- *                name:
- *                  type: string
- *                  example: testname
+ *          schema:
+ *            type: object
+ *            properties:
+ *              username:
+ *                type: string
+ *                example: jdoe
+ *              name:
+ *                type: string
+ *                example: John Doe
+ *    responses:
+ *      '200':
+ *        description: Returns an object with a key "user", with a user object
+ *        content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/user_schema'
+ *      '400':
+ *        description: Bad Request
+ *        content:
+ *          application/json:
+ *            schema:
+ *               $ref: '#/components/schemas/bad_request_schema'
+ *      '404':
+ *        description: Not Found
+ *        content:
+ *          application/json:
+ *            schema:
+ *               $ref: '#/components/schemas/not_found_schema'
  *  delete:
- *    summary: Use to delete one users
+ *    summary: Use to delete a user
  *    tags: [Users]
  *    parameters:
  *      - $ref: '#parameters/id'
  *    responses:
  *      '204':
- *        description: A successful response
+ *        description: Returns an empty object
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
  *      '400':
- *        description: Bad request.
+ *        description: Bad Request
+ *        content:
+ *          application/json:
+ *            schema:
+ *               $ref: '#/components/schemas/bad_request_schema'
+ *      '404':
+ *        description: Not Found
+ *        content:
+ *          application/json:
+ *            schema:
+ *               $ref: '#/components/schemas/not_found_schema'
+ */
+
+/**
+ * @openapi
+ * components:
+ *  schemas:
+ *    user_schema:
+ *      type: object
+ *      properties:
+ *        id:
+ *          type: string
+ *          format: uuid
+ *        username:
+ *          type: string
+ *        name:
+ *          type: string
+ *        created_at:
+ *          type: string
+ *          format: date-time
+ *        updated_at:
+ *          type: string
+ *          format: date-time
+ *        deleted_at:
+ *          type: string
+ *          format: date-time
+ *    users_schema:
+ *      type: object
+ *      properties:
+ *        users:
+ *          type: array
+ *          items:
+ *            type: object
+ *            allOf:
+ *              - $ref: '#/components/schemas/user_schema'
+ *    not_found_schema:
+ *      type: object
+ *      properties:
+ *        statusCode:
+ *          type: integer
+ *          example: 404
+ *        error:
+ *          type: string
+ *          example: Not Found
+ *        message:
+ *          type: string
+ *          example: '"id" could not be found'
+ *    bad_request_schema:
+ *      type: object
+ *      properties:
+ *        statusCode:
+ *          type: integer
+ *          example: 400
+ *        error:
+ *          type: string
+ *          example: Bad Request
+ *        message:
+ *          type: string
+ *          example: '"id" must be a valid GUID'
  */
