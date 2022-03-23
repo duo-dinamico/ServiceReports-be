@@ -70,7 +70,7 @@ module.exports = clientsRouter;
  *                example: Client location
  *    responses:
  *      '201':
- *        description: Returns an object with a client object
+ *        description: Returns an object with a key "client", with a client object
  *        content:
  *          application/json:
  *            schema:
@@ -215,28 +215,4 @@ module.exports = clientsRouter;
  *            type: object
  *            allOf:
  *              - $ref: '#/components/schemas/client_schema'
- *    not_found_schema:
- *      type: object
- *      properties:
- *        statusCode:
- *          type: integer
- *          example: 404
- *        error:
- *          type: string
- *          example: Not Found
- *        message:
- *          type: string
- *          example: '"id" could not be found'
- *    bad_request_schema:
- *      type: object
- *      properties:
- *        statusCode:
- *          type: integer
- *          example: 400
- *        error:
- *          type: string
- *          example: Bad Request
- *        message:
- *          type: string
- *          example: '"id" must be a valid GUID'
  */

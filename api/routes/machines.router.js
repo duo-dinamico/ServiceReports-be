@@ -47,7 +47,7 @@ module.exports = machinesRouter;
  *      - $ref: '#parameters/model'
  *    responses:
  *      '200':
- *        description: Returns an object with an array of machine objects
+ *        description: Returns an object with a key "machines", with an array of machine objects
  *        content:
  *          application/json:
  *            schema:
@@ -57,17 +57,7 @@ module.exports = machinesRouter;
  *        content:
  *          application/json:
  *            schema:
- *              type: object
- *              properties:
- *                statusCode:
- *                  type: integer
- *                  example: 400
- *                error:
- *                  type: string
- *                  example: Bad Request
- *                message:
- *                  type: string
- *                  example: '"id" must be a valid GUID'
+ *               $ref: '#/components/schemas/bad_request_schema'
  *  post:
  *    summary: Use to add a machine
  *    tags: [Machines]
@@ -94,43 +84,23 @@ module.exports = machinesRouter;
  *                example: 4dca6671-7c73-4414-bf4c-0646d8c70ede
  *    responses:
  *      '201':
- *        description: Returns an object with a machine object
+ *        description: Returns an object with a key "machine", with a machine object
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/machine_schema'
+ *              $ref: '#/components/schemas/machine_id_schema'
  *      '400':
  *        description: Bad Request
  *        content:
  *          application/json:
  *            schema:
- *              type: object
- *              properties:
- *                statusCode:
- *                  type: integer
- *                  example: 400
- *                error:
- *                  type: string
- *                  example: Bad Request
- *                message:
- *                  type: string
- *                  example: '"id" must be a valid GUID'
+ *               $ref: '#/components/schemas/bad_request_schema'
  *      '404':
  *        description: Not Found
  *        content:
  *          application/json:
  *            schema:
- *              type: object
- *              properties:
- *                statusCode:
- *                  type: integer
- *                  example: 404
- *                error:
- *                  type: string
- *                  example: Not Found
- *                message:
- *                  type: string
- *                  example: '"id" could not be found'
+ *               $ref: '#/components/schemas/not_found_schema'
  */
 
 /**
@@ -147,39 +117,19 @@ module.exports = machinesRouter;
  *        content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/machine_schema'
+ *               $ref: '#/components/schemas/machine_id_schema'
  *      '400':
  *        description: Bad Request
  *        content:
  *          application/json:
  *            schema:
- *              type: object
- *              properties:
- *                statusCode:
- *                  type: integer
- *                  example: 400
- *                error:
- *                  type: string
- *                  example: Bad Request
- *                message:
- *                  type: string
- *                  example: '"id" must be a valid GUID'
+ *               $ref: '#/components/schemas/bad_request_schema'
  *      '404':
  *        description: Not Found
  *        content:
  *          application/json:
  *            schema:
- *              type: object
- *              properties:
- *                statusCode:
- *                  type: integer
- *                  example: 404
- *                error:
- *                  type: string
- *                  example: Not Found
- *                message:
- *                  type: string
- *                  example: '"id" could not be found'
+ *               $ref: '#/components/schemas/not_found_schema'
  *  patch:
  *    summary: Use to update a machine
  *    tags: [Machines]
@@ -212,39 +162,19 @@ module.exports = machinesRouter;
  *        content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/machine_schema'
+ *               $ref: '#/components/schemas/machine_id_schema'
  *      '400':
  *        description: Bad Request
  *        content:
  *          application/json:
  *            schema:
- *              type: object
- *              properties:
- *                statusCode:
- *                  type: integer
- *                  example: 400
- *                error:
- *                  type: string
- *                  example: Bad Request
- *                message:
- *                  type: string
- *                  example: '"id" must be a valid GUID'
+ *               $ref: '#/components/schemas/bad_request_schema'
  *      '404':
  *        description: Not Found
  *        content:
  *          application/json:
  *            schema:
- *              type: object
- *              properties:
- *                statusCode:
- *                  type: integer
- *                  example: 404
- *                error:
- *                  type: string
- *                  example: Not Found
- *                message:
- *                  type: string
- *                  example: '"id" could not be found'
+ *               $ref: '#/components/schemas/not_found_schema'
  *  delete:
  *    summary: Use to delete a machine
  *    tags: [Machines]
@@ -262,33 +192,13 @@ module.exports = machinesRouter;
  *        content:
  *          application/json:
  *            schema:
- *              type: object
- *              properties:
- *                statusCode:
- *                  type: integer
- *                  example: 400
- *                error:
- *                  type: string
- *                  example: Bad Request
- *                message:
- *                  type: string
- *                  example: '"id" must be a valid GUID'
+ *               $ref: '#/components/schemas/bad_request_schema'
  *      '404':
  *        description: Not Found
  *        content:
  *          application/json:
  *            schema:
- *              type: object
- *              properties:
- *                statusCode:
- *                  type: integer
- *                  example: 404
- *                error:
- *                  type: string
- *                  example: Not Found
- *                message:
- *                  type: string
- *                  example: '"id" could not be found'
+ *               $ref: '#/components/schemas/not_found_schema'
  */
 
 /**
@@ -326,6 +236,13 @@ module.exports = machinesRouter;
  *        deleted_at:
  *          type: string
  *          format: date-time
+ *    machine_id_schema:
+ *      type: object
+ *      properties:
+ *        machine:
+ *            type: object
+ *            allOf:
+ *              - $ref: '#/components/schemas/machine_schema'
  *    machines_schema:
  *      type: object
  *      properties:

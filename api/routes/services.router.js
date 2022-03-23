@@ -10,14 +10,14 @@ servicesRouter.route("/").get(celebrate(servicesSchema), getAllServices).all(met
 module.exports = servicesRouter;
 
 /**
- * @swagger
+ * @openapi
  * tags:
  *   name: Services
  *   description: Department management and retrieval
  */
 
 /**
- * @swagger
+ * @openapi
  * /services:
  *  get:
  *    summary: Use to request all services
@@ -30,8 +30,76 @@ module.exports = servicesRouter;
  *      - $ref: '#parameters/created_by'
  *      - $ref: '#parameters/closed_by'
  *    responses:
- *      '200':
- *        description: A successful response
+ *      200:
+ *         description: Returns an object with a key "services", with an array of service objects
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/services_schema'
  *      '400':
- *        description: Bad request.
+ *        description: Bad Request
+ *        content:
+ *          application/json:
+ *            schema:
+ *               $ref: '#/components/schemas/bad_request_schema'
+ */
+
+/**
+ * @openapi
+ * components:
+ *  schemas:
+ *    service_schema:
+ *      type: object
+ *      properties:
+ *        id:
+ *          type: string
+ *          format: uuid
+ *        user:
+ *          type: object
+ *          allOf:
+ *            - $ref: '#/components/schemas/user_schema'
+ *        department:
+ *          type: object
+ *          allOf:
+ *            - $ref: '#/components/schemas/department_schema'
+ *        created_at:
+ *          type: string
+ *          format: date-time
+ *        updated_at:
+ *          type: string
+ *          format: date-time
+ *        closed_at:
+ *          type: string
+ *          format: date-time
+ *        deleted_at:
+ *          type: string
+ *          format: date-time
+ *        created_by:
+ *          type: string
+ *          format: uuid
+ *        updated_by:
+ *          type: string
+ *          format: uuid
+ *        closed_by:
+ *          type: string
+ *          format: uuid
+ *        deleted_by:
+ *          type: string
+ *          format: uuid
+ *    service_id_schema:
+ *      type: object
+ *      properties:
+ *        service:
+ *            type: object
+ *            allOf:
+ *              - $ref: '#/components/schemas/service_schema'
+ *    services_schema:
+ *      type: object
+ *      properties:
+ *        services:
+ *          type: array
+ *          items:
+ *            type: object
+ *            allOf:
+ *              - $ref: '#/components/schemas/service_schema'
  */

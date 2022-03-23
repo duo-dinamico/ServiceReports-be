@@ -82,7 +82,7 @@ module.exports = departmentsRouter;
  *                example: 4dca6671-7c73-4414-bf4c-0646d8c70ede
  *    responses:
  *      '201':
- *        description: Returns an object with a department object
+ *        description: Returns an object with a key "department", with a department object
  *        content:
  *          application/json:
  *            schema:
@@ -241,28 +241,4 @@ module.exports = departmentsRouter;
  *            type: object
  *            allOf:
  *              - $ref: '#/components/schemas/department_schema'
- *    not_found_schema:
- *      type: object
- *      properties:
- *        statusCode:
- *          type: integer
- *          example: 404
- *        error:
- *          type: string
- *          example: Not Found
- *        message:
- *          type: string
- *          example: '"id" could not be found'
- *    bad_request_schema:
- *      type: object
- *      properties:
- *        statusCode:
- *          type: integer
- *          example: 400
- *        error:
- *          type: string
- *          example: Bad Request
- *        message:
- *          type: string
- *          example: '"id" must be a valid GUID'
  */

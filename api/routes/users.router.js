@@ -39,7 +39,7 @@ module.exports = usersRouter;
  *      - $ref: '#parameters/user_id'
  *    responses:
  *      200:
- *         description: Returns an object with an array of users objects
+ *         description: Returns an object with a key "users", with an array of user objects
  *         content:
  *           application/json:
  *             schema:
@@ -69,11 +69,11 @@ module.exports = usersRouter;
  *                example: John Doe
  *    responses:
  *      '201':
- *        description: Returns an object with a user object
+ *        description: Returns an object with a key "user", with a user object
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/machine_schema'
+ *              $ref: '#/components/schemas/user_id_schema'
  *      '400':
  *        description: Bad Request
  *        content:
@@ -102,7 +102,7 @@ module.exports = usersRouter;
  *        content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/user_schema'
+ *               $ref: '#/components/schemas/user_id_schema'
  *      '400':
  *        description: Bad Request
  *        content:
@@ -140,7 +140,7 @@ module.exports = usersRouter;
  *        content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/user_schema'
+ *               $ref: '#/components/schemas/user_id_schema'
  *      '400':
  *        description: Bad Request
  *        content:
@@ -202,6 +202,13 @@ module.exports = usersRouter;
  *        deleted_at:
  *          type: string
  *          format: date-time
+ *    user_id_schema:
+ *      type: object
+ *      properties:
+ *        user:
+ *            type: object
+ *            allOf:
+ *              - $ref: '#/components/schemas/user_schema'
  *    users_schema:
  *      type: object
  *      properties:
@@ -211,28 +218,4 @@ module.exports = usersRouter;
  *            type: object
  *            allOf:
  *              - $ref: '#/components/schemas/user_schema'
- *    not_found_schema:
- *      type: object
- *      properties:
- *        statusCode:
- *          type: integer
- *          example: 404
- *        error:
- *          type: string
- *          example: Not Found
- *        message:
- *          type: string
- *          example: '"id" could not be found'
- *    bad_request_schema:
- *      type: object
- *      properties:
- *        statusCode:
- *          type: integer
- *          example: 400
- *        error:
- *          type: string
- *          example: Bad Request
- *        message:
- *          type: string
- *          example: '"id" must be a valid GUID'
  */
