@@ -94,6 +94,16 @@ describe("/api", () => {
                                 const [machine] = machines;
                                 expect(machine).toHaveProperty("model", "Chipper Champ 2");
                             }));
+                    it("status: 200, filter by department", () =>
+                        request
+                            .get(urlPath)
+                            .query({department_id: "a7895b03-70a2-4bab-8e0f-dbc561e6d098"})
+                            .expect(200)
+                            .then(({body: {machines}}) => {
+                                expect(machines).toHaveLength(1);
+                                const [machine] = machines;
+                                expect(machine).toHaveProperty("department.id", "a7895b03-70a2-4bab-8e0f-dbc561e6d098");
+                            }));
                 });
                 it("status: 200", () =>
                     request

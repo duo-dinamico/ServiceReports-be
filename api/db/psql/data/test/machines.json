@@ -27,5 +27,12 @@
         "serial_number": "08-761-0101B",
         "department_id": "329adfd4-9880-49ee-b650-af3f24dc4929",
         "deleted_at": "2022-03-08T20:44:24.907Z"
+    },
+    {
+        "id": "b5af02e8-2688-41a5-99a2-1a50cf849706",
+        "manufacturer": "SG",
+        "model": "Shuffler",
+        "serial_number": "087610101B",
+        "department_id": "a7895b03-70a2-4bab-8e0f-dbc561e6d098"
     }
 ]

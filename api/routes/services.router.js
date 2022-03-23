@@ -1,11 +1,17 @@
 const servicesRouter = require("express").Router();
 const {celebrate} = require("celebrate");
 
-const {servicesSchema} = require("../schemas/services");
-const {getAllServices} = require("../controllers/services.controllers");
+const {servicesSchema, serviceSchema, patchServiceSchema} = require("../schemas/services");
+const {getAllServices, getService, patchService} = require("../controllers/services.controllers");
 const {methodNotAllowed} = require("../errors");
+const {validateServiceExists} = require("../validation/services.validation");
 
 servicesRouter.route("/").get(celebrate(servicesSchema), getAllServices).all(methodNotAllowed);
+servicesRouter
+    .route("/:id")
+    .get(celebrate(serviceSchema), getService)
+    .patch(celebrate(patchServiceSchema), validateServiceExists, patchService)
+    .all(methodNotAllowed);
 
 module.exports = servicesRouter;
 

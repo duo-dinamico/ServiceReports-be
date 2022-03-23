@@ -3,6 +3,7 @@ const {fetchUser} = require("../../models/users.models");
 const {fetchClient} = require("../../models/clients.models");
 const {fetchDepartment} = require("../../models/departments.models");
 const {fetchMachine} = require("../../models/machines.models");
+const {fetchService} = require("../../models/services.models");
 
 async function validateUserById(id) {
     try {
@@ -68,6 +69,15 @@ async function validateMachineByManufacturer(body) {
     return true;
 }
 
+async function validateServiceById(id) {
+    try {
+        await fetchService({id});
+        return true;
+    } catch (err) {
+        return Promise.reject(err.output.payload);
+    }
+}
+
 module.exports = {
     validateUserById,
     validateUserByUsername,
@@ -77,4 +87,5 @@ module.exports = {
     validateDepartmentById,
     validateMachineByManufacturer,
     validateMachineById,
+    validateServiceById,
 };

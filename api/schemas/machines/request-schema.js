@@ -7,6 +7,7 @@ const machinesSchema = {
         machine_id: Joi.string().uuid(),
         manufacturer: Joi.string(),
         model: Joi.string(),
+        department_id: Joi.string().uuid(),
     }),
 };
 

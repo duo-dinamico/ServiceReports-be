@@ -45,6 +45,7 @@ module.exports = machinesRouter;
  *      - $ref: '#parameters/machine_id'
  *      - $ref: '#parameters/manufacturer'
  *      - $ref: '#parameters/model'
+ *      - $ref: '#parameters/department_id'
  *    responses:
  *      '200':
  *        description: Returns an object with a key "machines", with an array of machine objects
