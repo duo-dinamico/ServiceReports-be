@@ -50,7 +50,7 @@ module.exports = departmentsRouter;
  *      - $ref: '#parameters/department_id'
  *    responses:
  *      '200':
- *        description: Returns an object with an array of department objects
+ *        description: Returns an object with a key "departments", with an array of department objects
  *        content:
  *          application/json:
  *            schema:
@@ -60,17 +60,8 @@ module.exports = departmentsRouter;
  *        content:
  *          application/json:
  *            schema:
- *              type: object
- *              properties:
- *                statusCode:
- *                  type: integer
- *                  example: 400
- *                error:
- *                  type: string
- *                  example: Bad Request
- *                message:
- *                  type: string
- *                  example: '"id" must be a valid GUID'
+ *               $ref: '#/components/schemas/bad_request_schema'
+ *
  *  post:
  *    summary: Use to add a department
  *    tags: [Departments]
@@ -95,23 +86,19 @@ module.exports = departmentsRouter;
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/department_schema'
+ *              $ref: '#/components/schemas/department_id_schema'
  *      '400':
  *        description: Bad Request
  *        content:
  *          application/json:
  *            schema:
- *              type: object
- *              properties:
- *                statusCode:
- *                  type: integer
- *                  example: 400
- *                error:
- *                  type: string
- *                  example: Bad Request
- *                message:
- *                  type: string
- *                  example: '"id" must be a valid GUID'
+ *               $ref: '#/components/schemas/bad_request_schema'
+ *      '404':
+ *        description: Not Found
+ *        content:
+ *          application/json:
+ *            schema:
+ *               $ref: '#/components/schemas/not_found_schema'
  */
 
 /**
@@ -128,39 +115,20 @@ module.exports = departmentsRouter;
  *        content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/department_schema'
+ *               $ref: '#/components/schemas/department_id_schema'
  *      '400':
  *        description: Bad Request
  *        content:
  *          application/json:
  *            schema:
- *              type: object
- *              properties:
- *                statusCode:
- *                  type: integer
- *                  example: 400
- *                error:
- *                  type: string
- *                  example: Bad Request
- *                message:
- *                  type: string
- *                  example: '"id" must be a valid GUID'
+ *               $ref: '#/components/schemas/bad_request_schema'
  *      '404':
  *        description: Not Found
  *        content:
  *          application/json:
  *            schema:
- *              type: object
- *              properties:
- *                statusCode:
- *                  type: integer
- *                  example: 404
- *                error:
- *                  type: string
- *                  example: Not Found
- *                message:
- *                  type: string
- *                  example: '"id" could not be found'
+ *               $ref: '#/components/schemas/not_found_schema'
+ *
  *  patch:
  *    summary: Use to update a department
  *    tags: [Departments]
@@ -187,39 +155,19 @@ module.exports = departmentsRouter;
  *        content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/department_schema'
+ *               $ref: '#/components/schemas/department_id_schema'
  *      '400':
  *        description: Bad Request
  *        content:
  *          application/json:
  *            schema:
- *              type: object
- *              properties:
- *                statusCode:
- *                  type: integer
- *                  example: 400
- *                error:
- *                  type: string
- *                  example: Bad Request
- *                message:
- *                  type: string
- *                  example: '"id" must be a valid GUID'
+ *               $ref: '#/components/schemas/bad_request_schema'
  *      '404':
  *        description: Not Found
  *        content:
  *          application/json:
  *            schema:
- *              type: object
- *              properties:
- *                statusCode:
- *                  type: integer
- *                  example: 404
- *                error:
- *                  type: string
- *                  example: Not Found
- *                message:
- *                  type: string
- *                  example: '"id" could not be found'
+ *               $ref: '#/components/schemas/not_found_schema'
  *  delete:
  *    summary: Use to delete a department
  *    tags: [Departments]
@@ -227,43 +175,23 @@ module.exports = departmentsRouter;
  *      - $ref: '#parameters/id'
  *    responses:
  *      '204':
- *        description: Returns an object with a department object
+ *        description: Returns an empty object
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/department_schema'
+ *              type: object
  *      '400':
  *        description: Bad Request
  *        content:
  *          application/json:
  *            schema:
- *              type: object
- *              properties:
- *                statusCode:
- *                  type: integer
- *                  example: 400
- *                error:
- *                  type: string
- *                  example: Bad Request
- *                message:
- *                  type: string
- *                  example: '"id" must be a valid GUID'
+ *               $ref: '#/components/schemas/bad_request_schema'
  *      '404':
  *        description: Not Found
  *        content:
  *          application/json:
  *            schema:
- *              type: object
- *              properties:
- *                statusCode:
- *                  type: integer
- *                  example: 404
- *                error:
- *                  type: string
- *                  example: Not Found
- *                message:
- *                  type: string
- *                  example: '"id" could not be found'
+ *               $ref: '#/components/schemas/not_found_schema'
  */
 
 /**
@@ -297,6 +225,13 @@ module.exports = departmentsRouter;
  *        deleted_at:
  *          type: string
  *          format: date-time
+ *    department_id_schema:
+ *      type: object
+ *      properties:
+ *        department:
+ *            type: object
+ *            allOf:
+ *              - $ref: '#/components/schemas/department_schema'
  *    departments_schema:
  *      type: object
  *      properties:
@@ -306,4 +241,28 @@ module.exports = departmentsRouter;
  *            type: object
  *            allOf:
  *              - $ref: '#/components/schemas/department_schema'
+ *    not_found_schema:
+ *      type: object
+ *      properties:
+ *        statusCode:
+ *          type: integer
+ *          example: 404
+ *        error:
+ *          type: string
+ *          example: Not Found
+ *        message:
+ *          type: string
+ *          example: '"id" could not be found'
+ *    bad_request_schema:
+ *      type: object
+ *      properties:
+ *        statusCode:
+ *          type: integer
+ *          example: 400
+ *        error:
+ *          type: string
+ *          example: Bad Request
+ *        message:
+ *          type: string
+ *          example: '"id" must be a valid GUID'
  */
