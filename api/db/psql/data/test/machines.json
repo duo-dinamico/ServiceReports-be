@@ -1,38 +1,80 @@
 [
     {
         "id": "341ae597-6e26-4c2a-9966-26447522a21e",
-        "manufacturer": "Shuffle Master",
-        "model": "One 2 Six",
+        "manufacturer": "Printing Company",
+        "model": "Printer Master 25",
         "serial_number": "01010101A",
         "department_id": "1ed90dca-dd68-476a-bd48-63b2a5d66c2f"
     },
     {
         "id": "f8cae396-5376-47ae-8dfc-690572e76a09",
-        "manufacturer": "TCS",
-        "model": "Chipper Champ 2",
-        "serial_number": "087610101A",
+        "manufacturer": "Venting Company",
+        "model": "Super Ventilator 3",
+        "serial_number": "CC087610101A",
         "department_id": "a7895b03-70a2-4bab-8e0f-dbc561e6d098"
     },
     {
         "id": "0f53de42-3506-4bad-9a2d-c827bd6c5b6d",
-        "manufacturer": "CountR",
-        "model": "Caion",
+        "manufacturer": "Deleted Company",
+        "model": "Deleted Department Model",
         "serial_number": "08-761-0101A",
         "department_id": "329adfd4-9880-49ee-b650-af3f24dc4929"
     },
     {
+        "id": "8ae453ad-fc7a-4129-a80b-d9307a9b0f18",
+        "manufacturer": "Printing Company",
+        "model": "Printer Master 32",
+        "serial_number": "0105B101A",
+        "department_id": "1ed90dca-dd68-476a-bd48-63b2a5d66c2f"
+    },
+    {
         "id": "14772f69-0c53-409c-a373-f7db7f0543cf",
-        "manufacturer": "CountR",
-        "model": "Model2",
+        "manufacturer": "Deleted Company",
+        "model": "Deleted Machine",
         "serial_number": "08-761-0101B",
-        "department_id": "329adfd4-9880-49ee-b650-af3f24dc4929",
+        "department_id": "1ed90dca-dd68-476a-bd48-63b2a5d66c2f",
         "deleted_at": "2022-03-08T20:44:24.907Z"
     },
     {
         "id": "b5af02e8-2688-41a5-99a2-1a50cf849706",
-        "manufacturer": "SG",
-        "model": "Shuffler",
+        "manufacturer": "Venting Company",
+        "model": "Super Ventilator 5",
         "serial_number": "087610101B",
         "department_id": "a7895b03-70a2-4bab-8e0f-dbc561e6d098"
+    },
+    {
+        "id": "71fb0781-c9a3-4d94-b21d-9e59326c7cd3",
+        "manufacturer": "Pumping Company",
+        "model": "Pump Ultra Large 8",
+        "serial_number": "087610101B",
+        "department_id": "341ae597-6e26-4c2a-9966-26447522a21e"
+    },
+    {
+        "id": "fab17dda-e3b1-42a7-bba2-f777407146fd",
+        "manufacturer": "Pumping Company",
+        "model": "Pump Ultra Large 21",
+        "serial_number": "087HR6101B",
+        "department_id": "341ae597-6e26-4c2a-9966-26447522a21e"
+    },
+    {
+        "id": "4a4fe9d0-4bcd-49de-85e0-af0a3d84c092",
+        "manufacturer": "Records Company",
+        "model": "Rock Record 34",
+        "serial_number": "087HR6101B",
+        "department_id": "04ef48c0-38b3-4cdc-b483-2d72dfa81527"
+    },
+    {
+        "id": "82340ff6-1a70-4131-ac9a-02d1984a3217",
+        "manufacturer": "Gas Manufacturer Company",
+        "model": "Heating Coil 56",
+        "serial_number": "087HR6101B",
+        "department_id": "e95bd0c0-9b36-4ff5-8c63-244b1237d4d0"
+    },
+    {
+        "id": "77009881-33f9-4c92-a53c-0a06b28b5fba",
+        "manufacturer": "Media Manufacturer Company",
+        "model": "Monitor 55",
+        "serial_number": "45087HR6101B",
+        "department_id": "753e15b4-20b2-4049-b45f-5a6ba7e465bb"
     }
 ]

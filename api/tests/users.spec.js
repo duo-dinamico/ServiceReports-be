@@ -147,10 +147,10 @@ describe("/api", () => {
                 it("status: 400, should error if user already exists [username must be unique]", () =>
                     request
                         .post(urlPath)
-                        .send({username: "jsilva", name: "second"})
+                        .send({username: "cpayne", name: "second"})
                         .expect(400)
                         .then(({body: {error, message}}) => {
-                            expect(message).toBe('"jsilva" already exists');
+                            expect(message).toBe('"cpayne" already exists');
                             expect(error).toBe("Bad Request");
                         }));
                 it("status: 400, should error if username not well formatted [username must follow this regex: ^[a-z]+$ ]", () =>

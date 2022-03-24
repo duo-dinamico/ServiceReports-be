@@ -142,11 +142,11 @@ describe("/api", () => {
                 it("status: 400, client should be unique [name must be unique]", () =>
                     request
                         .post(urlPath)
-                        .send({name: "client Estoril", location: "Estoril"})
+                        .send({name: "Royal Gas", location: "Sarasota"})
                         .expect(400)
                         .then(({body: {error, message}}) => {
                             expect(error).toBe("Bad Request");
-                            expect(message).toBe('"client Estoril" already exists');
+                            expect(message).toBe('"Royal Gas" already exists');
                         }));
                 it("status: 400, should only have allowed keys", () =>
                     request
@@ -314,11 +314,11 @@ describe("/api", () => {
                     it("status: 400, name should be unique", () =>
                         request
                             .patch(`${urlPath}/${clientId}`)
-                            .send({name: "client Estoril"})
+                            .send({name: "Royal Gas"})
                             .expect(400)
                             .then(({body: {error, message}}) => {
                                 expect(error).toBe("Bad Request");
-                                expect(message).toBe('"client Estoril" already exists');
+                                expect(message).toBe('"Royal Gas" already exists');
                             }));
                 });
                 describe("DELETE", () => {

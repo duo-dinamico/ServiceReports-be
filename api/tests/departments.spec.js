@@ -152,11 +152,11 @@ describe("/api", () => {
                 it("status: 400, department should be unique [name must be unique]", () =>
                     request
                         .post(urlPath)
-                        .send({name: "Caixas Lisboa", client_id: postBody.client_id})
+                        .send({name: "Heating at Royal Gas", client_id: postBody.client_id})
                         .expect(400)
                         .then(({body: {error, message}}) => {
                             expect(error).toBe("Bad Request");
-                            expect(message).toBe('"Caixas Lisboa" already exists');
+                            expect(message).toBe('"Heating at Royal Gas" already exists');
                         }));
                 it("status: 400, should only have allowed keys", () =>
                     request
@@ -335,11 +335,11 @@ describe("/api", () => {
                     it("status: 400, name should be unique", () =>
                         request
                             .patch(`${urlPath}/${departmentId}`)
-                            .send({name: "Sala de Máquinas Estoril"})
+                            .send({name: "Ventilation Department at Clarks"})
                             .expect(400)
                             .then(({body: {error, message}}) => {
                                 expect(error).toBe("Bad Request");
-                                expect(message).toBe('"Sala de Máquinas Estoril" already exists');
+                                expect(message).toBe('"Ventilation Department at Clarks" already exists');
                             }));
                     it("status: 404, client must exist", () =>
                         request
