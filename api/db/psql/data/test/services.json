@@ -1,6 +1,6 @@
 [
     {
-        "id": "341ae597-6e26-4c2a-9966-26447522a21e",
+        "id": "dacfd73f-b7ae-4f86-b8d6-f07478343a6c",
         "department_id": "1ed90dca-dd68-476a-bd48-63b2a5d66c2f",
         "created_at": "2021-01-21T09:00:00",
         "updated_at": "2021-01-22T09:00:00",
@@ -16,7 +16,7 @@
         "department_id": "a7895b03-70a2-4bab-8e0f-dbc561e6d098",
         "created_at": "2021-01-21T09:00:00",
         "updated_at": "2021-01-22T09:00:00",
-        "closed_at": "2021-01-23T09:00:00",
+        "closed_at": null,
         "deleted_at": null,
         "created_by": "9a5c5991-a14d-4d85-b75f-d75081500c8d",
         "updated_by": "9a5c5991-a14d-4d85-b75f-d75081500c8d",
@@ -28,19 +28,19 @@
         "department_id": "a7895b03-70a2-4bab-8e0f-dbc561e6d098",
         "created_at": "2021-01-21T09:00:00",
         "updated_at": "2021-01-22T09:00:00",
-        "closed_at": "2021-01-23T09:00:00",
-        "deleted_at": "2022-03-08T20:44:24.907Z",
+        "closed_at": "2021-01-22T09:00:00",
+        "deleted_at": null,
         "created_by": "435ccd69-f989-4219-a3c7-9f09ff32c6cb",
         "updated_by": "435ccd69-f989-4219-a3c7-9f09ff32c6cb",
-        "closed_by": null,
-        "deleted_by": "435ccd69-f989-4219-a3c7-9f09ff32c6cb"
+        "closed_by": "435ccd69-f989-4219-a3c7-9f09ff32c6cb",
+        "deleted_by": null
     },
     {
         "id": "31618d24-204c-49b0-b5ee-0ada5673940e",
         "department_id": "a7895b03-70a2-4bab-8e0f-dbc561e6d098",
         "created_at": "2021-01-21T09:00:00",
         "updated_at": "2021-01-22T09:00:00",
-        "closed_at": "2021-01-23T09:00:00",
+        "closed_at": null,
         "deleted_at": "2022-03-08T20:44:24.907Z",
         "created_by": "435ccd69-f989-4219-a3c7-9f09ff32c6cb",
         "updated_by": "435ccd69-f989-4219-a3c7-9f09ff32c6cb",

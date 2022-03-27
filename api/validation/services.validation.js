@@ -1,12 +1,23 @@
 const Boom = require("@hapi/boom");
-const {validateServiceById, validateMachineById} = require("./utils/validation");
+const {
+    validateServiceById,
+    validateMachineById,
+    validateUserById,
+    validateDepartmentById,
+    validateDepartmentHasMachines,
+    validateMachineHasRevisions,
+} = require("./utils/validation");
 
 exports.validateServiceExists = async (req, res, next) => {
-    const {id} = req.params;
-    const {machine_id} = req.body;
+    const {service_id, machine_id} = req.params;
+    const {user_id, department_id} = req.body;
     const toValidate = [];
-    if (id) toValidate.push(validateServiceById(id));
+    if (service_id) toValidate.push(validateServiceById(service_id));
     if (machine_id) toValidate.push(validateMachineById(machine_id));
+    if (service_id && machine_id) toValidate.push(validateMachineHasRevisions(service_id, machine_id));
+    if (user_id) toValidate.push(validateUserById(user_id));
+    if (department_id)
+        toValidate.push(validateDepartmentById(department_id), validateDepartmentHasMachines(department_id));
     try {
         await Promise.all(toValidate);
         next();

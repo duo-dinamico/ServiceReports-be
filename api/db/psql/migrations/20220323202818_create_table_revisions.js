@@ -7,10 +7,10 @@ exports.up = knex =>
             table.foreign("service_id").references("services.id");
             table.uuid("machine_id");
             table.foreign("machine_id").references("machines.id");
-            table.boolean("maintaned").defaultTo(false);
+            table.boolean("maintained").defaultTo(false);
             table.boolean("repaired").defaultTo(false);
             table.boolean("operational").defaultTo(false);
-            table.string("comments");
+            table.string("comments").defaultTo(null);
             table.boolean("closed").defaultTo(false);
             table.timestamp("deleted_at").defaultTo(null);
         }),

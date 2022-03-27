@@ -1,24 +1,36 @@
-const {fetchService} = require("../models/services.models");
+const {fetchService, updateService, addServiceService} = require("../models/services.models");
 const {fetchAllMachines} = require("../models/machines.models");
 const {fetchAllRevisions} = require("../models/revisions.models");
 
-exports.getServiceService = async params => {
-    const service = await fetchService(params.id).catch(err => {
-        Promise.reject(err);
-    });
-    const machines = await fetchAllMachines({department_id: service.department.id}).catch(err => {
-        Promise.reject(err);
-    });
+const getServiceService = async ({service_id}) => {
+    const service = await fetchService(service_id);
+    const machines = await fetchAllMachines({department_id: service.department.id});
     const revisionsLookup = await fetchAllRevisions(service.id);
     machines.forEach(machine => {
         const {id} = machine;
         /* eslint no-param-reassign: ["error", { "props": false }] */
         machine.revisions = [];
+        delete machine.department;
         revisionsLookup.forEach(revision => {
             if (id === revision.machine_id) {
                 machine.revisions.push(revision);
             }
         });
     });
-    console.log(machines[0].revisions);
+    const {id, department, ...rest} = service;
+    return {id, department, machines, ...rest};
 };
+
+const patchServiceService = async ({service_id}, body) => {
+    await updateService(service_id, body);
+    const service = await getServiceService({service_id});
+    return service;
+};
+
+const postServiceService = async body => {
+    const {id} = await addServiceService(body);
+    const service = await getServiceService({service_id: id});
+    return service;
+};
+
+module.exports = {getServiceService, patchServiceService, postServiceService};

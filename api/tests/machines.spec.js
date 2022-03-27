@@ -80,9 +80,10 @@ describe("/api", () => {
                             .query({manufacturer: "Venting Company"})
                             .expect(200)
                             .then(({body: {machines}}) => {
-                                expect(machines).toHaveLength(1);
-                                const [machine] = machines;
-                                expect(machine).toHaveProperty("manufacturer", "Venting Company");
+                                expect(machines).toHaveLength(2);
+                                machines.forEach(machine => {
+                                    expect(machine).toHaveProperty("manufacturer", "Venting Company");
+                                });
                             }));
                     it("status: 200, filter by model", () =>
                         request
@@ -100,9 +101,13 @@ describe("/api", () => {
                             .query({department_id: "a7895b03-70a2-4bab-8e0f-dbc561e6d098"})
                             .expect(200)
                             .then(({body: {machines}}) => {
-                                expect(machines).toHaveLength(1);
-                                const [machine] = machines;
-                                expect(machine).toHaveProperty("department.id", "a7895b03-70a2-4bab-8e0f-dbc561e6d098");
+                                expect(machines).toHaveLength(2);
+                                machines.forEach(machine => {
+                                    expect(machine).toHaveProperty(
+                                        "department.id",
+                                        "a7895b03-70a2-4bab-8e0f-dbc561e6d098"
+                                    );
+                                });
                             }));
                 });
                 it("status: 200", () =>
