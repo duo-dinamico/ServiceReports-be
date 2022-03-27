@@ -7,7 +7,7 @@ const expectedKeys = ["id", "username", "name", "created_at", "updated_at", "del
 const urlPath = "/api/users";
 const invalidMethods = ["put", "patch", "delete"];
 const invalidMethodsId = ["post", "put"];
-const deleteUserId = "1ebd707a-894e-41b1-881e-d222379ac1f4";
+const deleteUserId = "9a5c5991-a14d-4d85-b75f-d75081500c8d";
 const userId = "9a5c5991-a14d-4d85-b75f-d75081500c8d";
 
 describe("/api", () => {

@@ -16,8 +16,8 @@ const serviceSchema = {params: Joi.object({service_id: Joi.string().uuid()})};
 const patchServiceSchema = {
     params: Joi.object({service_id: Joi.string().uuid()}),
     body: Joi.object({
-        user_id: Joi.string().uuid(),
-        closed: Joi.boolean(),
+        user_id: Joi.string().uuid().required(),
+        closed: Joi.boolean().required(),
     })
         .min(1)
         .required(),
@@ -30,7 +30,7 @@ const patchMachineRevisionSchema = {
         repaired: Joi.boolean(),
         operational: Joi.boolean(),
         comments: Joi.string().max(255),
-        user_id: Joi.string().uuid(),
+        user_id: Joi.string().uuid().required(),
     })
         .min(1)
         .required(),

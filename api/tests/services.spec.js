@@ -355,24 +355,6 @@ describe("/api", () => {
                             }));
                 });
                 describe("PATCH", () => {
-                    it("status: 400, empty body not allowed", () =>
-                        request
-                            .patch(`${urlPath}/${serviceId}`)
-                            .send({})
-                            .expect(400)
-                            .then(({body: {error, message}}) => {
-                                expect(error).toBe("Bad Request");
-                                expect(message).toBe('"value" must have at least 1 key');
-                            }));
-                    it("status: 400, closed is the only allowed key", () =>
-                        request
-                            .patch(`${urlPath}/${serviceId}`)
-                            .send({fake_key: "the only key for you"})
-                            .expect(400)
-                            .then(({body: {error, message}}) => {
-                                expect(error).toBe("Bad Request");
-                                expect(message).toBe('"fake_key" is not allowed');
-                            }));
                     it("status: 404, service id must exist", () =>
                         request
                             .patch(`${urlPath}/435fc172-dff3-4294-ab7b-7e929d00aa45`)
@@ -473,19 +455,10 @@ describe("/api", () => {
                                 operational: false,
                                 comments: "Esta maquina esta como nova",
                             };
-                            it("status: 400, empty body not allowed", () =>
-                                request
-                                    .patch(`${urlPath}/${serviceId}/machine/${machineId}`)
-                                    .send({})
-                                    .expect(400)
-                                    .then(({body: {error, message}}) => {
-                                        expect(error).toBe("Bad Request");
-                                        expect(message).toBe('"value" must have at least 1 key');
-                                    }));
                             it("status: 400, only allow the following keys: maintained, repaired, operational, comments", () =>
                                 request
                                     .patch(`${urlPath}/${serviceId}/machine/${machineId}`)
-                                    .send({fake_key: "the only key for you"})
+                                    .send({...patchRevision, fake_key: "the only key for you"})
                                     .expect(400)
                                     .then(({body: {error, message}}) => {
                                         expect(error).toBe("Bad Request");

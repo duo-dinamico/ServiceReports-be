@@ -16,8 +16,10 @@ exports.validateServiceExists = async (req, res, next) => {
     if (machine_id) toValidate.push(validateMachineById(machine_id));
     if (service_id && machine_id) toValidate.push(validateMachineHasRevisions(service_id, machine_id));
     if (user_id) toValidate.push(validateUserById(user_id));
-    if (department_id)
-        toValidate.push(validateDepartmentById(department_id), validateDepartmentHasMachines(department_id));
+    if (department_id) {
+        toValidate.push(validateDepartmentById(department_id));
+        toValidate.push(validateDepartmentHasMachines(department_id));
+    }
     try {
         await Promise.all(toValidate);
         next();
