@@ -1,5 +1,38 @@
 [
     {
+        "id": "cd5fda3f-d92a-4ba3-88ac-f026240c6a04",
+        "service_id": "dacfd73f-b7ae-4f86-b8d6-f07478343a6c",
+        "machine_id": "daa4bbba-969a-4732-a123-bb8beddb4ab6",
+        "maintained": false,
+        "repaired": false,
+        "operational": true,
+        "comments": "no comments",
+        "closed": false,
+        "deleted_at": null
+    },
+    {
+        "id": "e7bc3528-512b-407a-a048-31d61e3279d4",
+        "service_id": "dacfd73f-b7ae-4f86-b8d6-f07478343a6c",
+        "machine_id": "8ae453ad-fc7a-4129-a80b-d9307a9b0f18",
+        "maintained": false,
+        "repaired": false,
+        "operational": true,
+        "comments": "no comments",
+        "closed": false,
+        "deleted_at": null
+    },
+    {
+        "id": "7602ce2c-b1a9-4417-9e37-bcc161b810c3",
+        "service_id": "dacfd73f-b7ae-4f86-b8d6-f07478343a6c",
+        "machine_id": "14772f69-0c53-409c-a373-f7db7f0543cf",
+        "maintained": false,
+        "repaired": false,
+        "operational": true,
+        "comments": "no comments",
+        "closed": false,
+        "deleted_at": null
+    },
+    {
         "id": "a698e90c-af2b-45a8-b300-f1fc1b9d5e7d",
         "service_id": "435fc172-dff3-4294-ab7b-7e929d00aa44",
         "machine_id": "f8cae396-5376-47ae-8dfc-690572e76a09",
@@ -7,6 +40,127 @@
         "repaired": false,
         "operational": true,
         "comments": "no comments",
+        "closed": false,
+        "deleted_at": null
+    },
+    {
+        "id": "3d999b57-0665-4643-877d-116e69d034b8",
+        "service_id": "435fc172-dff3-4294-ab7b-7e929d00aa44",
+        "machine_id": "b5af02e8-2688-41a5-99a2-1a50cf849706",
+        "maintained": false,
+        "repaired": false,
+        "operational": false,
+        "comments": "no comments",
+        "closed": false,
+        "deleted_at": null
+    },
+    {
+        "id": "c0890624-11af-4e95-80d3-36e155a75aa5",
+        "service_id": "435fc172-dff3-4294-ab7b-7e929d00aa44",
+        "machine_id": "bdd8d58e-1c70-468a-bcf5-21a5a3aa84f2",
+        "maintained": false,
+        "repaired": false,
+        "operational": false,
+        "comments": "no comments",
+        "closed": false,
+        "deleted_at": null
+    },
+    {
+        "id": "5d5fe984-baf0-4537-96de-88aca944252c",
+        "service_id": "435fc172-dff3-4294-ab7b-7e929d00aa44",
+        "machine_id": "9d5808ad-3b31-4986-8c1b-c1309e4eee30",
+        "maintained": true,
+        "repaired": false,
+        "operational": false,
+        "comments": "no comments",
+        "closed": false,
+        "deleted_at": null
+    },
+    {
+        "id": "6c0da9c0-48c7-4109-9ada-fbb662210dd6",
+        "service_id": "48e01a0d-3e9a-4568-bb47-368c13ed3f4d",
+        "machine_id": "f8cae396-5376-47ae-8dfc-690572e76a09",
+        "maintained": false,
+        "repaired": false,
+        "operational": false,
+        "comments": null,
+        "closed": false,
+        "deleted_at": null
+    },
+    {
+        "id": "95944d05-35d6-493e-9342-016642d31f98",
+        "service_id": "48e01a0d-3e9a-4568-bb47-368c13ed3f4d",
+        "machine_id": "b5af02e8-2688-41a5-99a2-1a50cf849706",
+        "maintained": false,
+        "repaired": false,
+        "operational": false,
+        "comments": null,
+        "closed": false,
+        "deleted_at": null
+    },
+    {
+        "id": "355738e8-8d73-4490-82a4-5ca6c989620c",
+        "service_id": "48e01a0d-3e9a-4568-bb47-368c13ed3f4d",
+        "machine_id": "bdd8d58e-1c70-468a-bcf5-21a5a3aa84f2",
+        "maintained": false,
+        "repaired": false,
+        "operational": false,
+        "comments": null,
+        "closed": false,
+        "deleted_at": null
+    },
+    {
+        "id": "a5b2da04-ade1-4dc4-a1d2-0a0afb665ee5",
+        "service_id": "48e01a0d-3e9a-4568-bb47-368c13ed3f4d",
+        "machine_id": "9d5808ad-3b31-4986-8c1b-c1309e4eee30",
+        "maintained": false,
+        "repaired": false,
+        "operational": false,
+        "comments": null,
+        "closed": false,
+        "deleted_at": null
+    },
+    {
+        "id": "54b232c8-47ab-48c0-9d89-7c732845e533",
+        "service_id": "31618d24-204c-49b0-b5ee-0ada5673940e",
+        "machine_id": "f8cae396-5376-47ae-8dfc-690572e76a09",
+        "maintained": false,
+        "repaired": false,
+        "operational": false,
+        "comments": null,
+        "closed": false,
+        "deleted_at": null
+    },
+    {
+        "id": "a515d34f-bf15-42b0-ba12-49b24bd89ba3",
+        "service_id": "31618d24-204c-49b0-b5ee-0ada5673940e",
+        "machine_id": "b5af02e8-2688-41a5-99a2-1a50cf849706",
+        "maintained": false,
+        "repaired": false,
+        "operational": false,
+        "comments": null,
+        "closed": false,
+        "deleted_at": null
+    },
+    {
+        "id": "7c272482-dbce-4aec-bd62-c5c8aac1e23e",
+        "service_id": "31618d24-204c-49b0-b5ee-0ada5673940e",
+        "machine_id": "bdd8d58e-1c70-468a-bcf5-21a5a3aa84f2",
+        "maintained": false,
+        "repaired": false,
+        "operational": false,
+        "comments": null,
+        "closed": false,
+        "deleted_at": null
+    },
+    {
+        "id": "cd08760a-8542-4f87-9f41-b11166fa3f85",
+        "service_id": "31618d24-204c-49b0-b5ee-0ada5673940e",
+        "machine_id": "9d5808ad-3b31-4986-8c1b-c1309e4eee30",
+        "maintained": false,
+        "repaired": false,
+        "operational": false,
+        "comments": null,
         "closed": false,
         "deleted_at": null
     }

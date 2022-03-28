@@ -80,7 +80,7 @@ describe("/api", () => {
                             .query({manufacturer: "Venting Company"})
                             .expect(200)
                             .then(({body: {machines}}) => {
-                                expect(machines).toHaveLength(2);
+                                expect(machines).toHaveLength(4);
                                 machines.forEach(machine => {
                                     expect(machine).toHaveProperty("manufacturer", "Venting Company");
                                 });
@@ -91,7 +91,7 @@ describe("/api", () => {
                             .query({model: "Super Ventilator 5"})
                             .expect(200)
                             .then(({body: {machines}}) => {
-                                expect(machines).toHaveLength(1);
+                                expect(machines).toHaveLength(3);
                                 const [machine] = machines;
                                 expect(machine).toHaveProperty("model", "Super Ventilator 5");
                             }));
@@ -101,7 +101,7 @@ describe("/api", () => {
                             .query({department_id: "a7895b03-70a2-4bab-8e0f-dbc561e6d098"})
                             .expect(200)
                             .then(({body: {machines}}) => {
-                                expect(machines).toHaveLength(2);
+                                expect(machines).toHaveLength(4);
                                 machines.forEach(machine => {
                                     expect(machine).toHaveProperty(
                                         "department.id",

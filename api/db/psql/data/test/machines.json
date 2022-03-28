@@ -76,5 +76,40 @@
         "model": "Monitor 55",
         "serial_number": "45087HR6101B",
         "department_id": "753e15b4-20b2-4049-b45f-5a6ba7e465bb"
+    },
+    {
+        "id": "bdd8d58e-1c70-468a-bcf5-21a5a3aa84f2",
+        "manufacturer": "Venting Company",
+        "model": "Super Ventilator 5",
+        "serial_number": "087610101C",
+        "department_id": "a7895b03-70a2-4bab-8e0f-dbc561e6d098"
+    },
+    {
+        "id": "9d5808ad-3b31-4986-8c1b-c1309e4eee30",
+        "manufacturer": "Venting Company",
+        "model": "Super Ventilator 5",
+        "serial_number": "087610101D",
+        "department_id": "a7895b03-70a2-4bab-8e0f-dbc561e6d098"
+    },
+    {
+        "id": "cd28b3aa-f2f9-44a2-be3a-8315d398bd7f",
+        "manufacturer": "Records Company",
+        "model": "Rock Record 67",
+        "serial_number": "087HR6401B",
+        "department_id": "04ef48c0-38b3-4cdc-b483-2d72dfa81527"
+    },
+    {
+        "id": "353d6a32-c891-465f-811d-90e245d96ac2",
+        "manufacturer": "Media Manufacturer Company",
+        "model": "Monitor 55",
+        "serial_number": "45087HR6102C",
+        "department_id": "753e15b4-20b2-4049-b45f-5a6ba7e465bb"
+    },
+    {
+        "id": "71180284-1032-4d32-a6ad-830698aa6330",
+        "manufacturer": "Media Manufacturer Company",
+        "model": "Machine without revisions",
+        "serial_number": "45087HR6102D",
+        "department_id": "d2f2b92c-3d48-4d0f-a385-9dc0592f1ac4"
     }
 ]

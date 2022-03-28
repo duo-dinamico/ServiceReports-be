@@ -108,7 +108,7 @@ describe("/api", () => {
                             .query({show_deleted: true})
                             .expect(200)
                             .then(({body: {services}}) => {
-                                expect(services).toHaveLength(4);
+                                expect(services).toHaveLength(5);
                                 services.forEach(service => {
                                     if (service.id === "31618d24-204c-49b0-b5ee-0ada5673940e") {
                                         expect(service.deleted_at).not.toBe(null);
@@ -521,14 +521,14 @@ describe("/api", () => {
                             it("status: 400, machine must have revisions", () =>
                                 request
                                     .patch(
-                                        `${urlPath}/dacfd73f-b7ae-4f86-b8d6-f07478343a6c/machine/8ae453ad-fc7a-4129-a80b-d9307a9b0f18`
+                                        `${urlPath}/72bcff39-0f89-47fe-b123-94c58e18dcda/machine/71180284-1032-4d32-a6ad-830698aa6330`
                                     )
                                     .send(patchRevision)
                                     .expect(400)
                                     .then(({body: {error, message}}) => {
                                         expect(error).toBe("Bad Request");
                                         expect(message).toBe(
-                                            "Machine 8ae453ad-fc7a-4129-a80b-d9307a9b0f18 has no revisions."
+                                            "Machine 71180284-1032-4d32-a6ad-830698aa6330 has no revisions."
                                         );
                                     }));
                         });

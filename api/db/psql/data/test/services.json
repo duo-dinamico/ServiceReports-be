@@ -36,6 +36,18 @@
         "deleted_by": null
     },
     {
+        "id": "72bcff39-0f89-47fe-b123-94c58e18dcda",
+        "department_id": "a7895b03-70a2-4bab-8e0f-dbc561e6d098",
+        "created_at": "2021-01-21T09:00:00",
+        "updated_at": "2021-01-22T09:00:00",
+        "closed_at": null,
+        "deleted_at": "2022-03-08T20:44:24.907Z",
+        "created_by": "435ccd69-f989-4219-a3c7-9f09ff32c6cb",
+        "updated_by": "435ccd69-f989-4219-a3c7-9f09ff32c6cb",
+        "closed_by": null,
+        "deleted_by": null
+    },
+    {
         "id": "31618d24-204c-49b0-b5ee-0ada5673940e",
         "department_id": "a7895b03-70a2-4bab-8e0f-dbc561e6d098",
         "created_at": "2021-01-21T09:00:00",
