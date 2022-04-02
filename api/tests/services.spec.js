@@ -521,7 +521,7 @@ describe("/api", () => {
                             it("status: 400, machine must have revisions", () =>
                                 request
                                     .patch(
-                                        `${urlPath}/72bcff39-0f89-47fe-b123-94c58e18dcda/machine/71180284-1032-4d32-a6ad-830698aa6330`
+                                        `${urlPath}/435fc172-dff3-4294-ab7b-7e929d00aa44/machine/71180284-1032-4d32-a6ad-830698aa6330`
                                     )
                                     .send(patchRevision)
                                     .expect(400)

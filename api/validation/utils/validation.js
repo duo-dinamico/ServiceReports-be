@@ -91,9 +91,14 @@ async function validateDepartmentHasMachines(department_id) {
 }
 
 async function validateMachineHasRevisions(service_id, machine_id) {
-    const revision = await fetchRevision(service_id, machine_id);
-    if (!revision) return Promise.reject(Boom.badRequest(`Machine ${machine_id} has no revisions.`).output.payload);
-    return true;
+    try {
+        await fetchMachine({id: machine_id});
+        const revision = await fetchRevision(service_id, machine_id);
+        if (!revision) return Promise.reject(Boom.badRequest(`Machine ${machine_id} has no revisions.`).output.payload);
+        return true;
+    } catch (err) {
+        return Promise.reject(err.output.payload);
+    }
 }
 
 module.exports = {

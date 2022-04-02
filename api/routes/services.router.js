@@ -19,12 +19,12 @@ const {
     postService,
 } = require("../controllers/services.controllers");
 const {methodNotAllowed} = require("../errors");
-const {validateServiceExists} = require("../validation/services.validation");
+const {validateServiceExists, validateServiceMachineDepartment} = require("../validation/services.validation");
 
 servicesRouter
     .route("/")
     .get(celebrate(servicesSchema), getAllServices)
-    .post(celebrate(postServiceSchema), validateServiceExists, postService)
+    .post(celebrate(postServiceSchema), validateServiceMachineDepartment, postService)
     .all(methodNotAllowed);
 servicesRouter
     .route("/:service_id")
@@ -34,7 +34,7 @@ servicesRouter
     .all(methodNotAllowed);
 servicesRouter
     .route("/:service_id/machine/:machine_id")
-    .patch(celebrate(patchMachineRevisionSchema), validateServiceExists, patchMachineRevision)
+    .patch(celebrate(patchMachineRevisionSchema), validateServiceMachineDepartment, patchMachineRevision)
     .all(methodNotAllowed);
 
 module.exports = servicesRouter;
