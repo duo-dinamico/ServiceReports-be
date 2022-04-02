@@ -1,0 +1,11 @@
+[
+    {"id": "435ccd69-f989-4219-a3c7-9f09ff32c6cb", "username": "cpayne", "name": "Christopher T. Payne"},
+    {"id": "9a5c5991-a14d-4d85-b75f-d75081500c8d", "username": "tstark", "name": "Timothy Stark"},
+    {"id": "af275e22-a0ef-4e85-9926-c1abe1c1d192", "username": "rtucker", "name": "Ronald Tucker"},
+    {
+        "id": "d3b77da1-f9a3-4b1b-b747-7a7cb27efe75",
+        "username": "karnott",
+        "name": "Kimberly Arnott",
+        "deleted_at": "2022-03-08T20:44:24.907Z"
+    }
+]

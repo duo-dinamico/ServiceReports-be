@@ -1,0 +1,138 @@
+parameters:
+    sort_by:
+        description: "To sort by valid parameters"
+        in: query
+        name: sort_by
+        schema:
+            type: string
+    order:
+        description: "Sorting direction"
+        in: query
+        name: order
+        schema:
+            type: string
+    user_id:
+        description: "To filter users by id"
+        in: query
+        name: user_id
+        schema:
+            type: string
+            format: uuid
+        examples:
+            allUsers:
+                value:
+            user_id:
+                value: 435ccd69-f989-4219-a3c7-9f09ff32c6cb
+    client_id:
+        description: "To filter clients by id"
+        in: query
+        name: client_id
+        schema:
+            type: string
+            format: uuid
+        examples:
+            allClients:
+                value:
+            client_id:
+                value: 74562a23-4ae4-4fc0-8d98-32bad3472c9a
+    department_id:
+        description: "To filter departments by id"
+        in: query
+        name: department_id
+        schema:
+            type: string
+            format: uuid
+        examples:
+            allDepartments:
+                value:
+            department_id:
+                value: a7895b03-70a2-4bab-8e0f-dbc561e6d098
+    machine_id:
+        description: "To filter machines by id"
+        in: query
+        name: machine_id
+        schema:
+            type: string
+            format: uuid
+        examples:
+            allMachines:
+                value:
+            machine_id:
+                value: f8cae396-5376-47ae-8dfc-690572e76a09
+    manufacturer:
+        description: "To filter machines by manufacturer"
+        in: query
+        name: manufacturer
+        schema:
+            type: string
+        examples:
+            allMachines:
+                value:
+            manufacturer:
+                value: TCS
+    model:
+        description: "To filter machines by model"
+        in: query
+        name: model
+        schema:
+            type: string
+        examples:
+            allMachines:
+                value:
+            model:
+                value: Chipper Champ 2
+    created_by:
+        description: "To filter services by the user that created them"
+        in: query
+        name: created_by
+        schema:
+            type: string
+            format: uuid
+        examples:
+            allUsers:
+                value:
+            created_by:
+                value: 435ccd69-f989-4219-a3c7-9f09ff32c6cb
+    closed_by:
+        description: "To filter services by the user that closed them"
+        in: query
+        name: closed_by
+        schema:
+            type: string
+            format: uuid
+        examples:
+            allUsers:
+                value:
+            closed_by:
+                value: 435ccd69-f989-4219-a3c7-9f09ff32c6cb
+    id:
+        description: "Id in path"
+        in: path
+        name: id
+        schema:
+            type: string
+            format: uuid
+        required: true
+    show_deleted:
+        description: "To show deleted services"
+        in: query
+        name: show_deleted
+        schema:
+            type: boolean
+            default: "false"
+    machine_id_path:
+        description: "Id in path"
+        in: path
+        name: machine_id_path
+        schema:
+            type: string
+            format: uuid
+        required: true
+    service_id_path:
+        description: "Id in path"
+        in: path
+        name: service_id_path
+        schema:
+            type: string
+            format: uuid
+        required: true
