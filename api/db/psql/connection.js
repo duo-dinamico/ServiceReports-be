@@ -33,14 +33,17 @@ const productionConfig = {
     },
 };
 
-let config;
+let config =
+    process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test"
+        ? // eslint-disable-next-line import/extensions
+          require("../../knexfile.js")[environment]
+        : null;
+
 if (process.env.NODE_ENV === "production") {
     config = productionConfig.production;
-} else if (process.env.NODE_ENV === "github_actions") {
+}
+if (process.env.NODE_ENV === "github_actions") {
     config = githubConfig.github_actions;
-} else {
-    // eslint-disable-next-line global-require
-    config = require("../../knexfile")[environment];
 }
 
 module.exports = require("knex")(config);
