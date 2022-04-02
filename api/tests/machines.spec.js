@@ -101,7 +101,7 @@ describe("/api", () => {
                             .query({department_id: "a7895b03-70a2-4bab-8e0f-dbc561e6d098"})
                             .expect(200)
                             .then(({body: {machines}}) => {
-                                expect(machines).toHaveLength(4);
+                                expect(machines).toHaveLength(5);
                                 machines.forEach(machine => {
                                     expect(machine).toHaveProperty(
                                         "department.id",
