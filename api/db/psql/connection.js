@@ -1,5 +1,3 @@
-/* eslint-disable import/no-unresolved */
-/* eslint-disable import/extensions */
 const environment = process.env.NODE_ENV || "development";
 const githubConfig = {
     github_actions: {
@@ -19,6 +17,30 @@ const githubConfig = {
         },
     },
 };
-const config =
-    process.env.NODE_ENV === "github_actions" ? githubConfig.github_actions : require("../../knexfile.js")[environment];
+
+const productionConfig = {
+    production: {
+        client: "pg",
+        connection: {
+            host: process.env.DATABASE_URL,
+        },
+        migrations: {
+            directory: `${__dirname}/migrations`,
+        },
+        seeds: {
+            directory: `${__dirname}/seeds`,
+        },
+    },
+};
+
+let config;
+if (process.env.NODE_ENV === "production") {
+    config = productionConfig.production;
+} else if (process.env.NODE_ENV === "github_actions") {
+    config = githubConfig.github_actions;
+} else {
+    // eslint-disable-next-line global-require
+    config = require("../../knexfile")[environment];
+}
+
 module.exports = require("knex")(config);
