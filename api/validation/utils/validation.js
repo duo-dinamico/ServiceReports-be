@@ -2,7 +2,9 @@ const Boom = require("@hapi/boom");
 const {fetchUser} = require("../../models/users.models");
 const {fetchClient} = require("../../models/clients.models");
 const {fetchDepartment} = require("../../models/departments.models");
-const {fetchMachine} = require("../../models/machines.models");
+const {fetchMachine, fetchAllMachines} = require("../../models/machines.models");
+const {fetchService} = require("../../models/services.models");
+const {fetchRevision} = require("../../models/revisions.models");
 
 async function validateUserById(id) {
     try {
@@ -68,6 +70,37 @@ async function validateMachineByManufacturer(body) {
     return true;
 }
 
+async function validateServiceById(id) {
+    try {
+        await fetchService(id);
+        return true;
+    } catch (err) {
+        return Promise.reject(err.output.payload);
+    }
+}
+
+async function validateDepartmentHasMachines(department_id) {
+    const machines = await fetchAllMachines({department_id});
+    if (machines.length < 1)
+        return Promise.reject(
+            Boom.badRequest(
+                `Department ${department_id} has no machines. Please add at least one before creating a service`
+            ).output.payload
+        );
+    return true;
+}
+
+async function validateMachineHasRevisions(service_id, machine_id) {
+    try {
+        await fetchMachine({id: machine_id});
+        const revision = await fetchRevision(service_id, machine_id);
+        if (!revision) return Promise.reject(Boom.badRequest(`Machine ${machine_id} has no revisions.`).output.payload);
+        return true;
+    } catch (err) {
+        return Promise.reject(err.output.payload);
+    }
+}
+
 module.exports = {
     validateUserById,
     validateUserByUsername,
@@ -77,4 +110,7 @@ module.exports = {
     validateDepartmentById,
     validateMachineByManufacturer,
     validateMachineById,
+    validateServiceById,
+    validateDepartmentHasMachines,
+    validateMachineHasRevisions,
 };

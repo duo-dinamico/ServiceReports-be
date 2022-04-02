@@ -113,3 +113,26 @@ parameters:
             type: string
             format: uuid
         required: true
+    show_deleted:
+        description: "To show deleted services"
+        in: query
+        name: show_deleted
+        schema:
+            type: boolean
+            default: "false"
+    machine_id_path:
+        description: "Id in path"
+        in: path
+        name: machine_id_path
+        schema:
+            type: string
+            format: uuid
+        required: true
+    service_id_path:
+        description: "Id in path"
+        in: path
+        name: service_id_path
+        schema:
+            type: string
+            format: uuid
+        required: true

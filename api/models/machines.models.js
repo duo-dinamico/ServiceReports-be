@@ -10,16 +10,14 @@ const columnSelection = [
     "machines.created_at",
     "machines.updated_at",
     "machines.deleted_at",
+    connection.raw(
+        "json_build_object('id',departments.id,'name',departments.name, 'client', clients.name) as department"
+    ),
 ];
 
-exports.fetchAllMachines = async ({sort_by, order, machine_id, manufacturer, model}) => {
+exports.fetchAllMachines = async ({sort_by, order, machine_id, manufacturer, model, department_id}) => {
     const machines = await connection
-        .select(
-            ...columnSelection,
-            connection.raw(
-                "json_build_object('id',departments.id,'name',departments.name, 'client', clients.name) as department"
-            )
-        )
+        .select(...columnSelection)
         .leftJoin("departments", "machines.department_id", "=", "departments.id")
         .leftJoin("clients", "departments.client_id", "=", "clients.id")
         .from("machines")
@@ -29,18 +27,14 @@ exports.fetchAllMachines = async ({sort_by, order, machine_id, manufacturer, mod
             if (manufacturer) builder.where({"machines.manufacturer": manufacturer});
             if (model) builder.where({"machines.model": model});
             if (machine_id) builder.where({"machines.id": machine_id});
+            if (department_id) builder.where({"machines.department_id": department_id});
         });
     return machines;
 };
 
 exports.fetchMachine = async ({id}, model, serial_number) => {
     const [machine] = await connection
-        .select(
-            ...columnSelection,
-            connection.raw(
-                "json_build_object('id',departments.id,'name',departments.name, 'client', clients.name) as department"
-            )
-        )
+        .select(...columnSelection)
         .leftJoin("departments", "machines.department_id", "=", "departments.id")
         .leftJoin("clients", "departments.client_id", "=", "clients.id")
         .from("machines")

@@ -77,22 +77,37 @@ describe("/api", () => {
                     it("status: 200, filter by manufacturer", () =>
                         request
                             .get(urlPath)
-                            .query({manufacturer: "TCS"})
+                            .query({manufacturer: "Venting Company"})
                             .expect(200)
                             .then(({body: {machines}}) => {
-                                expect(machines).toHaveLength(1);
-                                const [machine] = machines;
-                                expect(machine).toHaveProperty("manufacturer", "TCS");
+                                expect(machines).toHaveLength(4);
+                                machines.forEach(machine => {
+                                    expect(machine).toHaveProperty("manufacturer", "Venting Company");
+                                });
                             }));
                     it("status: 200, filter by model", () =>
                         request
                             .get(urlPath)
-                            .query({model: "Chipper Champ 2"})
+                            .query({model: "Super Ventilator 5"})
                             .expect(200)
                             .then(({body: {machines}}) => {
-                                expect(machines).toHaveLength(1);
+                                expect(machines).toHaveLength(3);
                                 const [machine] = machines;
-                                expect(machine).toHaveProperty("model", "Chipper Champ 2");
+                                expect(machine).toHaveProperty("model", "Super Ventilator 5");
+                            }));
+                    it("status: 200, filter by department", () =>
+                        request
+                            .get(urlPath)
+                            .query({department_id: "a7895b03-70a2-4bab-8e0f-dbc561e6d098"})
+                            .expect(200)
+                            .then(({body: {machines}}) => {
+                                expect(machines).toHaveLength(5);
+                                machines.forEach(machine => {
+                                    expect(machine).toHaveProperty(
+                                        "department.id",
+                                        "a7895b03-70a2-4bab-8e0f-dbc561e6d098"
+                                    );
+                                });
                             }));
                 });
                 it("status: 200", () =>
@@ -200,16 +215,16 @@ describe("/api", () => {
                     request
                         .post(urlPath)
                         .send({
-                            manufacturer: "TCS",
-                            model: "Chipper Champ 2",
-                            serial_number: "087610101A",
+                            manufacturer: "Venting Company",
+                            model: "Super Ventilator 3",
+                            serial_number: "CC087610101A",
                             department_id: "04ef48c0-38b3-4cdc-b483-2d72dfa81527",
                         })
                         .expect(400)
                         .then(({body: {error, message}}) => {
                             expect(error).toBe("Bad Request");
                             expect(message).toBe(
-                                "Machine Chipper Champ 2 with serial number 087610101A already exists"
+                                "Machine Super Ventilator 3 with serial number CC087610101A already exists"
                             );
                         }));
                 it("status: 400, should only have allowed keys", () =>
@@ -416,11 +431,17 @@ describe("/api", () => {
                     it("status: 400, serial number and model combination should be unique", () =>
                         request
                             .patch(`${urlPath}/${machineId}`)
-                            .send({manufacturer: "Test manufacturer", model: "One 2 Six", serial_number: "01010101A"})
+                            .send({
+                                manufacturer: "Venting Company",
+                                model: "Super Ventilator 3",
+                                serial_number: "CC087610101A",
+                            })
                             .expect(400)
                             .then(({body: {error, message}}) => {
                                 expect(error).toBe("Bad Request");
-                                expect(message).toBe("Machine One 2 Six with serial number 01010101A already exists");
+                                expect(message).toBe(
+                                    "Machine Super Ventilator 3 with serial number CC087610101A already exists"
+                                );
                             }));
                     it("status: 404, department must exist", () =>
                         request

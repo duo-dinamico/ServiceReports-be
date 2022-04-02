@@ -1,4 +1,4 @@
-const {clientsData, departmentsData, machinesData, servicesData, usersData} = require("../data");
+const {clientsData, departmentsData, machinesData, servicesData, usersData, revisionData} = require("../data");
 
 exports.seed = async knex => {
     await knex.migrate.rollback();
@@ -7,5 +7,6 @@ exports.seed = async knex => {
     await knex.insert(clientsData).into("clients");
     await knex.insert(departmentsData).into("departments");
     await knex.insert(machinesData).into("machines");
-    return knex.insert(servicesData).into("services");
+    await knex.insert(servicesData).into("services");
+    return knex.insert(revisionData).into("revisions");
 };
