@@ -1,3 +1,5 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/extensions */
 const environment = process.env.NODE_ENV || "development";
 const githubConfig = {
     github_actions: {
@@ -35,8 +37,7 @@ const productionConfig = {
 
 let config =
     process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test"
-        ? // eslint-disable-next-line import/extensions
-          require("../../knexfile.js")[environment]
+        ? require("../../knexfile.js")[environment]
         : null;
 
 if (process.env.NODE_ENV === "production") {
