@@ -19,6 +19,32 @@ const githubConfig = {
         },
     },
 };
-const config =
-    process.env.NODE_ENV === "github_actions" ? githubConfig.github_actions : require("../../knexfile.js")[environment];
+
+const productionConfig = {
+    production: {
+        client: "pg",
+        connection: {
+            host: process.env.DATABASE_URL,
+        },
+        migrations: {
+            directory: `${__dirname}/migrations`,
+        },
+        seeds: {
+            directory: `${__dirname}/seeds`,
+        },
+    },
+};
+
+let config =
+    process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test"
+        ? require("../../knexfile.js")[environment]
+        : null;
+
+if (process.env.NODE_ENV === "production") {
+    config = productionConfig.production;
+}
+if (process.env.NODE_ENV === "github_actions") {
+    config = githubConfig.github_actions;
+}
+
 module.exports = require("knex")(config);
