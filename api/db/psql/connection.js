@@ -35,14 +35,13 @@ const productionConfig = {
     },
 };
 
-let config = require("../../knexfile")[environment];
+let config = {};
 
 if (environment === "github_actions") {
     config = githubConfig.github_actions;
-}
-
-if (environment === "production") {
+} else if (environment === "production") {
     config = productionConfig.production;
-}
+    // eslint-disable-next-line global-require
+} else config = require("../../knexfile")[environment];
 
 module.exports = require("knex")(config);
