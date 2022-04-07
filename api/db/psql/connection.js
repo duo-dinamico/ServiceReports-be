@@ -35,16 +35,14 @@ const productionConfig = {
     },
 };
 
-let config =
-    process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test"
-        ? require("../../knexfile.js")[environment]
-        : null;
+let config = require("../../knexfile")[environment];
 
-if (process.env.NODE_ENV === "production") {
-    config = productionConfig.production;
-}
-if (process.env.NODE_ENV === "github_actions") {
+if (environment === "github_actions") {
     config = githubConfig.github_actions;
+}
+
+if (environment === "production") {
+    config = productionConfig.production;
 }
 
 module.exports = require("knex")(config);
