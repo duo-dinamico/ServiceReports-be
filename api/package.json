@@ -13,7 +13,7 @@
         "seed-test": "cross-env NODE_ENV=test cross-env NODE_ENV=test npm run seed-psql",
         "seed-psql": "knex migrate:rollback --all && knex migrate:latest && knex seed:run",
         "prepare-husky": "cd .. && husky install api/.husky",
-        "start": "npm run seed-psql && npx nodemon listen.js"
+        "start": "NODE_ENV=production npm run seed-psql && npx nodemon listen.js"
     },
     "author": "DuoDinamico",
     "license": "ISC",
