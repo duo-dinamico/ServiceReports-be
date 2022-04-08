@@ -19,7 +19,7 @@
   "scripts": {
     "postinstall" : "(cd api && npm install);",
     "start-up": "docker compose up",
-    "start": "(cd api && npm start);",
+    "start": "(cd api && npm run seed-psql && npm start);",
     "stop": "docker compose down",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
