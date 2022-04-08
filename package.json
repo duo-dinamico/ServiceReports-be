@@ -18,7 +18,8 @@
   "devDependencies": {},
   "scripts": {
     "postinstall" : "(cd api && npm install);",
-    "start": "docker compose up",
+    "start-up": "docker compose up",
+    "start": "(cd api && npm start);",
     "stop": "docker compose down",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
