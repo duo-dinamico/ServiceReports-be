@@ -27,10 +27,10 @@ const productionConfig = {
             host: process.env.DATABASE_URL,
         },
         migrations: {
-            directory: `${__dirname}/migrations`,
+            directory: `${__dirname}/api/db/psql/migrations`,
         },
         seeds: {
-            directory: `${__dirname}/seeds`,
+            directory: `${__dirname}/api/db/psql/seeds`,
         },
     },
 };
@@ -41,6 +41,7 @@ if (environment === "github_actions") {
     config = githubConfig.github_actions;
 } else if (environment === "production") {
     config = productionConfig.production;
+    console.log(config);
     // eslint-disable-next-line global-require
 } else config = require("../../knexfile")[environment];
 
