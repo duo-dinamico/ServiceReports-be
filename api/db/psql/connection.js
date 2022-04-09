@@ -27,10 +27,10 @@ const productionConfig = {
             host: process.env.DATABASE_URL,
         },
         migrations: {
-            directory: `${__dirname}/api/db/psql/migrations`,
+            directory: `${__dirname}/migrations`,
         },
         seeds: {
-            directory: `${__dirname}/api/db/psql/seeds`,
+            directory: `${__dirname}/seeds`,
         },
     },
 };
