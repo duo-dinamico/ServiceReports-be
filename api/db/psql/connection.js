@@ -32,8 +32,7 @@ const productionConfig = {
         seeds: {
             directory: `${__dirname}/seeds`,
         },
-        ssl: true,
-        debug: true
+        ssl: { rejectUnauthorized: false },
     },
 };
 
