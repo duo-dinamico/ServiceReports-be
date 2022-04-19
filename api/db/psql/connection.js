@@ -24,7 +24,8 @@ const productionConfig = {
     production: {
         client: "pg",
         connection: {
-            host: process.env.DATABASE_URL,
+            connectionString: process.env.DATABASE_URL,
+            ssl: { rejectUnauthorized: false },
         },
         migrations: {
             directory: `${__dirname}/migrations`,
@@ -32,7 +33,6 @@ const productionConfig = {
         seeds: {
             directory: `${__dirname}/seeds`,
         },
-        ssl: { rejectUnauthorized: false },
     },
 };
 
