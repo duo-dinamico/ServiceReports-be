@@ -24,7 +24,8 @@ const productionConfig = {
     production: {
         client: "pg",
         connection: {
-            host: process.env.DATABASE_URL,
+            connectionString: process.env.DATABASE_URL,
+            ssl: { rejectUnauthorized: false },
         },
         migrations: {
             directory: `${__dirname}/migrations`,
@@ -41,6 +42,7 @@ if (environment === "github_actions") {
     config = githubConfig.github_actions;
 } else if (environment === "production") {
     config = productionConfig.production;
+    console.log(config);
     // eslint-disable-next-line global-require
 } else config = require("../../knexfile")[environment];
 
