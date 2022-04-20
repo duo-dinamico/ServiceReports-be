@@ -23,16 +23,7 @@ const githubConfig = {
 const productionConfig = {
     production: {
         client: "pg",
-        connection: {
-            connectionString: process.env.DATABASE_URL,
-            // ssl: { rejectUnauthorized: false },
-        },
-        migrations: {
-            directory: `${__dirname}/migrations`,
-        },
-        seeds: {
-            directory: `${__dirname}/seeds`,
-        },
+        connection: process.env.DATABASE_URL,
     },
 };
 
