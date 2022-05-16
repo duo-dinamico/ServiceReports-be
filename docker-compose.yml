@@ -23,3 +23,16 @@ services:
       - POSTGRES_DB=service_reports
     # volumes:
     #   - ./api/db_data:/var/lib/postgresql/data
+
+  service-report-frontend:
+    image: node:16-slim
+    user: "node"
+    working_dir: /home/node/app
+    volumes:
+      - ./frontend:/home/node/app
+    container_name: frontend
+    depends_on:
+      - service-report-api
+    ports:
+      - "8080:8080"
+    command: bash -c "npm run dev"
