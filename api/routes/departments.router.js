@@ -62,6 +62,12 @@ module.exports = departmentsRouter;
  *          application/json:
  *            schema:
  *               $ref: '#/components/schemas/bad_request_schema'
+ *      '404':
+ *        description: Not Found
+ *        content:
+ *          application/json:
+ *            schema:
+ *               $ref: '#/components/schemas/not_found_schema'
  *
  *  post:
  *    summary: Use to add a department
