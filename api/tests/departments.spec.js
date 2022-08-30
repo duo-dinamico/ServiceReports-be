@@ -149,6 +149,15 @@ describe("/api", () => {
                                 expect(error).toBe("Bad Request");
                                 expect(message).toBe('"client_id" must be a valid GUID');
                             }));
+                    it("status: 400, client id must exist", () =>
+                        request
+                            .get(urlPath)
+                            .query({client_id: "4dca6671-7c73-4414-bf4c-0646d8c70ed0"})
+                            .expect(404)
+                            .then(({body: {error, message}}) => {
+                                expect(error).toBe("Not Found");
+                                expect(message).toBe('"4dca6671-7c73-4414-bf4c-0646d8c70ed0" could not be found');
+                            }));
                 });
             });
             describe("POST", () => {

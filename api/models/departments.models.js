@@ -26,6 +26,10 @@ exports.fetchAllDepartments = async ({sort_by, order, department_id, client_id})
             if (department_id) builder.where({"departments.id": department_id});
             if (client_id) builder.where({"departments.client_id": client_id});
         });
+
+    if (client_id && departments.length === 0)
+        return Promise.reject(Boom.notFound(`"${client_id}" could not be found`));
+
     return departments;
 };
 
