@@ -9,6 +9,7 @@ const invalidMethods = ["put", "patch", "delete"];
 const invalidMethodsId = ["post", "put"];
 
 const departmentId = "a7895b03-70a2-4bab-8e0f-dbc561e6d098";
+const clientId = "4dca6671-7c73-4414-bf4c-0646d8c70ede";
 const patchBody = {name: "Test Department", client_id: "4dca6671-7c73-4414-bf4c-0646d8c70ede"};
 const postBody = {name: "New Department", client_id: "583eed9c-65d0-4d3e-b561-faba91ca0ee5"};
 
@@ -46,6 +47,17 @@ describe("/api", () => {
                                 expect(departments).toHaveLength(1);
                                 const [department] = departments;
                                 expect(department).toHaveProperty("id", departmentId);
+                            }));
+                    it("status: 200, filter by client id", () =>
+                        request
+                            .get(urlPath)
+                            .query({client_id: clientId})
+                            .expect(200)
+                            .then(({body: {departments}}) => {
+                                expect(departments).toHaveLength(3);
+                                departments.forEach(department => {
+                                    expect(department).toHaveProperty("client.id", clientId);
+                                });
                             }));
                 });
                 it("status: 200", () =>
@@ -127,6 +139,15 @@ describe("/api", () => {
                             .then(({body: {error, message}}) => {
                                 expect(error).toBe("Bad Request");
                                 expect(message).toBe('"department_id" must be a valid GUID');
+                            }));
+                    it("status: 400, client id must contain a valid GUID", () =>
+                        request
+                            .get(urlPath)
+                            .query({client_id: "invalid"})
+                            .expect(400)
+                            .then(({body: {error, message}}) => {
+                                expect(error).toBe("Bad Request");
+                                expect(message).toBe('"client_id" must be a valid GUID');
                             }));
                 });
             });

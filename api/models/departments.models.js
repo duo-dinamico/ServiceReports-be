@@ -10,7 +10,7 @@ const columnSelection = [
     "departments.deleted_at",
 ];
 
-exports.fetchAllDepartments = async ({sort_by, order, department_id}) => {
+exports.fetchAllDepartments = async ({sort_by, order, department_id, client_id}) => {
     const departments = await connection
         .select(
             ...columnSelection,
@@ -24,6 +24,7 @@ exports.fetchAllDepartments = async ({sort_by, order, department_id}) => {
         .modify(builder => {
             if (sort_by && order) builder.orderBy(sort_by, order);
             if (department_id) builder.where({"departments.id": department_id});
+            if (client_id) builder.where({"departments.client_id": client_id});
         });
     return departments;
 };
