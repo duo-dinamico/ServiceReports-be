@@ -1,0 +1,25 @@
+version: "3"
+services:
+    service-report-api:
+        image: node:16-slim
+        user: "node"
+        working_dir: /home/node/app
+        volumes:
+            - ./.:/home/node/app
+        container_name: nodejs
+        depends_on:
+            - postgres
+        ports:
+            - "9090:9090"
+        command: bash -c "npx nodemon listen.js"
+
+    postgres:
+        image: postgres:13.5
+        ports:
+            - "5432:5432"
+        environment:
+            - POSTGRES_USER=sruser
+            - POSTGRES_PASSWORD=sruser
+            - POSTGRES_DB=service_reports
+        # volumes:
+        #   - ./api/db_data:/var/lib/postgresql/data

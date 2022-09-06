@@ -15,7 +15,9 @@
         "migrate-rollback:prod": "NODE_ENV=production DB_URL=$(heroku config:get DATABASE_URL) knex migrate:rollback",
         "seed-test": "cross-env NODE_ENV=test cross-env NODE_ENV=test npm run seed-psql",
         "seed-psql": "knex migrate:rollback --all && knex migrate:latest && knex seed:run",
-        "prepare-husky": "cd .. && husky install api/.husky",
+        "prepare-husky": "husky install .husky",
+        "start-up": "docker compose up",
+        "stop": "docker compose down",
         "start": "npx nodemon listen.js"
     },
     "author": "DuoDinamico",
