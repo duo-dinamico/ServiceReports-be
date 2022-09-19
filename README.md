@@ -20,7 +20,7 @@
 
 This project will manage technical services reports, for client works.
 
-It will be composed of an API with PostgreSQL, a REACT frontend for report usage, and a REACT backend for administration.
+It will be composed of an API with PostgreSQL, in a dockerized environment.
 
 ## Technologies
 
@@ -29,11 +29,7 @@ API is created with:
 - NodeJS
 - Postgresql
 
-Frontend for report is created with:
-
-- React
-
-And uses Docker for deployment.
+Uses Docker for deployment.
 
 ## Setup
 
@@ -42,7 +38,6 @@ To run this project, install it locally using npm:
 ```
 $ cd api
 $ npm install
-$ cd ..
 $ npm start
 ```
 
