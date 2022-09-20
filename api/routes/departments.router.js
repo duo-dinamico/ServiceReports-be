@@ -48,6 +48,7 @@ module.exports = departmentsRouter;
  *      - $ref: '#parameters/sort_by'
  *      - $ref: '#parameters/order'
  *      - $ref: '#parameters/department_id'
+ *      - $ref: '#parameters/client_id'
  *    responses:
  *      '200':
  *        description: Returns an object with a key "departments", with an array of department objects
@@ -61,6 +62,12 @@ module.exports = departmentsRouter;
  *          application/json:
  *            schema:
  *               $ref: '#/components/schemas/bad_request_schema'
+ *      '404':
+ *        description: Not Found
+ *        content:
+ *          application/json:
+ *            schema:
+ *               $ref: '#/components/schemas/not_found_schema'
  *
  *  post:
  *    summary: Use to add a department

@@ -5,6 +5,7 @@ const departmentsSchema = {
         sort_by: Joi.string().valid("name").default("name"),
         order: Joi.string().valid("asc", "desc").default("asc"),
         department_id: Joi.string().uuid(),
+        client_id: Joi.string().uuid(),
     }),
 };
 
